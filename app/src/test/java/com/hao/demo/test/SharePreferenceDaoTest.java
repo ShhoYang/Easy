@@ -1,20 +1,17 @@
 package com.hao.demo.test;
 
-import android.support.test.runner.AndroidJUnit4;
-import android.util.Log;
-
-import com.hao.demo.App;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 /**
  * @author Yang Shihao
  */
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(application = RoboApp.class) // 配置Application
 public class SharePreferenceDaoTest {
 
     private static final String TAG = "SharePreferenceDaoTest";
@@ -25,7 +22,8 @@ public class SharePreferenceDaoTest {
 
     @Before
     public void setUp() {
-        mDao = new SharePreferenceDao(App.getInstance());
+        //这里就不用依赖其他库了，用RuntimeEnvironment.application代替Context
+        mDao = new SharePreferenceDao(RuntimeEnvironment.application);
     }
 
     @Test
