@@ -8,23 +8,23 @@ import android.content.SharedPreferences;
  */
 public class SharePreferenceDao {
 
-    private SharedPreferences mSp;
+    private SharedPreferences sp;
 
     public SharePreferenceDao(Context context) {
         this(context.getSharedPreferences("config", Context.MODE_PRIVATE));
     }
 
     public SharePreferenceDao(SharedPreferences sp) {
-        mSp = sp;
+        sp = sp;
     }
 
     public void put(String key, String value) {
-        SharedPreferences.Editor edit = mSp.edit();
+        SharedPreferences.Editor edit = sp.edit();
         edit.putString(key, value);
         edit.apply();
     }
 
     public String get(String key) {
-        return mSp.getString(key, "");
+        return sp.getString(key, "");
     }
 }

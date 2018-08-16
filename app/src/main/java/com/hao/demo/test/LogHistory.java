@@ -13,7 +13,7 @@ import java.util.List;
 
 public class LogHistory implements Parcelable {
 
-    private final List<Pair<String, Long>> mData = new ArrayList<>();
+    private final List<Pair<String, Long>> data = new ArrayList<>();
 
     public LogHistory() { }
 
@@ -25,13 +25,13 @@ public class LogHistory implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         // Prepare an array of strings and an array of timestamps.
-        String[] texts = new String[mData.size()];
-        long[] timestamps = new long[mData.size()];
+        String[] texts = new String[data.size()];
+        long[] timestamps = new long[data.size()];
 
         // Store the data in the arrays.
-        for (int i = 0; i < mData.size(); i++) {
-            texts[i] = mData.get(i).first;
-            timestamps[i] = mData.get(i).second;
+        for (int i = 0; i < data.size(); i++) {
+            texts[i] = data.get(i).first;
+            timestamps[i] = data.get(i).second;
         }
         // Write the size of the arrays first.
         out.writeInt(texts.length);
@@ -59,7 +59,7 @@ public class LogHistory implements Parcelable {
      * Returns a copy of the current data used by the activity.
      */
     public List<Pair<String, Long>> getData() {
-        return new ArrayList<>(mData);
+        return new ArrayList<>(data);
     }
 
     /**
@@ -68,7 +68,7 @@ public class LogHistory implements Parcelable {
      * @param timestamp the current time in milliseconds since January 1, 1970 00:00:00.0 UTC.
      */
     public void addEntry(String text, long timestamp) {
-        mData.add(new Pair<String, Long>(text, timestamp));
+        data.add(new Pair<String, Long>(text, timestamp));
     }
 
     // Constructor used from the CREATOR field that unpacks a Parcel.
@@ -90,10 +90,10 @@ public class LogHistory implements Parcelable {
         }
 
         // Reset the data container and update the data.
-        mData.clear();
+        data.clear();
         for (int i = 0; i < texts.length; i++) {
             Pair<String, Long> pair = new Pair<>(texts[i], timestamps[i]);
-            mData.add(pair);
+            data.add(pair);
         }
     }
 
