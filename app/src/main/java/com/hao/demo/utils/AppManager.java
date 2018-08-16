@@ -15,7 +15,7 @@ public class AppManager {
 
     private static final String TAG = "AppManager";
 
-    private List<WeakReference<Activity>> mStack = new ArrayList<WeakReference<Activity>>();
+    private List<WeakReference<Activity>> list = new ArrayList<WeakReference<Activity>>();
 
     public static AppManager getInstance() {
         return Holder.INSTANCE;
@@ -29,13 +29,13 @@ public class AppManager {
             if (activity == null) {
                 return;
             }
-            if (mStack == null) {
-                mStack  = new ArrayList<WeakReference<Activity>>();
+            if (list == null) {
+                list  = new ArrayList<WeakReference<Activity>>();
             }
             WeakReference<Activity> weakReference = new WeakReference<Activity>(activity);
-            mStack.add(weakReference);
+            list.add(weakReference);
         }
-        Log.d(TAG, "pushActivity: " + mStack.size());
+        Log.d(TAG, "pushActivity: " + list.size());
     }
 
     /**
@@ -46,9 +46,9 @@ public class AppManager {
             if (activity == null) {
                 return;
             }
-            for(WeakReference<Activity> weakReference : mStack) {
+            for(WeakReference<Activity> weakReference : list) {
                 if(weakReference.get() == activity) {
-                    mStack.remove(weakReference);
+                    list.remove(weakReference);
                     if (!activity.isFinishing()) {
                         activity.finish();
                     }
@@ -56,17 +56,17 @@ public class AppManager {
                 }
             }
         }
-        Log.d(TAG, "popActivity: " + mStack.size());
+        Log.d(TAG, "popActivity: " + list.size());
     }
 
     /**
      * 移除指定类名的Activity
      */
     public void finishActivity(Class<?> cls) {
-        if (mStack == null || mStack.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             return;
         }
-        Iterator<WeakReference<Activity>> iterator = mStack.iterator();
+        Iterator<WeakReference<Activity>> iterator = list.iterator();
         while (iterator.hasNext()){
             WeakReference<Activity> weakReference = iterator.next();
             Activity activity = weakReference.get();
@@ -83,10 +83,10 @@ public class AppManager {
      * 移除指定类名的Activity之外的所有Sctivity
      */
     public void finishAllActivityExceptAppoint(Class<?> cls) {
-        if (mStack == null || mStack.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             return;
         }
-        Iterator<WeakReference<Activity>> iterator = mStack.iterator();
+        Iterator<WeakReference<Activity>> iterator = list.iterator();
         while (iterator.hasNext()) {
             WeakReference<Activity> weakReference = iterator.next();
             Activity activity = weakReference.get();
@@ -106,12 +106,12 @@ public class AppManager {
      */
     public void exit() {
         synchronized (AppManager.class) {
-            for (WeakReference<Activity> weakReference : mStack) {
+            for (WeakReference<Activity> weakReference : list) {
                 if (weakReference != null && weakReference.get() != null) {
                     weakReference.get().finish();
                 }
             }
-            mStack.clear();
+            list.clear();
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(0);
         }

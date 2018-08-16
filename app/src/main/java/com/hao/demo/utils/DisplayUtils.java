@@ -22,7 +22,7 @@ import com.hao.demo.App;
  */
 public class DisplayUtils {
 
-    private static DisplayMetrics mDisplayMetrics;
+    private static DisplayMetrics metrics;
 
     private DisplayUtils() {
         /* cannot be instantiated */
@@ -30,11 +30,11 @@ public class DisplayUtils {
     }
 
     private static DisplayMetrics getDisplayMetrics() {
-        if (mDisplayMetrics == null) {
-            mDisplayMetrics = App.getInstance().getResources().getDisplayMetrics();
+        if (metrics == null) {
+            metrics = App.getInstance().getResources().getDisplayMetrics();
         }
 
-        return mDisplayMetrics;
+        return metrics;
     }
 
     /**
