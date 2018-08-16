@@ -18,10 +18,10 @@ public class TranslateActivity extends BaseActivity {
 
 
     @BindView(R.id.tv)
-    TextView mTv;
+    TextView tv;
 
     TranslateAnimation translateAnimation;
-    List<String> mList = new ArrayList<>();
+    List<String> list = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -42,7 +42,7 @@ public class TranslateActivity extends BaseActivity {
 
     public void start(View view) {
         i++;
-        mList.add("第" + i);
+        list.add("第" + i);
         startAnim();
     }
 
@@ -67,12 +67,12 @@ public class TranslateActivity extends BaseActivity {
 
     private void startAnim() {
 
-        if (mList.size() == 0 || b) {
+        if (list.size() == 0 || b) {
             return;
         }
 
-        final String s = mList.get(0);
-        mTv.setText(s);
+        final String s = list.get(0);
+        tv.setText(s);
         translateAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -83,9 +83,9 @@ public class TranslateActivity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 b = false;
-                mList.remove(s);
-                Log.d(TAG, "onAnimationEnd: " + mList.size());
-                if (mList.size() == 0) {
+                list.remove(s);
+                Log.d(TAG, "onAnimationEnd: " + list.size());
+                if (list.size() == 0) {
 
                 } else {
                     startAnim();
@@ -97,6 +97,6 @@ public class TranslateActivity extends BaseActivity {
 
             }
         });
-        mTv.startAnimation(translateAnimation);
+        tv.startAnimation(translateAnimation);
     }
 }

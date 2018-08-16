@@ -17,16 +17,16 @@ import butterknife.OnClick;
 public class ExpandActivity extends BaseActivity {
 
     @BindView(R.id.ll3)
-    LinearLayout mLl3;
+    LinearLayout ll3;
     @BindView(R.id.ll2)
-    LinearLayout mLl2;
+    LinearLayout ll2;
     @BindView(R.id.btn)
-    Button mBtn;
+    Button btn;
 
-    int mh1, mh2;
-    boolean mShow = true;
-    TranslateAnimation mAnimationTop, mAnimationBottom;
-    ObjectAnimator mObjectAnimatorTop, mObjectAnimatorBottom, mObjectAnimatorOther;
+    int h1, h2;
+    boolean show = true;
+    TranslateAnimation animationTop, animationBottom;
+    ObjectAnimator objectAnimatorTop, objectAnimatorBottom, objectAnimatorOther;
 
     @Override
     protected int getLayoutId() {
@@ -40,8 +40,8 @@ public class ExpandActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mh1 = DisplayUtils.dip2px( 44);
-        mh2 = DisplayUtils.dip2px( 88);
+        h1 = DisplayUtils.dip2px( 44);
+        h2 = DisplayUtils.dip2px( 88);
     }
 
     @OnClick(R.id.ll3)
@@ -56,36 +56,36 @@ public class ExpandActivity extends BaseActivity {
 
     @OnClick(R.id.btn)
     public void onBtnClicked() {
-        if (mShow) {
+        if (show) {
             hide();
 
         } else {
             show();
 
         }
-        mShow = !mShow;
+        show = !show;
     }
 
     private void show() {
 
-        mObjectAnimatorTop = ObjectAnimator.ofFloat(mLl2, "translationY", -mh1, 0);
-        mObjectAnimatorBottom = ObjectAnimator.ofFloat(mLl3, "translationY", -mh2, 0);
-        mObjectAnimatorOther = ObjectAnimator.ofFloat(mBtn, "translationY", -mh2, 0);
+        objectAnimatorTop = ObjectAnimator.ofFloat(ll2, "translationY", -h1, 0);
+        objectAnimatorBottom = ObjectAnimator.ofFloat(ll3, "translationY", -h2, 0);
+        objectAnimatorOther = ObjectAnimator.ofFloat(btn, "translationY", -h2, 0);
 
-        mObjectAnimatorTop.setDuration(500);
-        mObjectAnimatorBottom.setDuration(500);
-        mObjectAnimatorOther.setDuration(500);
+        objectAnimatorTop.setDuration(500);
+        objectAnimatorBottom.setDuration(500);
+        objectAnimatorOther.setDuration(500);
 
-        mObjectAnimatorTop.start();
-        mObjectAnimatorBottom.start();
-        mObjectAnimatorOther.start();
-//        mAnimationTop = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
+        objectAnimatorTop.start();
+        objectAnimatorBottom.start();
+        objectAnimatorOther.start();
+//        animationTop = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
 //                Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, -1, Animation.RELATIVE_TO_SELF, 0);
-//        mAnimationBottom = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
+//        animationBottom = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
 //                Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, -2, Animation.RELATIVE_TO_SELF, 0);
-//        mAnimationTop.setDuration(500);
-//        mAnimationBottom.setDuration(500);
-//        mAnimationTop.setAnimationListener(new Animation.AnimationListener() {
+//        animationTop.setDuration(500);
+//        animationBottom.setDuration(500);
+//        animationTop.setAnimationListener(new Animation.AnimationListener() {
 //            @Override
 //            public void onAnimationStart(Animation animation) {
 //
@@ -93,7 +93,7 @@ public class ExpandActivity extends BaseActivity {
 //
 //            @Override
 //            public void onAnimationEnd(Animation animation) {
-//                mLl2.setVisibility(View.VISIBLE);
+//                ll2.setVisibility(View.VISIBLE);
 //            }
 //
 //            @Override
@@ -101,7 +101,7 @@ public class ExpandActivity extends BaseActivity {
 //
 //            }
 //        });
-//        mAnimationBottom.setAnimationListener(new Animation.AnimationListener() {
+//        animationBottom.setAnimationListener(new Animation.AnimationListener() {
 //            @Override
 //            public void onAnimationStart(Animation animation) {
 //
@@ -109,7 +109,7 @@ public class ExpandActivity extends BaseActivity {
 //
 //            @Override
 //            public void onAnimationEnd(Animation animation) {
-//                mLl3.setVisibility(View.VISIBLE);
+//                ll3.setVisibility(View.VISIBLE);
 //            }
 //
 //            @Override
@@ -117,31 +117,31 @@ public class ExpandActivity extends BaseActivity {
 //
 //            }
 //        });
-//        mLl2.startAnimation(mAnimationTop);
-//        mLl3.startAnimation(mAnimationBottom);
+//        ll2.startAnimation(animationTop);
+//        ll3.startAnimation(animationBottom);
     }
 
     private void hide() {
-        mObjectAnimatorTop = ObjectAnimator.ofFloat(mLl2, "translationY", 0, -mh1);
-        mObjectAnimatorBottom = ObjectAnimator.ofFloat(mLl3, "translationY", 0, -mh2);
-        mObjectAnimatorOther = ObjectAnimator.ofFloat(mBtn, "translationY", 0, -mh2);
+        objectAnimatorTop = ObjectAnimator.ofFloat(ll2, "translationY", 0, -h1);
+        objectAnimatorBottom = ObjectAnimator.ofFloat(ll3, "translationY", 0, -h2);
+        objectAnimatorOther = ObjectAnimator.ofFloat(btn, "translationY", 0, -h2);
 
-        mObjectAnimatorTop.setDuration(500);
-        mObjectAnimatorBottom.setDuration(500);
-        mObjectAnimatorOther.setDuration(500);
+        objectAnimatorTop.setDuration(500);
+        objectAnimatorBottom.setDuration(500);
+        objectAnimatorOther.setDuration(500);
 
-        mObjectAnimatorTop.start();
-        mObjectAnimatorBottom.start();
-        mObjectAnimatorOther.start();
-//        mAnimationTop = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
+        objectAnimatorTop.start();
+        objectAnimatorBottom.start();
+        objectAnimatorOther.start();
+//        animationTop = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
 //                Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, -1);
-//        mAnimationBottom = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
+//        animationBottom = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
 //                Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, -2);
-//        mAnimationTop.setDuration(500);
-//        mAnimationTop.setFillAfter(true);
-//        mAnimationBottom.setDuration(500);
-//        mAnimationBottom.setFillAfter(true);
-//        mAnimationTop.setAnimationListener(new Animation.AnimationListener() {
+//        animationTop.setDuration(500);
+//        animationTop.setFillAfter(true);
+//        animationBottom.setDuration(500);
+//        animationBottom.setFillAfter(true);
+//        animationTop.setAnimationListener(new Animation.AnimationListener() {
 //            @Override
 //            public void onAnimationStart(Animation animation) {
 //
@@ -149,7 +149,7 @@ public class ExpandActivity extends BaseActivity {
 //
 //            @Override
 //            public void onAnimationEnd(Animation animation) {
-//               // mLl2.setVisibility(View.GONE);
+//               // ll2.setVisibility(View.GONE);
 //            }
 //
 //            @Override
@@ -157,7 +157,7 @@ public class ExpandActivity extends BaseActivity {
 //
 //            }
 //        });
-//        mAnimationBottom.setAnimationListener(new Animation.AnimationListener() {
+//        animationBottom.setAnimationListener(new Animation.AnimationListener() {
 //            @Override
 //            public void onAnimationStart(Animation animation) {
 //
@@ -165,7 +165,7 @@ public class ExpandActivity extends BaseActivity {
 //
 //            @Override
 //            public void onAnimationEnd(Animation animation) {
-//              //  mLl3.setVisibility(View.GONE);
+//              //  ll3.setVisibility(View.GONE);
 //            }
 //
 //            @Override
@@ -173,7 +173,7 @@ public class ExpandActivity extends BaseActivity {
 //
 //            }
 //        });
-//        mLl2.startAnimation(mAnimationTop);
-//        mLl3.startAnimation(mAnimationBottom);
+//        ll2.startAnimation(animationTop);
+//        ll3.startAnimation(animationBottom);
     }
 }
