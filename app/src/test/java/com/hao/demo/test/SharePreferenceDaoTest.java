@@ -18,18 +18,18 @@ public class SharePreferenceDaoTest {
 
     private static final String KEY = "PRE_KEY";
 
-    SharePreferenceDao mDao;
+    SharePreferenceDao dao;
 
     @Before
     public void setUp() {
         //这里就不用依赖其他库了，用RuntimeEnvironment.application代替Context
-        mDao = new SharePreferenceDao(RuntimeEnvironment.application);
+        dao = new SharePreferenceDao(RuntimeEnvironment.application);
     }
 
     @Test
     public void sharePreferenceDaoWriteRead() {
-        mDao.put(KEY, "123");
-        String s = mDao.get(KEY);
+        dao.put(KEY, "123");
+        String s = dao.get(KEY);
         System.out.println(s);
     }
 }

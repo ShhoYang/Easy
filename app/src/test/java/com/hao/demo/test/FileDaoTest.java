@@ -11,20 +11,20 @@ import org.junit.Test;
  */
 public class FileDaoTest {
 
-    FileDao mFileDao;
+    FileDao dao;
 
     @Before
     public void setUp() throws  Exception{
-        mFileDao = new FileDao();
+        dao = new FileDao();
     }
 
     @Test
     public void testRead(){
         String  content = "hello android test";
         String name = "test.txt";
-        System.out.println(mFileDao.getDirectory().getName());
-        mFileDao.write(name,content);
-        Assert.assertEquals(content,mFileDao.read(name));
+        System.out.println(dao.getDirectory().getName());
+        dao.write(name,content);
+        Assert.assertEquals(content,dao.read(name));
 
     }
 }
