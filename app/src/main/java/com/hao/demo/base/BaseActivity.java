@@ -18,14 +18,14 @@ import butterknife.Unbinder;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected Unbinder mUnbinder;
+    protected Unbinder unbinder;
     protected String TAG;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        mUnbinder = ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         TAG = getClass().getSimpleName();
         KLog.d(TAG, "onCreate: " + TAG);
         setTitle(TAG);
@@ -37,8 +37,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if (mUnbinder != null) {
-            mUnbinder.unbind();
+        if (unbinder != null) {
+            unbinder.unbind();
         }
     }
 
