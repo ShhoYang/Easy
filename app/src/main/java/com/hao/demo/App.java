@@ -2,6 +2,8 @@ package com.hao.demo;
 
 import android.app.Application;
 
+import com.socks.library.KLog;
+
 /**
  * @author Yang Shihao
  */
@@ -12,6 +14,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mApp = this;
+        KLog.init(true);
     }
 
     public static App getInstance() {

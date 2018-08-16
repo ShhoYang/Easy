@@ -40,8 +40,8 @@ public class ExpandActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mh1 = DisplayUtils.dip2px(this, 44);
-        mh2 = DisplayUtils.dip2px(this, 88);
+        mh1 = DisplayUtils.dip2px( 44);
+        mh2 = DisplayUtils.dip2px( 88);
     }
 
     @OnClick(R.id.ll3)
