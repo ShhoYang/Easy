@@ -1,4 +1,4 @@
-package com.hao.demo.test;
+package com.hao.easy.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.hao.demo;
+package com.hao.easy;
 
 import org.junit.Test;
 

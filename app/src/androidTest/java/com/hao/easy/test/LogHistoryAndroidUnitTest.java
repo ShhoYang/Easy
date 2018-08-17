@@ -1,4 +1,4 @@
-package com.hao.demo.test;
+package com.hao.easy.test;
 
 import android.os.Parcel;
 import android.support.test.filters.SmallTest;

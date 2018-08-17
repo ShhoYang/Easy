@@ -1,8 +1,8 @@
-package com.hao.demo.test;
+package com.hao.easy.test;
 
 import android.content.Context;
 
-import com.hao.demo.R;
+import com.hao.easy.R;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

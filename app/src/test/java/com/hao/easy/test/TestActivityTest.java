@@ -1,9 +1,9 @@
-package com.hao.demo.test;
+package com.hao.easy.test;
 
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.hao.demo.R;
+import com.hao.easy.R;
 
 import org.junit.Assert;
 import org.junit.Test;

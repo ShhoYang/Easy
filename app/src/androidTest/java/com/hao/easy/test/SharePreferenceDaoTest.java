@@ -1,15 +1,12 @@
-package com.hao.demo.test;
+package com.hao.easy.test;
 
 import android.support.test.runner.AndroidJUnit4;
-import android.util.Log;
 
-import com.hao.demo.App;
+import com.hao.easy.App;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Yang Shihao
