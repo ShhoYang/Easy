@@ -1,1 +1,7 @@
-include ':app', ':router-annotation', ':router-compiler', ':router-core'
+include ':app'
+include ':base'
+include ':router-annotation'
+include ':router-compiler'
+include ':router-core'
+include ':router-module1'
+include ':router-module2'
