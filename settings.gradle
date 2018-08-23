@@ -5,3 +5,6 @@ include ':router-compiler'
 include ':router-core'
 include ':router-module1'
 include ':router-module2'
+
+include ':buildsrc'
+include ':plugin-module'

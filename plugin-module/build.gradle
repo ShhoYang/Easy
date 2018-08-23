@@ -1,0 +1,23 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+
+group='com.hao.plugin'
+version='1.0.0'
+archivesBaseName='plugin-module'
+
+uploadArchives{
+    repositories {
+        mavenDeployer{
+            repository(url: uri('../HaoPluginModule'))
+        }
+    }
+}
