@@ -25,7 +25,6 @@ public class ImmersiveActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
     }
 
     @Override

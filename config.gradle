@@ -13,8 +13,7 @@ ext {
     constraintVersion = '1.1.2'
 
     butterknifeVersion = '8.5.1'
-    glideVersion = '4.5.0'
-    glideTransVersion = '3.0.1'
+    glideVersion = '4.8.0'
 
     dependencies = [
             "appcompat-v7"     : "com.android.support:appcompat-v7:${supportVersion}",

@@ -11,12 +11,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".progress.ProgressBarActivity">
+
+        </activity>
+        <activity android:name=".memory.MemoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".memory.Memory2Activity"></activity>
+        <activity android:name=".memory.Memory3Activity"></activity>
     </application>
 
 </manifest>

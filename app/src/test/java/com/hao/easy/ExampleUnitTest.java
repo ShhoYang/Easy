@@ -1,8 +1,9 @@
 package com.hao.easy;
 
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.math.BigInteger;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -11,7 +12,11 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void test() {
+        //2147483647
+        String s = "2444815874";
+        int i = Integer.reverseBytes(new BigInteger(s).intValue());
+        String s1 = String.format("%08x", i).toUpperCase();
+        System.out.println(s1);
     }
 }
