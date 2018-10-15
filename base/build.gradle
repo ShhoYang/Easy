@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion rootProject.ext.version.compileSdk
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion rootProject.ext.version.minSdk
+        targetSdkVersion rootProject.ext.version.targetSdk
+        versionCode rootProject.ext.version.versionCode
+        versionName rootProject.ext.version.versionName
     }
 
     buildTypes {
@@ -21,7 +21,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    rootProject.ext.implementation.each { k, v -> api v }
-    api project(':router-core')
-
+    api rootProject.ext.implementation
+    //rootProject.ext.implementation.each { k, v -> api v }
+    //api project(':router-core')
 }

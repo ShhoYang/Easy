@@ -5,16 +5,16 @@ if (isModule) {
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion rootProject.ext.version.compileSdk
 
     defaultConfig {
         if (!isModule) {
             applicationId "com.hao.easy.router.module1"
         }
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion rootProject.ext.version.minSdk
+        targetSdkVersion rootProject.ext.version.targetSdk
+        versionCode rootProject.ext.version.versionCode
+        versionName rootProject.ext.version.versionName
 
         javaCompileOptions {
             annotationProcessorOptions {
