@@ -1,19 +1,18 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion rootProject.ext.version.compileSdk
+    compileSdkVersion versions.compileSdk
 
     defaultConfig {
 
         applicationId "com.hao.easy"
-        minSdkVersion rootProject.ext.version.minSdk
-        targetSdkVersion rootProject.ext.version.targetSdk
-        versionCode rootProject.ext.version.versionCode
-        versionName rootProject.ext.version.versionName
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -53,11 +52,11 @@ dependencies {
         implementation project(':router-module2')
     }
 
-    annotationProcessor rootProject.ext.annotationProcessor
-    kapt rootProject.ext.kapt
-    debugImplementation rootProject.ext.debugImplementation
-    testImplementation rootProject.ext.testImplementation
-    androidTestImplementation rootProject.ext.androidTestImplementation
+    annotationProcessor annotationProcessorLibs
+    kapt kaptLibs
+    debugImplementation debugImplementationLibs
+    testImplementation testImplementationLibs
+    androidTestImplementation androidTestImplementationLibs
 
     api project(':base')
 }

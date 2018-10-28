@@ -1,5 +1,7 @@
-include ':app'
 include ':base'
+include ':app'
+include ':cmake'
+
 include ':router-annotation'
 include ':router-compiler'
 include ':router-core'

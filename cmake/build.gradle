@@ -1,9 +1,10 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
+        applicationId "com.hao.cmake"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versions.versionCode
@@ -11,6 +12,11 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_STL=c++_static'
+            }
+        }
     }
 
     buildTypes {
@@ -20,10 +26,15 @@ android {
         }
     }
 
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+        }
+    }
+
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:$versions.support"
-    api project(':router-annotation')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':base')
 }
