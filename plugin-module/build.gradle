@@ -10,14 +10,14 @@ repositories {
     mavenCentral()
 }
 
-group='com.hao.plugin'
+group='com.hao.easy'
 version='1.0.0'
-archivesBaseName='plugin-module'
+archivesBaseName='hao-plugin'
 
 uploadArchives{
     repositories {
         mavenDeployer{
-            repository(url: uri('../HaoPluginModule'))
+            repository(url: uri('../plugin-hao'))
         }
     }
 }

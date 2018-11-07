@@ -1,4 +1,4 @@
-package com.hao.plugin
+package com.hao.easy.plugin
 
 import org.gradle.api.Plugin
 
