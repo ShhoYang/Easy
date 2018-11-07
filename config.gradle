@@ -21,6 +21,7 @@ ext {
             glide      : '4.8.0',
             okhttp     : '3.11.0',
             retrofit   : '2.4.0',
+            anko       : '0.10.4'
     ]
 
     implementations = [
@@ -29,6 +30,11 @@ ext {
             "recyclerview"      : "com.android.support:recyclerview-v7:${versions.support}",
             "annotations"       : "com.android.support:support-annotations:${versions.support}",
             "constraint-layout" : "com.android.support.constraint:constraint-layout:${versions.constraint}",
+
+            "retrofit-adapter"  : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
+            "retrofit-converter": "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+            "rxandroid"         : 'io.reactivex.rxjava2:rxandroid:2.1.0',
+            "okhttp-logging"    : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
 
             "KLog"              : 'com.github.zhaokaiqiang.klog:library:1.6.0',
             "glide"             : "com.github.bumptech.glide:glide:$versions.glide",
@@ -43,12 +49,8 @@ ext {
             "paging-rxjava2"    : "android.arch.paging:rxjava2:1.0.0-rc1",
             "lifecycle"         : "android.arch.lifecycle:extensions:$versions.lifecycle",
 
-            "rxandroid"         : 'io.reactivex.rxjava2:rxandroid:2.1.0',
-
-            "retrofit-adapter"  : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
-            "retrofit-converter": "com.squareup.retrofit2:converter-gson:$versions.retrofit",
-
-            "okhttp-logging"    : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
+            "anko-commons"      : "org.jetbrains.anko:anko-commons:$versions.anko",
+            "anko-coroutines"   : "org.jetbrains.anko:anko-coroutines:$versions.anko",
 
             "router"            : project(':router-core')
     ]
@@ -83,14 +85,11 @@ ext {
             "espresso-core": 'com.android.support.test.espresso:espresso-core:3.0.2'
     ]
 
-
-
     implementationLibs = implementations.values()
     annotationProcessorLibs = annotationProcessors.values()
     kaptLibs = kapts.values()
     debugImplementationLibs = debugImplementations.values()
     testImplementationLibs = testImplementations.values()
     androidTestImplementationLibs = androidTestImplementations.values()
-
 
 }

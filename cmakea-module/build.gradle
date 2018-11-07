@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.hao.easy.cmakea"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_STL=c++_static'
+                // 这里的名字最好和 ../cpp/jsoncpp/CMakeLists.txt 中设置的名字相同
+                targets 'jsoncpp'
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':base')
+}

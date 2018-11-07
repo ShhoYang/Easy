@@ -1,12 +1,11 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-
 android {
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
+        applicationId "com.hao.easy.cmakeso"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versions.versionCode
@@ -20,15 +19,21 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['../export/libsojsoncpp/lib']
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+        }
+    }
+
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api implementationLibs
-    kapt kaptLibs
-    debugApi debugImplementationLibs
-    testImplementation testImplementationLibs
-    androidTestImplementation androidTestImplementationLibs
-    //rootProject.ext.implementation.each { k, v -> api v }
-    //api project(':router-core')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':base')
 }
