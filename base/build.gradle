@@ -1,7 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -25,10 +22,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api implementationLibs
-    kapt kaptLibs
-    debugApi debugImplementationLibs
-    testImplementation testImplementationLibs
-    androidTestImplementation androidTestImplementationLibs
     //rootProject.ext.implementation.each { k, v -> api v }
     //api project(':router-core')
 }
