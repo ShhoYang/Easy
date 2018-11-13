@@ -1,4 +1,4 @@
-package com.hao.easy.sharedelement.image
+package com.hao.easy.sharedelement.image.from
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +16,7 @@ class SharedElement2Activity : BaseActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    var fragment: SharedElement2Fragment? = null
+    lateinit var fragment: SharedElement2Fragment
     override fun getLayoutId(): Int {
 
         return R.layout.activity_shared_element2
@@ -34,7 +34,7 @@ class SharedElement2Activity : BaseActivity() {
         super.onActivityReenter(resultCode, data)
         YcShareElement.onActivityReenter(this, resultCode, data, object : IShareElementSelector {
             override fun selectShareElements(p0: MutableList<ShareElementInfo<Parcelable>>) {
-                fragment?.selectedShareElement(p0[0])
+                fragment.selectedShareElement(p0[0])
             }
         })
     }

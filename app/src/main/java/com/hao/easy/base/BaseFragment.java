@@ -29,9 +29,14 @@ public abstract class BaseFragment extends Fragment {
         rootView = inflater.inflate(getLayoutId(), container, false);
         unbinder = ButterKnife.bind(this, rootView);
         activity = getActivity();
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         initView();
         initData();
-        return rootView;
     }
 
     @Override

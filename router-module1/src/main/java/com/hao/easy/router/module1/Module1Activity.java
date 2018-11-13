@@ -18,7 +18,7 @@ public class Module1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Router.getInstance().build("/module2/Module2Activity")
-                        .withString("S", "test string").navigation();
+                        .withString("String", "test string").navigation();
             }
         });
     }

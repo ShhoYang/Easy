@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_shared_element_details.*
 class DetailsActivity : BaseActivity() {
 
     override fun getLayoutId(): Int {
-
         return R.layout.activity_shared_element_details
     }
 
@@ -30,10 +29,6 @@ class DetailsActivity : BaseActivity() {
     }
 
     override fun initData() {
-        YcShareElement.setEnterTransitions(this, object : IShareElements {
-            override fun getShareElements(): Array<ShareElementInfo<Parcelable>> {
-                return arrayOf(ShareElementInfo(ivAvatar), ShareElementInfo(tvName, TextViewStateSaver()))
-            }
-        },false)
+        YcShareElement.setEnterTransitions(this, { arrayOf(ShareElementInfo<Parcelable>(ivAvatar), ShareElementInfo(tvName, TextViewStateSaver())) }, false)
     }
 }

@@ -1,16 +1,12 @@
-if (isModule) {
-    apply plugin: 'com.android.library'
-} else {
-    apply plugin: 'com.android.application'
-}
-
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
-        if (!isModule) {
-            applicationId "com.hao.easy.router.module2"
-        }
+
+        applicationId "com.hao.easy.router"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versions.versionCode
@@ -18,18 +14,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: "module2"]
-            }
-        }
-
-        sourceSets {
-            main {
-                if (isModule) {
-                    manifest.srcFile 'src/main/AndroidManifest.xml'
-                } else {
-                    manifest.srcFile 'src/main/module/AndroidManifest.xml'
-                    java.srcDirs 'src/main/module/java', 'src/main/java'
-                }
+                arguments = [moduleName: project.getName()]
             }
         }
     }
@@ -40,10 +25,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    if (isModule) {
+        implementation project(':router-module1')
+        implementation project(':router-module2')
+    }
     implementation project(':base')
     implementation project(':router-core')
     annotationProcessor project(':router-compiler')

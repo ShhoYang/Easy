@@ -46,5 +46,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
+    implementation project(':router-core')
     annotationProcessor project(':router-compiler')
 }

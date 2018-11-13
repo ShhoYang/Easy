@@ -2,7 +2,6 @@ package com.hao.easy;
 
 import android.app.Application;
 
-import com.hao.easy.router.core.Router;
 import com.socks.library.KLog;
 
 /**
@@ -17,7 +16,6 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         KLog.init(true);
-        Router.init(this);
         Base.init(this);
     }
 
