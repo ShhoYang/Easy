@@ -1,12 +1,13 @@
 include ':base'
 include ':app'
 
-include ':cmake'
-include ':cmakeso-module'
-include ':cmakeso-simple'
-include ':cmakea-module'
-include ':cmakea-simple'
+//include ':cmake'
+//include ':cmakeso-module'
+//include ':cmakeso-simple'
+//include ':cmakea-module'
+//include ':cmakea-simple'
 
+include ':router'
 include ':router-annotation'
 include ':router-compiler'
 include ':router-core'
