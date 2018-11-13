@@ -10,7 +10,7 @@ ext {
             versionCode: 1,
             versionName: "1.0",
 
-            support    : '27.0.2',
+            support    : '28.0.0',
             constraint : '1.1.3',
             kotlin     : '1.2.71',
             paging     : '1.0.0',
@@ -87,7 +87,7 @@ ext {
     ]
 
     supportLibs = supports.values()
-    implementationLibs = implementations.values() + supportLibs
+    implementationLibs = implementations.values()
     annotationProcessorLibs = annotationProcessors.values()
     kaptLibs = kapts.values()
     debugImplementationLibs = debugImplementations.values()

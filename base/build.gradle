@@ -1,4 +1,3 @@
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -25,11 +24,16 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api implementationLibs
+    api supportLibs
+    implementations.each { k, v ->
+        api(v) {
+            //去除第三方的重复support库
+            exclude group: 'com.android.support'
+        }
+    }
     kapt kaptLibs
     debugApi debugImplementationLibs
     testImplementation testImplementationLibs
     androidTestImplementation androidTestImplementationLibs
-    //rootProject.ext.implementation.each { k, v -> api v }
-    //api project(':router-core')
+
 }
