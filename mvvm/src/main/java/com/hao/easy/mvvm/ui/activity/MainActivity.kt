@@ -1,6 +1,5 @@
 package com.hao.easy.mvvm.ui.activity
 
-import android.support.design.internal.BottomNavigationItemView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -11,6 +10,7 @@ import com.hao.easy.mvvm.ui.fragment.FourthFragment
 import com.hao.easy.mvvm.ui.fragment.SecondFragment
 import com.hao.easy.mvvm.ui.fragment.ThirdFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar_style_text.*
 
 class MainActivity : BaseActivity() {
 
@@ -32,9 +32,10 @@ class MainActivity : BaseActivity() {
                         R.id.find -> 2
                         else -> 3
                     }
-
+            toolbarTitle.text = item.title
             true
         }
+        toolbarTitle.text = navigationView.menu.getItem(0).title
     }
 
     inner class MainViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {

@@ -2,6 +2,7 @@ package com.hao.easy.mvvm.ui.fragment
 
 import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_second.*
 
 /**
  * @author Yang Shihao
@@ -9,4 +10,8 @@ import com.hao.easy.mvvm.base.BaseFragment
  */
 class SecondFragment: BaseFragment() {
     override fun getLayoutId() = R.layout.fragment_second
+
+    override fun initView() {
+        textView.text = "通訊錄"
+    }
 }
