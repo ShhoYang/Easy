@@ -1,7 +1,7 @@
 package com.hao.easy.mvvm.http
 
-import com.hao.easy.mvvm.model.ArticleList
-import com.hao.easy.mvvm.model.HttpResult
+import com.hao.easy.mvvm.base.HttpResult
+import com.hao.easy.mvvm.first.model.ArticleList
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,7 +11,7 @@ import retrofit2.http.Path
  * @date 2018/11/19
  */
 
-interface WeChatApiService {
+interface ApiService {
 
     companion object {
          const val BASE_URL = "http://wanandroid.com/wxarticle/"

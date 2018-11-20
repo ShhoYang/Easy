@@ -1,14 +1,14 @@
-package com.hao.easy.mvvm.ui.activity
+package com.hao.easy.mvvm.first.ui.activity
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.base.BaseActivity
-import com.hao.easy.mvvm.ui.fragment.FirstFragment
-import com.hao.easy.mvvm.ui.fragment.FourthFragment
-import com.hao.easy.mvvm.ui.fragment.SecondFragment
-import com.hao.easy.mvvm.ui.fragment.ThirdFragment
+import com.hao.easy.mvvm.first.ui.fragment.FirstFragment
+import com.hao.easy.mvvm.first.ui.fragment.SecondFragment
+import com.hao.easy.mvvm.fourth.ui.fragment.FourthFragment
+import com.hao.easy.mvvm.third.ui.fragment.ThirdFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_style_text.*
 

@@ -1,13 +1,13 @@
-package com.hao.easy.mvvm.viewmodel
+package com.hao.easy.mvvm.first.viewmodel
 
 import android.arch.paging.DataSource
 import android.arch.paging.PageKeyedDataSource
 import android.util.Log
 import com.hao.easy.mvvm.extensions.doSubscribe
-import com.hao.easy.mvvm.http.WeChatApi
-import com.hao.easy.mvvm.model.Article
+import com.hao.easy.mvvm.http.Api
+import com.hao.easy.mvvm.first.model.Article
 
-class MainDataSource(private val api: WeChatApi) : PageKeyedDataSource<Int, Article>() {
+class MainDataSource(private val api: Api) : PageKeyedDataSource<Int, Article>() {
 
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Article>) {
@@ -29,7 +29,7 @@ class MainDataSource(private val api: WeChatApi) : PageKeyedDataSource<Int, Arti
 }
 
 
-class MainDataSourceFactory(private val api: WeChatApi) : DataSource.Factory<Int, Article>() {
+class MainDataSourceFactory(private val api: Api) : DataSource.Factory<Int, Article>() {
 
     override fun create(): DataSource<Int, Article> = MainDataSource(api)
 }

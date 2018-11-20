@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.ui.fragment
+package com.hao.easy.mvvm.fourth.ui.fragment
 
 import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.base.BaseFragment

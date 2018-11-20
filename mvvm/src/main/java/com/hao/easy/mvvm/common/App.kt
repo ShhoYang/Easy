@@ -2,6 +2,10 @@ package com.hao.easy.mvvm.common
 
 import android.app.Application
 import com.hao.easy.mvvm.extensions.notNullSingleValue
+import com.hao.easy.mvvm.inject.component.AppComponent
+import com.hao.easy.mvvm.inject.component.DaggerAppComponent
+import com.hao.easy.mvvm.inject.module.AppModule
+import com.hao.easy.mvvm.inject.module.NetworkModule
 import com.socks.library.KLog
 
 /**
@@ -10,8 +14,14 @@ import com.socks.library.KLog
  */
 class App : Application() {
 
-    companion object {
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.builder()
+                .appModule(AppModule(this))
+                .networkModule(NetworkModule())
+                .build()
+    }
 
+    companion object {
         var instance by notNullSingleValue<App>()
     }
 

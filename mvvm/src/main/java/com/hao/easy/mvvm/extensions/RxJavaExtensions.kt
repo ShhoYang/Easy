@@ -1,8 +1,8 @@
 package com.hao.easy.mvvm.extensions
 
+import com.hao.easy.mvvm.base.HttpResult
 import com.hao.easy.mvvm.http.HttpFailure
 import com.hao.easy.mvvm.http.HttpResponse
-import com.hao.easy.mvvm.model.HttpResult
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

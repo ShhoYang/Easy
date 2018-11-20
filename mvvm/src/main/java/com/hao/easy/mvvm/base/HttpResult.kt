@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.model
+package com.hao.easy.mvvm.base
 
 /**
  * @author Yang Shihao

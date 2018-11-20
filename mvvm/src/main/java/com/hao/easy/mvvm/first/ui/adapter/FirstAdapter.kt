@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.adapter
+package com.hao.easy.mvvm.first.ui.adapter
 
 import android.arch.paging.PagedListAdapter
 import android.support.v7.util.DiffUtil
@@ -8,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.hao.easy.mvvm.R
-import com.hao.easy.mvvm.model.Article
+import com.hao.easy.mvvm.first.model.Article
 import org.jetbrains.anko.toast
+import javax.inject.Inject
 
-class FirstAdapter : PagedListAdapter<Article, ViewHolder>(diff) {
+class FirstAdapter @Inject constructor() : PagedListAdapter<Article, FirstAdapter.ViewHolder>(diff) {
 
     companion object {
         val diff = object : DiffUtil.ItemCallback<Article>() {
@@ -31,8 +32,9 @@ class FirstAdapter : PagedListAdapter<Article, ViewHolder>(diff) {
         }
     }
 
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val textView = itemView.findViewById<TextView>(R.id.tv_text)!!
+    }
 }
 
-class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val textView = itemView.findViewById<TextView>(R.id.tv_text)!!
-}
+

@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.model
+package com.hao.easy.mvvm.first.model
 
 data class Author(var courseId: Int,
                   var id: Int,

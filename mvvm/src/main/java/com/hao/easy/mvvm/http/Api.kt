@@ -1,7 +1,7 @@
 package com.hao.easy.mvvm.http
 
 import com.hao.easy.mvvm.extensions.map
-import com.hao.easy.mvvm.model.ArticleList
+import com.hao.easy.mvvm.first.model.ArticleList
 import com.socks.library.KLog
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * @author Yang Shihao
  * @date 2018/11/19
  */
-class WeChatApi {
+class Api {
 
     private val loggingInterceptor: HttpLoggingInterceptor by lazy {
         var interceptor = HttpLoggingInterceptor {
@@ -31,14 +31,14 @@ class WeChatApi {
     }
 
     private val retrofit: Retrofit by lazy {
-        Retrofit.Builder().baseUrl(WeChatApiService.BASE_URL)
+        Retrofit.Builder().baseUrl(ApiService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build()
     }
 
-    private val weChatApiService: WeChatApiService = retrofit.create(WeChatApiService::class.java)
+    private val weChatApiService: ApiService = retrofit.create(ApiService::class.java)
 
     fun getArticleList(page: Int = 1): Observable<ArticleList> {
         return weChatApiService.getArticleList(409, page).map()
