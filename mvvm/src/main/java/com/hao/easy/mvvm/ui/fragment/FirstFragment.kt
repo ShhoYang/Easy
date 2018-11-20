@@ -1,12 +1,14 @@
 package com.hao.easy.mvvm.ui.fragment
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.arch.paging.PagedList
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import com.hao.easy.mvvm.R
+import com.hao.easy.mvvm.adapter.FirstAdapter
 import com.hao.easy.mvvm.base.BaseFragment
+import com.hao.easy.mvvm.model.Article
+import com.hao.easy.mvvm.viewmodel.FirstViewModel
 import kotlinx.android.synthetic.main.fragment_first.*
 
 /**
@@ -15,60 +17,22 @@ import kotlinx.android.synthetic.main.fragment_first.*
  */
 class FirstFragment : BaseFragment() {
 
-    lateinit var mainAdapter: Adapter
+    private lateinit var mainAdapter: FirstAdapter
+
+    private val viewModel by lazy {
+        ViewModelProviders.of(this).get(FirstViewModel::class.java)
+    }
 
     override fun getLayoutId() = R.layout.fragment_first
 
-    var i = 0
 
     override fun initView() {
-        var data = ArrayList<String>()
-        (i..100).forEach { data.add(it.toString()) }
-        mainAdapter = Adapter(data)
+
+        mainAdapter = FirstAdapter()
+        viewModel.liveData.observe(this, Observer<PagedList<Article>> { t -> mainAdapter.submitList(t) })
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             this.adapter = mainAdapter
         }
-
-        refreshLayout.setOnRefreshListener {
-            refreshLayout.isRefreshing = false
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            mainAdapter.addData((--i).toString())
-            recyclerView.smoothScrollToPosition(0)
-        }
-
-    }
-
-    inner class Adapter(val data: ArrayList<String>) : RecyclerView.Adapter<ViewHolder>() {
-
-        override fun onCreateViewHolder(p0: ViewGroup, p1: Int) = ViewHolder(TextView(p0.context))
-
-        override fun getItemCount() = data.size
-
-        override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-            p0.textView.text = data[p1]
-        }
-
-        fun addData(item: String) {
-            data.add(0, item)
-            notifyItemInserted(0)
-        }
-    }
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textView: TextView = itemView as TextView
     }
 }

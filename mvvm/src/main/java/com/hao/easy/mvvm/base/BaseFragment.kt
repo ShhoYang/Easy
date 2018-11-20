@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.gson.GsonRequestBodyConverter
 
 /**
  * @author Yang Shihao
@@ -22,7 +20,6 @@ abstract class BaseFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initView()
-        var gsonRequestBodyConverter = GsonConverterFactory<Any>()
     }
 
     @LayoutRes
