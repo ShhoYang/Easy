@@ -7,5 +7,5 @@ import android.view.View
  */
 
 fun <T : View> View.f(id: Int): T {
-    return findViewById<T>(id)
+    return findViewById(id)
 }

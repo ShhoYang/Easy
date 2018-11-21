@@ -1,6 +1,7 @@
 package com.hao.easy.mvvm.http
 
 import com.hao.easy.mvvm.common.App
+import com.socks.library.KLog
 import io.reactivex.functions.Consumer
 import org.jetbrains.anko.toast
 
@@ -26,6 +27,9 @@ class HttpFailure(val onFailure: (String) -> Unit = {
 }) : Consumer<Throwable> {
 
     override fun accept(t: Throwable?) {
+        t?.apply {
+            KLog.d("HttpFailure", message)
+        }
         onFailure("连接失败")
     }
 }

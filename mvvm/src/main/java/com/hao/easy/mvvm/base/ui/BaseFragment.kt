@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.base
+package com.hao.easy.mvvm.base.ui
 
 import android.os.Bundle
 import android.support.annotation.LayoutRes
@@ -18,21 +18,23 @@ import com.hao.easy.mvvm.inject.module.FragmentModule
  */
 abstract class BaseFragment : Fragment() {
 
-    private var fragmentComponent: FragmentComponent? = null
+    private lateinit var fragmentRootView: View
+    private lateinit var fragmentComponent: FragmentComponent
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(getLayoutId(), container, false)
+        fragmentRootView = inflater.inflate(getLayoutId(), container, false)
+        return fragmentRootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        init()
+        onInit()
         initInject()
         initView()
         initData()
     }
 
-    private fun init() {
+    open fun onInit() {
         val configPersistentComponent = DaggerConfigPersistentComponent.builder()
                 .appComponent(App.instance.appComponent)
         fragmentComponent = configPersistentComponent.build().fragmentComponent(FragmentModule(this))
@@ -40,6 +42,10 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun fragmentComponent() = fragmentComponent!!
+
+    fun <T : View> f(id: Int): T {
+        return fragmentRootView?.findViewById(id)
+    }
 
     @LayoutRes
     abstract fun getLayoutId(): Int

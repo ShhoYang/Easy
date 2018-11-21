@@ -25,7 +25,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':base')
-    annotationProcessor annotationProcessorLibs
+    implementation supportLibs
+    implementations.each { k, v ->
+        api(v) {
+            //去除第三方的重复support库
+            exclude group: 'com.android.support'
+        }
+    }
     kapt kaptLibs
+    annotationProcessor annotationProcessorLibs
 }

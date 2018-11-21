@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.hao.easy.mvvm.R
-import com.hao.easy.mvvm.base.BaseActivity
+import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.first.ui.fragment.FirstFragment
 import com.hao.easy.mvvm.first.ui.fragment.SecondFragment
 import com.hao.easy.mvvm.fourth.ui.fragment.FourthFragment

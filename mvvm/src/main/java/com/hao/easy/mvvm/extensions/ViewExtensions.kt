@@ -3,6 +3,7 @@ package com.hao.easy.mvvm.extensions
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
+import android.view.View
 
 /**
  * @author Yang Shihao
@@ -13,4 +14,8 @@ fun <VH : RecyclerView.ViewHolder, A : Adapter<VH>> RecyclerView.init(adapter: A
 
     this.layoutManager = layoutManager
     this.adapter = adapter
+}
+
+fun <T : View> View.f(id: Int): T {
+    return findViewById(id)
 }

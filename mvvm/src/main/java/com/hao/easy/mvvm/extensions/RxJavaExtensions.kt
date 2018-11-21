@@ -9,8 +9,7 @@ import io.reactivex.schedulers.Schedulers
 
 
 fun <D, T : HttpResult<D>> Observable<T>.map(): Observable<D> =
-        map { it.data }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        map { it.data }.observeOn(AndroidSchedulers.mainThread())
 
 fun <T> Observable<T>.io2main(): Observable<T> =
         subscribeOn(Schedulers.io())

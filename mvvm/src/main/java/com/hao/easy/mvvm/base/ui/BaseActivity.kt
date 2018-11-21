@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.base
+package com.hao.easy.mvvm.base.ui
 
 import android.os.Bundle
 import android.support.annotation.LayoutRes
@@ -18,7 +18,7 @@ abstract class BaseActivity : AppCompatActivity() {
         BackgroundLibrary.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
-        View.inflate(this, getLayoutId(), viewRoot)
+        View.inflate(this, getLayoutId(), activityRootView)
 
         initView()
     }
