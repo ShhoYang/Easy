@@ -43,7 +43,7 @@ abstract class BaseFragment : Fragment() {
 
     fun fragmentComponent() = fragmentComponent!!
 
-    fun <T : View> f(id: Int): T {
+    fun <T : View> f(id: Int): T? {
         return fragmentRootView?.findViewById(id)
     }
 
@@ -60,6 +60,4 @@ abstract class BaseFragment : Fragment() {
     open fun initData() {
 
     }
-
-
 }

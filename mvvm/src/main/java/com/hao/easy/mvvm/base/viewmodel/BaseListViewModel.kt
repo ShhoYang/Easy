@@ -6,6 +6,7 @@ import android.arch.lifecycle.Observer
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PageKeyedDataSource
 import android.arch.paging.PagedList
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.support.annotation.NonNull
 import com.hao.easy.mvvm.base.datasource.DataSourceFactory
 import com.hao.easy.mvvm.base.datasource.PagedDataLoader
@@ -13,8 +14,11 @@ import com.socks.library.KLog
 
 abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
 
+    open fun pageSize(): Int {
+        return 20
+    }
+
     companion object {
-        const val PAGE_SIZE = 20
         const val TAG = "BaseViewModel"
     }
 
@@ -22,7 +26,7 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
         DataSourceFactory(this)
     }
 
-    private val loadLiveData = LivePagedListBuilder(dataSourceFactory, PAGE_SIZE).build()
+    private val loadLiveData = LivePagedListBuilder(dataSourceFactory, pageSize()).build()
 
     private val refreshLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -32,17 +36,17 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
         dataSourceFactory.sourceLiveData.value?.invalidate()
     }
 
-    fun observe(@NonNull owner: LifecycleOwner, data: (PagedList<T>) -> Unit, refreshResult: (Boolean) -> Unit, loadMoreResult: (Boolean) -> Unit) {
+    fun observe(@NonNull owner: LifecycleOwner, data: (PagedList<T>) -> Unit, refreshResult: (Boolean?) -> Unit, loadMoreResult: (Boolean?) -> Unit) {
         loadLiveData.observe(owner, Observer {
             it?.apply(data)
         })
 
         refreshLiveData.observe(owner, Observer {
-            refreshResult(it ?: false)
+            refreshResult(it)
         })
 
         loadMoreLiveData.observe(owner, Observer {
-            loadMoreResult(it ?: false)
+            loadMoreResult(it)
         })
     }
 
@@ -53,11 +57,11 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
             when {
                 it == null -> refreshLiveData.value = false
                 it.size < PAGE_SIZE -> {
-                    callback.onResult(it, 0, 1)
-                    refreshLiveData.value = true
+                    callback.onResult(it, null, null)
+                    refreshLiveData.value = null
                 }
                 else -> {
-                    callback.onResult(it, 0, 2)
+                    callback.onResult(it, null, 2)
                     refreshLiveData.value = true
                 }
             }
@@ -70,9 +74,9 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
         loadData(params.key) {
             when {
                 it == null -> loadMoreLiveData.value = false
-                it.size < PAGE_SIZE -> {
-                    callback.onResult(it, params.key)
-                    loadMoreLiveData.value = true
+                it.size < pageSize() -> {
+                    callback.onResult(it, null)
+                    loadMoreLiveData.value = null
                 }
                 else -> {
                     callback.onResult(it, params.key + 1)

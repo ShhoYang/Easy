@@ -1,17 +1,20 @@
 package com.hao.easy.mvvm.extensions
 
-import com.hao.easy.mvvm.base.HttpResult
-import com.hao.easy.mvvm.http.HttpFailure
-import com.hao.easy.mvvm.http.HttpResponse
+import com.hao.easy.mvvm.base.model.HttpResult
+import com.hao.easy.mvvm.base.http.HttpFailure
+import com.hao.easy.mvvm.base.http.HttpResponse
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-fun <D, T : HttpResult<D>> Observable<T>.map(): Observable<D> =
+fun <D, T : HttpResult<D>> Observable<T>.map_main(): Observable<D> =
         map { it.data }.observeOn(AndroidSchedulers.mainThread())
 
-fun <T> Observable<T>.io2main(): Observable<T> =
+fun <D, T : HttpResult<D>> Observable<T>.map_io_main(): Observable<D> =
+        map { it.data }.io_main()
+
+fun <T> Observable<T>.io_main(): Observable<T> =
         subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 

@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".first.ui.activity.MainActivity">
+    tools:context=".wechat.ui.activity.MainActivity">
 
-    <include layout="@layout/toolbar_style_text" />
+    <include layout="@layout/toolbar" />
 
-    <android.support.constraint.ConstraintLayout
+    <FrameLayout
         android:id="@+id/activityRootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

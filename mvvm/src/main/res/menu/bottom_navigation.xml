@@ -3,17 +3,17 @@
     <item
         android:id="@+id/conversation"
         android:icon="@drawable/tab_conversation"
-        android:title="聊天" />
+        android:title="公眾號" />
     <item
         android:id="@+id/contacts"
         android:icon="@drawable/tab_contacts"
-        android:title="通訊錄" />
+        android:title="最新" />
     <item
         android:id="@+id/find"
         android:icon="@drawable/tab_find"
-        android:title="發現" />
+        android:title="項目" />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/tab_profile"
-        android:title="我的" />
+        android:title="Kotlin" />
 </menu>

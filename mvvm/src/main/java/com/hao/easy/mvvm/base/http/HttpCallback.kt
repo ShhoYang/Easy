@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.http
+package com.hao.easy.mvvm.base.http
 
 import com.hao.easy.mvvm.common.App
 import com.socks.library.KLog
