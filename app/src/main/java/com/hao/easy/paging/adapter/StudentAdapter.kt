@@ -2,6 +2,7 @@ package com.hao.easy.paging.adapter
 
 import android.arch.paging.PagedListAdapter
 import android.support.v7.util.DiffUtil
+import android.util.Log
 import android.view.ViewGroup
 import com.hao.easy.paging.db.Student
 
@@ -17,8 +18,10 @@ class StudentAdapter : PagedListAdapter<Student, StudentViewHolder>(diffCallback
                     p0.id == p1.id
 
 
-            override fun areContentsTheSame(p0: Student, p1: Student): Boolean =
-                    p0 == p1
+            override fun areContentsTheSame(p0: Student, p1: Student): Boolean {
+                Log.d("aaaaaaaaaaaaaa", p0.name + "---" + p1.name)
+                return p0 == p1
+            }
         }
     }
 

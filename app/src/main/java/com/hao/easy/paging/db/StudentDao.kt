@@ -2,6 +2,7 @@ package com.hao.easy.paging.db
 
 import android.arch.paging.DataSource
 import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 
@@ -20,4 +21,7 @@ interface StudentDao {
 
     @Query("SELECT * FROM Student ORDER BY name COLLATE NOCASE ASC")
     fun getAllStudent(): DataSource.Factory<Int, Student>
+
+    @Query("DELETE FROM Student")
+    fun deleteAll()
 }

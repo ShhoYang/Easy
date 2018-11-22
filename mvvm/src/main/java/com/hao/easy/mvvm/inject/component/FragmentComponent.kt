@@ -19,5 +19,5 @@ interface FragmentComponent {
 
     fun inject(wechatArticlesFragment: WechatArticlesFragment)
 
-    fun inject(newArticlesFragment: NewArticlesFragment)
+    fun inject(articlesFragment: NewArticlesFragment)
 }

@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.util.Log
 import com.hao.easy.R
 import com.hao.easy.base.BaseActivity
 import com.hao.easy.paging.adapter.StudentAdapter
@@ -27,6 +28,18 @@ class PagingActivity : BaseActivity() {
     override fun initData() {
         val adapter = StudentAdapter()
         recyclerView.adapter = adapter
-        viewModel.allStudents.observe(this, Observer { adapter.submitList(it) })
+        viewModel.allStudents.observe(this, Observer {
+            adapter.submitList(it)
+        })
     }
+
+    var i: Int = 0
+
+//    override fun onBackPressed() {
+//        //super.onBackPressed()
+//        ioThread {
+//            viewModel.insertStudent(i++.toString())
+//        }
+//
+//    }
 }

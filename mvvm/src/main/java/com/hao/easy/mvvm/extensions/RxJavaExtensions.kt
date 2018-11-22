@@ -18,18 +18,18 @@ fun <T> Observable<T>.io_main(): Observable<T> =
         subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
-fun <T> Observable<T>.doSubscribe() {
-    doSubscribe({}, {})
+fun <T> Observable<T>.subscribeBy() {
+    subscribeBy({}, {})
 }
 
-fun <T> Observable<T>.doSubscribe(onResponse: (T) -> Unit) {
-    doSubscribe(onResponse, {})
+fun <T> Observable<T>.subscribeBy(onResponse: (T) -> Unit) {
+    subscribeBy(onResponse, {})
 }
 
-fun <T> Observable<T>.doSubscribeForFailure(onFailure: (String) -> Unit) {
-    doSubscribe({}, onFailure)
+fun <T> Observable<T>.subscribeByFailure(onFailure: (String) -> Unit) {
+    subscribeBy({}, onFailure)
 }
 
-fun <T> Observable<T>.doSubscribe(onResponse: (T) -> Unit, onFailure: (String) -> Unit) {
+fun <T> Observable<T>.subscribeBy(onResponse: (T) -> Unit, onFailure: (String) -> Unit) {
     subscribe(HttpResponse(onResponse, onFailure), HttpFailure(onFailure))
 }

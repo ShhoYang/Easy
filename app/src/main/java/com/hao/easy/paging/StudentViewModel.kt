@@ -22,7 +22,7 @@ class StudentViewModel(app: Application) : AndroidViewModel(app) {
 
     val dao = StudentDb.get(app).studentDao()
 
-    val allStudents = LivePagedListBuilder(dao.getAllStudent(),
+    val allStudents = LivePagedListBuilder(DataSourceFactory(),
             PagedList.Config.Builder()
                     .setPageSize(PAGE_SIZE)
                     .setEnablePlaceholders(ENABLE_PLACEHOLDERS)
@@ -33,5 +33,4 @@ class StudentViewModel(app: Application) : AndroidViewModel(app) {
     fun insertStudent(name: String) {
         dao.insert(Student(0, name))
     }
-
 }

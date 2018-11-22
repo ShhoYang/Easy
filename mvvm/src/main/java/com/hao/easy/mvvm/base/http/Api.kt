@@ -4,6 +4,7 @@ import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.base.model.HttpResult
 import com.hao.easy.mvvm.base.model.ListPaged
 import com.hao.easy.mvvm.newatricles.model.NewArticle
+import com.hao.easy.mvvm.wechat.model.Ad
 import com.hao.easy.mvvm.wechat.model.Author
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -15,6 +16,9 @@ import retrofit2.http.Path
  */
 
 interface Api {
+
+    @GET("banner/json")
+    fun getAd(): Observable<HttpResult<ArrayList<Ad>>>
 
     @GET("wxarticle/chapters/json")
     fun getWeChatAuthors(): Observable<HttpResult<ArrayList<Author>>>

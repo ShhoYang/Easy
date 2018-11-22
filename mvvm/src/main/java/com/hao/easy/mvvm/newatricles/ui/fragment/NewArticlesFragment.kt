@@ -5,7 +5,6 @@ import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.newatricles.model.NewArticle
 import com.hao.easy.mvvm.newatricles.ui.adapter.NewArticlesAdapter
 import com.hao.easy.mvvm.newatricles.viewmodel.NewArticlesViewModel
-import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 /**

@@ -1,10 +1,13 @@
 package com.hao.easy.mvvm.wechat.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import com.hao.easy.mvvm.R
+import com.hao.easy.mvvm.base.adapter.BasePagedAdapter
 import com.hao.easy.mvvm.base.ui.BaseListFragment
+import com.hao.easy.mvvm.extensions.snack
 import com.hao.easy.mvvm.wechat.model.Article
-import com.hao.easy.mvvm.wechat.ui.adapter.FirstAdapter
+import com.hao.easy.mvvm.wechat.ui.adapter.WechatArticlesAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.WechatArticlesViewModel
 import javax.inject.Inject
 
@@ -26,7 +29,7 @@ class WechatArticlesFragment : BaseListFragment<Article>() {
     }
 
     @Inject
-    lateinit var adapter: FirstAdapter
+    lateinit var adapter: WechatArticlesAdapter
 
     @Inject
     lateinit var viewModel: WechatArticlesViewModel
@@ -37,14 +40,26 @@ class WechatArticlesFragment : BaseListFragment<Article>() {
         fragmentComponent().inject(this)
     }
 
+    var a = 0
+
+    override fun isLazy() = true
+
     override fun initData() {
-        arguments?.apply { viewModel.authorId = getInt(AUTHOR_ID, 409) }
+        arguments?.apply {
+            a = getInt(AUTHOR_ID, 409)
+            viewModel.authorId = getInt(AUTHOR_ID, 409)
+        }
         super.initData()
     }
 
     override fun dataViewModel() = viewModel
 
-    override fun adapter() = adapter
+    override fun adapter(): BasePagedAdapter<Article> {
+        adapter.itemClickListener = { _, item, _ ->
+            recyclerView.snack(item.title)
+        }
+        return adapter
+    }
 
     override fun refreshFinished(success: Boolean?) {
         super.refreshFinished(success)
@@ -54,5 +69,10 @@ class WechatArticlesFragment : BaseListFragment<Article>() {
 
     fun refresh() {
         viewModel.invalidate()
+    }
+
+    override fun doLoad() {
+        super.doLoad()
+        Log.d("aaaaaaaaaaaa", "id = $a")
     }
 }

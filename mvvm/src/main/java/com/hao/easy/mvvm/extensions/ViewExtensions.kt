@@ -1,5 +1,6 @@
 package com.hao.easy.mvvm.extensions
 
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
@@ -18,4 +19,8 @@ fun <VH : RecyclerView.ViewHolder, A : Adapter<VH>> RecyclerView.init(adapter: A
 
 fun <T : View> View.f(id: Int): T {
     return findViewById(id)
+}
+
+fun View.snack(msg: String) {
+    Snackbar.make(this, msg, Snackbar.LENGTH_SHORT).show()
 }

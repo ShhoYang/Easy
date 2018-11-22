@@ -28,10 +28,11 @@ abstract class StudentDb : RoomDatabase() {
                         .addCallback(object : RoomDatabase.Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
 
+
                                 ioThread {
-                                    get(context)
-                                            .studentDao()
-                                            .insert(CHEESE_DATA.map { Student(0, it) })
+                                    val studentDao = get(context).studentDao()
+                                    studentDao.insert(CHEESE_DATA.map { Student(0, it) }
+                                            )
                                 }
                             }
 
