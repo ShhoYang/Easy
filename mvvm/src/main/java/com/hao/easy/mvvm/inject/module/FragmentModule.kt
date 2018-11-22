@@ -4,11 +4,11 @@ import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v4.app.Fragment
-import com.hao.easy.mvvm.wechat.viewmodel.WeChatArticlesViewModel
+import com.hao.easy.mvvm.wechat.viewmodel.WechatArticlesViewModel
 import com.hao.easy.mvvm.base.http.Api
 import com.hao.easy.mvvm.inject.ActivityContext
 import com.hao.easy.mvvm.newatricles.viewmodel.NewArticlesViewModel
-import com.hao.easy.mvvm.wechat.viewmodel.WeChatViewModel
+import com.hao.easy.mvvm.wechat.viewmodel.WechatViewModel
 import dagger.Module
 import dagger.Provides
 
@@ -36,15 +36,15 @@ class FragmentModule(private val fragment: Fragment) {
     }
 
     @Provides
-    internal fun provideWeChatViewModel(api: Api): WeChatViewModel {
-        val viewModel = ViewModelProviders.of(fragment).get(WeChatViewModel::class.java)
+    internal fun provideWechatViewModel(api: Api): WechatViewModel {
+        val viewModel = ViewModelProviders.of(fragment).get(WechatViewModel::class.java)
         viewModel.api = api
         return viewModel
     }
 
     @Provides
-    internal fun provideWeChatArticlesViewModel(api: Api): WeChatArticlesViewModel {
-        val viewModel = ViewModelProviders.of(fragment).get(WeChatArticlesViewModel::class.java)
+    internal fun provideWechatArticlesViewModel(api: Api): WechatArticlesViewModel {
+        val viewModel = ViewModelProviders.of(fragment).get(WechatArticlesViewModel::class.java)
         viewModel.api = api
         return viewModel
     }

@@ -5,19 +5,19 @@ import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.adapter.FirstAdapter
-import com.hao.easy.mvvm.wechat.viewmodel.WeChatArticlesViewModel
+import com.hao.easy.mvvm.wechat.viewmodel.WechatArticlesViewModel
 import javax.inject.Inject
 
 /**
  * @author Yang Shihao
  * @date 2018/11/18
  */
-class WeChatArticlesFragment : BaseListFragment<Article>() {
+class WechatArticlesFragment : BaseListFragment<Article>() {
 
     companion object {
         private const val AUTHOR_ID = "AUTHOR_ID"
-        fun instance(authorId: Int): WeChatArticlesFragment {
-            val fragment = WeChatArticlesFragment()
+        fun instance(authorId: Int): WechatArticlesFragment {
+            val fragment = WechatArticlesFragment()
             val bundle = Bundle()
             bundle.putInt(AUTHOR_ID, authorId)
             fragment.arguments = bundle
@@ -29,9 +29,9 @@ class WeChatArticlesFragment : BaseListFragment<Article>() {
     lateinit var adapter: FirstAdapter
 
     @Inject
-    lateinit var viewModel: WeChatArticlesViewModel
+    lateinit var viewModel: WechatArticlesViewModel
 
-    override fun getLayoutId() = R.layout.fragment_we_chat_articles
+    override fun getLayoutId() = R.layout.fragment_wechat_articles
 
     override fun initInject() {
         fragmentComponent().inject(this)
@@ -45,4 +45,14 @@ class WeChatArticlesFragment : BaseListFragment<Article>() {
     override fun dataViewModel() = viewModel
 
     override fun adapter() = adapter
+
+    override fun refreshFinished(success: Boolean?) {
+        super.refreshFinished(success)
+        var weChatFragment = parentFragment as WechatFragment
+        weChatFragment?.refreshFinished()
+    }
+
+    fun refresh() {
+        viewModel.invalidate()
+    }
 }

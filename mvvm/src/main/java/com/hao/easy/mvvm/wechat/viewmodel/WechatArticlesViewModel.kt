@@ -5,7 +5,7 @@ import com.hao.easy.mvvm.extensions.doSubscribe
 import com.hao.easy.mvvm.extensions.map_main
 import com.hao.easy.mvvm.wechat.model.Article
 
-class WeChatArticlesViewModel : BaseListViewModel<Article>() {
+class WechatArticlesViewModel : BaseListViewModel<Article>() {
 
     var authorId:Int = 409
 

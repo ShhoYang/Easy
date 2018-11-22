@@ -6,7 +6,7 @@ import com.hao.easy.mvvm.extensions.doSubscribe
 import com.hao.easy.mvvm.extensions.map_io_main
 import com.hao.easy.mvvm.wechat.model.Author
 
-class WeChatViewModel : BaseViewModel() {
+class WechatViewModel : BaseViewModel() {
 
     val authorsLiveData: MutableLiveData<ArrayList<Author>> = MutableLiveData()
 

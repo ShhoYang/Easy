@@ -26,7 +26,7 @@ abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
     override fun getLayoutId() = R.layout.activity_base_list
 
     override fun initView() {
-        refreshLayout = f(R.id.baseRefreshView)
+        refreshLayout = f(R.id.baseRefreshLayout)
         recyclerView = f(R.id.baseRecyclerView)!!
 
         recyclerView.init(adapter())
@@ -45,7 +45,7 @@ abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
     /**
      * @param success true:刷新完成  false:刷新失败  null:加载完成,沒有更多
      */
-    fun refreshFinished(success: Boolean?) {
+    open fun refreshFinished(success: Boolean?) {
         refreshLayout?.isRefreshing = false
     }
 

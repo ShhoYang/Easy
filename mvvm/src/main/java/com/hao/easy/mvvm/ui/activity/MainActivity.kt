@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.base.ui.BaseActivity
-import com.hao.easy.mvvm.wechat.ui.fragment.WeChatFragment
+import com.hao.easy.mvvm.wechat.ui.fragment.WechatFragment
 import com.hao.easy.mvvm.fourth.ui.fragment.FourthFragment
 import com.hao.easy.mvvm.third.ui.fragment.ThirdFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.NewArticlesFragment
@@ -25,9 +25,9 @@ class MainActivity : BaseActivity() {
         navigationView.setOnNavigationItemSelectedListener { item ->
             viewPager.currentItem =
                     when (item.itemId) {
-                        R.id.conversation -> 0
-                        R.id.contacts -> 1
-                        R.id.find -> 2
+                        R.id.tab_wechat -> 0
+                        R.id.tab_new -> 1
+                        R.id.tab_android -> 2
                         else -> 3
                     }
             true
@@ -37,7 +37,7 @@ class MainActivity : BaseActivity() {
     inner class MainViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(p0: Int): Fragment {
             return when (p0) {
-                0 -> WeChatFragment()
+                0 -> WechatFragment()
                 1 -> NewArticlesFragment()
                 2 -> ThirdFragment()
                 else -> FourthFragment()

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/conversation"
-        android:icon="@drawable/tab_conversation"
+        android:id="@+id/tab_wechat"
+        android:icon="@drawable/ic_widgets_black_24dp"
         android:title="公眾號" />
     <item
-        android:id="@+id/contacts"
-        android:icon="@drawable/tab_contacts"
+        android:id="@+id/tab_new"
+        android:icon="@drawable/ic_whatshot_black_24dp"
         android:title="最新" />
     <item
-        android:id="@+id/find"
-        android:icon="@drawable/tab_find"
+        android:id="@+id/tab_android"
+        android:icon="@drawable/ic_android_black_24dp"
         android:title="項目" />
     <item
-        android:id="@+id/profile"
-        android:icon="@drawable/tab_profile"
+        android:id="@+id/tab_kotlin"
+        android:icon="@drawable/ic_kotlin_black_24dp"
         android:title="Kotlin" />
 </menu>
