@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.wechat.ui.activity
+package com.hao.easy.mvvm.ui.activity
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -12,6 +12,8 @@ import com.hao.easy.mvvm.wechat.ui.fragment.NewArticlesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+
+    override fun showToolbar() = false
 
     override fun getLayoutId() = R.layout.activity_main
 

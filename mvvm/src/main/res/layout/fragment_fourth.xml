@@ -6,9 +6,10 @@
 
     <com.hao.easy.mvvm.view.ToolbarLayout
         style="@style/FillWidth"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/title_height"
         android:layout_marginTop="@dimen/status_bar_height"
         app:layout_constraintTop_toTopOf="parent"
+        app:showBack="false"
         app:title="Kotlin" />
 
 </android.support.constraint.ConstraintLayout>

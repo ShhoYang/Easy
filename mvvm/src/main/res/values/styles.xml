@@ -67,4 +67,9 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/title_height</item>
+    </style>
+
 </resources>

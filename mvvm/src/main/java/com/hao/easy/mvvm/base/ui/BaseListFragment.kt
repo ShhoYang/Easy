@@ -8,6 +8,7 @@ import com.hao.easy.mvvm.base.adapter.BaseItem
 import com.hao.easy.mvvm.base.adapter.BasePagedAdapter
 import com.hao.easy.mvvm.base.viewmodel.BaseListViewModel
 import com.hao.easy.mvvm.extensions.init
+import com.hao.easy.mvvm.extensions.snack
 import com.socks.library.KLog
 import org.jetbrains.anko.toast
 
@@ -84,7 +85,7 @@ abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
      */
     fun loadMoreFinished(success: Boolean?) {
         if (success == null) {
-            context?.toast("全部加载完成")
+            recyclerView.snack("全部加载完成")
         }
     }
 

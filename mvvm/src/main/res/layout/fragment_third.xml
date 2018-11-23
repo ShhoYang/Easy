@@ -6,9 +6,10 @@
 
     <com.hao.easy.mvvm.view.ToolbarLayout
         style="@style/FillWidth"
+        android:layout_height="@dimen/title_height"
         android:layout_marginTop="@dimen/status_bar_height"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="48dp"
+        app:showBack="false"
         app:title="項目" />
 
 </android.support.constraint.ConstraintLayout>

@@ -12,13 +12,28 @@ import android.view.View
  */
 
 fun <VH : RecyclerView.ViewHolder, A : Adapter<VH>> RecyclerView.init(adapter: A, layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)) {
-
     this.layoutManager = layoutManager
     this.adapter = adapter
 }
 
-fun <T : View> View.f(id: Int): T {
-    return findViewById(id)
+fun View.gone() {
+    if (visibility != View.GONE) {
+        visibility = View.GONE
+    }
+}
+
+fun View.visible() {
+    if (visibility != View.VISIBLE) {
+        visibility = View.VISIBLE
+    }
+}
+
+fun View.visibility(visible: Boolean) {
+    if (visible) {
+        visible()
+    } else {
+        gone()
+    }
 }
 
 fun View.snack(msg: String) {

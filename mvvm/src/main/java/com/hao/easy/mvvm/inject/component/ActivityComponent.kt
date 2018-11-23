@@ -1,6 +1,6 @@
 package com.hao.easy.mvvm.inject.component
 
-import com.hao.easy.mvvm.wechat.ui.activity.MainActivity
+import com.hao.easy.mvvm.ui.activity.MainActivity
 import com.hao.easy.mvvm.inject.PreActivity
 import com.hao.easy.mvvm.inject.module.ActivityModule
 import dagger.Subcomponent

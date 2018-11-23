@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_height">
 
+    <ImageView
+        android:id="@+id/toolbarBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="12dp"
+        android:src="@drawable/ic_arrow_back_black_24dp" />
+
     <TextView
         android:id="@+id/toolbarTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:gravity="center"
+        android:singleLine="true"
         android:textColor="@color/text_black"
         android:textSize="18dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="标题" />
 
     <View
         android:id="@+id/toolbarLine_"

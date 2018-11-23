@@ -6,6 +6,7 @@ import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.base.adapter.BasePagedAdapter
 import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.extensions.snack
+import com.hao.easy.mvvm.ui.activity.WebActivity
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.adapter.WechatArticlesAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.WechatArticlesViewModel
@@ -56,7 +57,7 @@ class WechatArticlesFragment : BaseListFragment<Article>() {
 
     override fun adapter(): BasePagedAdapter<Article> {
         adapter.itemClickListener = { _, item, _ ->
-            recyclerView.snack(item.title)
+            context?.apply { WebActivity.start(this, item.title, item.link) }
         }
         return adapter
     }
@@ -69,10 +70,5 @@ class WechatArticlesFragment : BaseListFragment<Article>() {
 
     fun refresh() {
         viewModel.invalidate()
-    }
-
-    override fun doLoad() {
-        super.doLoad()
-        Log.d("aaaaaaaaaaaa", "id = $a")
     }
 }
