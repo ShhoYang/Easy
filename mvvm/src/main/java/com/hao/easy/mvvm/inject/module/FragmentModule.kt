@@ -8,6 +8,7 @@ import com.hao.easy.mvvm.wechat.viewmodel.WechatArticlesViewModel
 import com.hao.easy.mvvm.base.http.Api
 import com.hao.easy.mvvm.inject.ActivityContext
 import com.hao.easy.mvvm.newatricles.viewmodel.NewArticlesViewModel
+import com.hao.easy.mvvm.ui.viewmodel.LoginViewModel
 import com.hao.easy.mvvm.wechat.viewmodel.WechatViewModel
 import dagger.Module
 import dagger.Provides
@@ -33,6 +34,13 @@ class FragmentModule(private val fragment: Fragment) {
     @ActivityContext
     internal fun provideContext(): Context? {
         return fragment.context
+    }
+
+    @Provides
+    internal fun provideLoginViewModel(api: Api): LoginViewModel {
+        val viewModel = ViewModelProviders.of(fragment).get(LoginViewModel::class.java)
+        viewModel.api = api
+        return viewModel
     }
 
     @Provides

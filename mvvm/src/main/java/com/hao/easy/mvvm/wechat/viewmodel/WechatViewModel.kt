@@ -16,7 +16,8 @@ class WechatViewModel : BaseViewModel() {
     fun initData() {
         api.getAd().map_io_main().subscribeBy {
             adLiveData.value = it.map { ad -> ad.imagePath }
-        }
+        }.add()
+
         api.getWeChatAuthors().map_io_main().subscribeBy {
             var fragments = it.map { author ->
                 Pair<String, FragmentCreator>(author.name, object : FragmentCreator {
@@ -24,6 +25,6 @@ class WechatViewModel : BaseViewModel() {
                 })
             }
             authorsLiveData.value = fragments
-        }
+        }.add()
     }
 }

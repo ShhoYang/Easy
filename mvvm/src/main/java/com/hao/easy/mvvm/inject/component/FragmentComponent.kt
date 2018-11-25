@@ -3,6 +3,7 @@ package com.hao.easy.mvvm.inject.component
 import com.hao.easy.mvvm.wechat.ui.fragment.WechatFragment
 import com.hao.easy.mvvm.inject.PreFragment
 import com.hao.easy.mvvm.inject.module.FragmentModule
+import com.hao.easy.mvvm.ui.fragment.LoginFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.NewArticlesFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.WechatArticlesFragment
 import dagger.Subcomponent
@@ -14,6 +15,8 @@ import dagger.Subcomponent
 @PreFragment
 @Subcomponent(modules = [FragmentModule::class])
 interface FragmentComponent {
+
+    fun inject(loginFragment: LoginFragment)
 
     fun inject(wechatFragment: WechatFragment)
 

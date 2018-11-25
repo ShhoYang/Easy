@@ -6,6 +6,7 @@ import com.hao.easy.mvvm.base.http.Api
 import com.hao.easy.mvvm.inject.ApplicationContext
 import com.hao.easy.mvvm.inject.module.AppModule
 import dagger.Component
+import okhttp3.Cookie
 import javax.inject.Singleton
 
 /**
@@ -22,4 +23,6 @@ interface AppComponent {
     fun application(): Application
 
     fun api(): Api
+
+    fun cookies(): List<Cookie>
 }

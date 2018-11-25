@@ -26,10 +26,9 @@ class HttpFailure(val onFailure: (String) -> Unit = {
     App.instance.toast("网络出错")
 }) : Consumer<Throwable> {
 
-    override fun accept(t: Throwable?) {
-        t?.apply {
-            KLog.d("HttpFailure", message)
-        }
-        onFailure("连接失败")
+    override fun accept(t: Throwable) {
+
+        KLog.d("HttpFailure", t.message)
+        onFailure(t.message!!)
     }
 }

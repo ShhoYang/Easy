@@ -1,8 +1,13 @@
 package com.hao.easy.mvvm.inject.module
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.hao.easy.mvvm.common.App
 import com.socks.library.KLog
 import dagger.Module
 import dagger.Provides
+import okhttp3.Cookie
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,8 +37,10 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    internal fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+    internal fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor,
+                                     persistentCookieJar: PersistentCookieJar): OkHttpClient =
             OkHttpClient.Builder()
+                    .cookieJar(persistentCookieJar)
                     .addInterceptor(httpLoggingInterceptor)
                     .build()
 
@@ -44,4 +51,20 @@ class NetworkModule {
                 KLog.json("json____", it)
             }.setLevel(HttpLoggingInterceptor.Level.BODY)
 
+    @Provides
+    @Singleton
+    internal fun providePersistentCookieJar(sharedPrefsCookiePersistor: SharedPrefsCookiePersistor): PersistentCookieJar {
+        return PersistentCookieJar(SetCookieCache(), sharedPrefsCookiePersistor)
+    }
+
+
+    @Provides
+    @Singleton
+    internal fun provideSharedPrefsCookiePersistor(): SharedPrefsCookiePersistor =
+            SharedPrefsCookiePersistor(App.instance)
+
+    @Provides
+    @Singleton
+    internal fun provideCookies(sharedPrefsCookiePersistor: SharedPrefsCookiePersistor) =
+            sharedPrefsCookiePersistor.loadAll()
 }

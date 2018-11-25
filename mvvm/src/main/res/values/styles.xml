@@ -4,14 +4,24 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <item name="colorPrimaryDark">?android:attr/windowBackground</item>
+        <item name="colorPrimaryDark">@color/window_bg</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <!--<item name="android:windowBackground">@color/white</item>-->
+        <item name="android:windowBackground">@color/window_bg</item>
+    </style>
+
+    <style name="WelcomeTheme" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@mipmap/welcome_bg</item>
     </style>
 
     <style name="StatusBarTransparentTheme" parent="AppTheme">
 
+    </style>
+
+    <style name="LoginTheme" parent="StatusBarTransparentTheme">
+        <item name="android:windowBackground">@mipmap/login_bg</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="FillWidth">
@@ -68,8 +78,27 @@
     </style>
 
     <style name="Toolbar">
+        <item name="android:id">@id/baseToolbar</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/title_height</item>
+    </style>
+
+    <style name="TextInputLayoutLineColor" parent="Theme.AppCompat.Light">
+        <item name="android:textColorHint">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+    </style>
+
+    <!--浮动标签-->
+    <style name="HintAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--错误提示信息-->
+    <style name="ErrorAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>
     </style>
 
 </resources>

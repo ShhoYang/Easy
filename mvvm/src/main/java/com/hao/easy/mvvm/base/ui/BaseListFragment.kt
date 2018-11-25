@@ -9,8 +9,7 @@ import com.hao.easy.mvvm.base.adapter.BasePagedAdapter
 import com.hao.easy.mvvm.base.viewmodel.BaseListViewModel
 import com.hao.easy.mvvm.extensions.init
 import com.hao.easy.mvvm.extensions.snack
-import com.socks.library.KLog
-import org.jetbrains.anko.toast
+import com.hao.easy.mvvm.view.EmptyView
 
 /**
  * @author Yang Shihao
@@ -22,55 +21,36 @@ abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
         private const val TAG = "BaseListFragment"
     }
 
-    var refreshLayout: SwipeRefreshLayout? = null
+    private var refreshLayout: SwipeRefreshLayout? = null
+    private var emptyView: EmptyView? = null
 
     lateinit var recyclerView: RecyclerView
-
-    private var isCreated = false
-    private var isVisibleToUser = false
 
     override fun getLayoutId() = R.layout.activity_base_list
 
     override fun initView() {
         refreshLayout = f(R.id.baseRefreshLayout)
         recyclerView = f(R.id.baseRecyclerView)!!
-        recyclerView.init(adapter())
+        emptyView = f(R.id.baseEmptyView)
+        var adapter = adapter()
+        adapter.itemClickListener = { view, item, position ->
+            itemClicked(view, item, position)
+        }
+        recyclerView.init(adapter)
         refreshLayout?.setOnRefreshListener {
             dataViewModel().invalidate()
         }
     }
 
     override fun initData() {
-        if (isLazy()) {
-            isCreated = true
-            lazyLoad()
-        } else {
-            doLoad()
-        }
-    }
-
-    open fun isLazy() = false
-
-    private fun lazyLoad() {
-        if (isCreated && isVisibleToUser) {
-            doLoad()
-            isCreated = false
-        }
-    }
-
-    open fun doLoad() {
         dataViewModel().observe(this,
                 { adapter().submitList(it) },
                 { refreshFinished(it) },
                 { loadMoreFinished(it) })
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            this.isVisibleToUser = true
-            lazyLoad()
-        }
+    open fun itemClicked(view: View, item: T, position: Int) {
+
     }
 
     /**
@@ -78,6 +58,15 @@ abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
      */
     open fun refreshFinished(success: Boolean?) {
         refreshLayout?.isRefreshing = false
+        emptyView?.apply {
+            if (success == null) {
+                state = EmptyView.Status.NO_DATA
+            }else if(success){
+                state = EmptyView.Status.DISMISS
+            }else {
+                state = EmptyView.Status.LOAD_FAILED
+            }
+        }
     }
 
     /**
@@ -85,7 +74,7 @@ abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
      */
     fun loadMoreFinished(success: Boolean?) {
         if (success == null) {
-            recyclerView.snack("全部加载完成")
+            recyclerView?.snack("全部加载完成")
         }
     }
 

@@ -1,5 +1,9 @@
 package com.hao.easy.mvvm.extensions
 
+import android.app.Activity
+import android.content.Context
+import android.support.v4.app.Fragment
+import android.view.inputmethod.InputMethodManager
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -25,3 +29,12 @@ private class NotNullSingleValue<T> : ReadWriteProperty<Any?, T> {
 }
 
 fun <T> notNullSingleValue(): ReadWriteProperty<Any?, T> = NotNullSingleValue()
+
+fun Activity.hideSoftInput() {
+    var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(window.decorView.windowToken, 0)
+}
+
+fun Fragment.hideSoftInput() {
+    activity?.hideSoftInput()
+}

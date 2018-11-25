@@ -1,15 +1,14 @@
 package com.hao.easy.mvvm.wechat.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import com.hao.easy.mvvm.R
-import com.hao.easy.mvvm.base.adapter.BasePagedAdapter
 import com.hao.easy.mvvm.base.ui.BaseListFragment
-import com.hao.easy.mvvm.extensions.snack
 import com.hao.easy.mvvm.ui.activity.WebActivity
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.adapter.WechatArticlesAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.WechatArticlesViewModel
+import com.socks.library.KLog
 import javax.inject.Inject
 
 /**
@@ -19,6 +18,7 @@ import javax.inject.Inject
 class WechatArticlesFragment : BaseListFragment<Article>() {
 
     companion object {
+        private const val TAG = "WechatArticlesFragment"
         private const val AUTHOR_ID = "AUTHOR_ID"
         fun instance(authorId: Int): WechatArticlesFragment {
             val fragment = WechatArticlesFragment()
@@ -41,13 +41,9 @@ class WechatArticlesFragment : BaseListFragment<Article>() {
         fragmentComponent().inject(this)
     }
 
-    var a = 0
-
-    override fun isLazy() = true
-
     override fun initData() {
+        KLog.d(TAG, "initData")
         arguments?.apply {
-            a = getInt(AUTHOR_ID, 409)
             viewModel.authorId = getInt(AUTHOR_ID, 409)
         }
         super.initData()
@@ -55,11 +51,10 @@ class WechatArticlesFragment : BaseListFragment<Article>() {
 
     override fun dataViewModel() = viewModel
 
-    override fun adapter(): BasePagedAdapter<Article> {
-        adapter.itemClickListener = { _, item, _ ->
-            context?.apply { WebActivity.start(this, item.title, item.link) }
-        }
-        return adapter
+    override fun adapter() = adapter
+
+    override fun itemClicked(view: View, item: Article, position: Int) {
+        context?.apply { WebActivity.start(this, item.title, item.link) }
     }
 
     override fun refreshFinished(success: Boolean?) {

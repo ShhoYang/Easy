@@ -20,6 +20,8 @@ abstract class BaseFragment : Fragment() {
 
     private lateinit var fragmentRootView: View
     private lateinit var fragmentComponent: FragmentComponent
+    private var isCreated = false
+    private var isVisibleToUser = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentRootView = inflater.inflate(getLayoutId(), container, false)
@@ -31,7 +33,15 @@ abstract class BaseFragment : Fragment() {
         onInit()
         initInject()
         initView()
-        initData()
+        lodData()
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            this.isVisibleToUser = true
+            lazyLoad()
+        }
     }
 
     open fun onInit() {
@@ -39,6 +49,22 @@ abstract class BaseFragment : Fragment() {
                 .appComponent(App.instance.appComponent)
         fragmentComponent = configPersistentComponent.build().fragmentComponent(FragmentModule(this))
 
+    }
+
+    private fun lodData() {
+        if (isLazy()) {
+            isCreated = true
+            lazyLoad()
+        } else {
+            initData()
+        }
+    }
+
+    private fun lazyLoad() {
+        if (isCreated && isVisibleToUser) {
+            initData()
+            isCreated = false
+        }
     }
 
     fun fragmentComponent() = fragmentComponent!!
@@ -51,11 +77,16 @@ abstract class BaseFragment : Fragment() {
     abstract fun getLayoutId(): Int
 
     open fun initInject() {
+
     }
 
     open fun initView() {
+
     }
 
     open fun initData() {
+
     }
+
+    open fun isLazy() = false
 }

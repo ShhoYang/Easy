@@ -14,6 +14,6 @@ class WechatArticlesViewModel : BaseListViewModel<Article>() {
             onResponse(it.datas)
         }, {
             onResponse(null)
-        })
+        }).add()
     }
 }

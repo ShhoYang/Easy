@@ -4,9 +4,11 @@ import android.app.Application
 import com.hao.easy.mvvm.extensions.notNullSingleValue
 import com.hao.easy.mvvm.inject.component.AppComponent
 import com.hao.easy.mvvm.inject.component.DaggerAppComponent
+import com.hao.easy.mvvm.inject.module.ApiModule
 import com.hao.easy.mvvm.inject.module.AppModule
 import com.hao.easy.mvvm.inject.module.NetworkModule
 import com.socks.library.KLog
+import com.tencent.smtt.sdk.QbSdk
 
 /**
  * @author Yang Shihao
@@ -17,7 +19,6 @@ class App : Application() {
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
                 .appModule(AppModule(this))
-                .networkModule(NetworkModule())
                 .build()
     }
 
@@ -29,5 +30,6 @@ class App : Application() {
         super.onCreate()
         instance = this
         KLog.init(true)
+        QbSdk.initX5Environment(this, null)
     }
 }

@@ -1,12 +1,17 @@
 package com.hao.easy.mvvm.view
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.extensions.visibility
 import kotlinx.android.synthetic.main.toolbar.view.*
+import org.jetbrains.anko.textColor
 
 
 /**
@@ -21,35 +26,79 @@ class ToolbarLayout : FrameLayout {
             toolbarTitle?.text = title
         }
 
-    private var showBack: Boolean = true
+    var textColor = 0x333333
+        set(value) {
+            field = value
+            toolbarTitle?.textColor = value
+        }
+
+    var iconTintColor: Int = 0x333333
+        set(value) {
+            field = value
+            toolbarBack?.apply { tintIcon(this, value) }
+        }
+
+    var showBack: Boolean = true
+        set(value) {
+            field = value
+            toolbarBack?.visibility(value)
+        }
+
+
+    var showLine: Boolean = true
+        set(value) {
+            field = value
+            toolbarLine?.visibility(value)
+        }
 
     constructor(context: Context) : super(context) {
-        init(context, null)
+        init(null)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context, attrs)
+        init(attrs)
     }
 
-    fun setBackClickListener(f: () -> Unit) {
-        toolbarBack.setOnClickListener { f() }
-    }
-
-    private fun init(context: Context, attrs: AttributeSet?) {
+    private fun init(attrs: AttributeSet?) {
         View.inflate(context, R.layout.toolbar, this)
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.ToolbarLayout)
             typedArray.apply {
                 title = getString(R.styleable.ToolbarLayout_title)
                 showBack = getBoolean(R.styleable.ToolbarLayout_showBack, true)
+                showLine = getBoolean(R.styleable.ToolbarLayout_showLine, true)
+                textColor = getColor(R.styleable.ToolbarLayout_textColor, ContextCompat.getColor(context, R.color.text_black))
+                iconTintColor = getColor(R.styleable.ToolbarLayout_iconTint, ContextCompat.getColor(context, R.color.text_black))
                 recycle()
             }
         }
     }
 
+    fun setBackClickListener(f: () -> Unit) {
+        toolbarBack.setOnClickListener { f() }
+    }
+
+    private fun tintIcon(imageView: ImageView, colors: Int) {
+        imageView.apply {
+            val wrappedDrawable = DrawableCompat.wrap(drawable)
+            DrawableCompat.setTintList(wrappedDrawable, ColorStateList.valueOf(colors))
+            setImageDrawable(wrappedDrawable)
+        }
+    }
+
     override fun onFinishInflate() {
         super.onFinishInflate()
-        toolbarTitle.text = title
-        toolbarBack.visibility(showBack)
+        toolbarBack.apply {
+            visibility(showBack)
+            if (showBack) {
+                tintIcon(this, iconTintColor)
+            }
+        }
+        toolbarTitle.apply {
+            text = title
+            textColor = this@ToolbarLayout.textColor
+        }
+
+        toolbarLine.visibility(showLine)
     }
 }

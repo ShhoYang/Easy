@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.activity.WebActivity">
 
+
     <com.hao.easy.mvvm.view.ProgressWebView
-        android:id="@+id/webView"
+        android:id="@+id/baseWebView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
+
+    <include layout="@layout/include_web_progress_bar"/>
 
 </FrameLayout>

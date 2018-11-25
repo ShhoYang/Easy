@@ -1,5 +1,6 @@
 package com.hao.easy.mvvm.base.http
 
+import com.hao.easy.mvvm.User
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.base.model.HttpResult
 import com.hao.easy.mvvm.base.model.ListPaged
@@ -7,8 +8,7 @@ import com.hao.easy.mvvm.newatricles.model.NewArticle
 import com.hao.easy.mvvm.wechat.model.Ad
 import com.hao.easy.mvvm.wechat.model.Author
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /**
  * @author Yang Shihao
@@ -16,6 +16,10 @@ import retrofit2.http.Path
  */
 
 interface Api {
+
+    @FormUrlEncoded
+    @POST("user/login")
+    fun login(@Field("username") username: String, @Field("password") password: String): Observable<HttpResult<User>>
 
     @GET("banner/json")
     fun getAd(): Observable<HttpResult<ArrayList<Ad>>>

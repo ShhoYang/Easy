@@ -4,10 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/baseRecyclerView"
+    <com.hao.easy.mvvm.view.EmptyView
+        android:id="@+id/baseEmptyView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/baseRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+
+    </com.hao.easy.mvvm.view.EmptyView>
 
 </android.support.v4.widget.SwipeRefreshLayout>
