@@ -1,7 +1,15 @@
 //include ':base'
 //include ':app'
 //include ':jetpack'
+
 include ':mvvm'
+include ':mvvm_base'
+include ':mvvm_app'
+include ':mvvm_wechat'
+include ':mvvm_android'
+include ':mvvm_kotlin'
+include ':mvvm_flutter'
+include ':mvvm_user'
 
 //include ':cmake'
 //include ':cmakeso-module'

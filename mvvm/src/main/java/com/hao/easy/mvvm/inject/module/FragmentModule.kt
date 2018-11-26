@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment
 import com.hao.easy.mvvm.wechat.viewmodel.WechatArticlesViewModel
 import com.hao.easy.mvvm.base.http.Api
 import com.hao.easy.mvvm.inject.ActivityContext
-import com.hao.easy.mvvm.newatricles.viewmodel.NewArticlesViewModel
+import com.hao.easy.mvvm.example.viewmodel.NewArticlesViewModel
 import com.hao.easy.mvvm.ui.viewmodel.LoginViewModel
 import com.hao.easy.mvvm.wechat.viewmodel.WechatViewModel
 import dagger.Module

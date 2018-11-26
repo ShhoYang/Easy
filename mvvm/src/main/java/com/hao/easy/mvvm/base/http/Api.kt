@@ -4,7 +4,7 @@ import com.hao.easy.mvvm.User
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.base.model.HttpResult
 import com.hao.easy.mvvm.base.model.ListPaged
-import com.hao.easy.mvvm.newatricles.model.NewArticle
+import com.hao.easy.mvvm.example.model.NewArticle
 import com.hao.easy.mvvm.wechat.model.Ad
 import com.hao.easy.mvvm.wechat.model.Author
 import io.reactivex.Observable

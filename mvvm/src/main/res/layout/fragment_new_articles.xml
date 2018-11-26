@@ -11,7 +11,7 @@
         android:layout_marginTop="@dimen/status_bar_height"
         app:layout_constraintTop_toTopOf="parent"
         app:showBack="false"
-        app:title="最新" />
+        app:title="項目" />
 
     <include layout="@layout/activity_base_list" />
 
