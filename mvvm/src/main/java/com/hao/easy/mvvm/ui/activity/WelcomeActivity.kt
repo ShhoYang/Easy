@@ -1,9 +1,5 @@
 package com.hao.easy.mvvm.ui.activity
 
-import android.os.Handler
-import android.text.TextUtils
-import android.util.Log
-import android.view.TextureView
 import android.view.WindowManager
 import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.base.ui.BaseActivity
@@ -27,27 +23,27 @@ class WelcomeActivity : BaseActivity() {
     }
 
     override fun initData() {
-
-        var name: String? = null
-        var token: String? = null
-        cookies.forEach {
-            if (it.name() == "loginUserName") {
-                name = it.value()
-            } else if (it.name() == "token_pass") {
-                token = it.value()
-            }
-        }
-        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(token)) {
-            Handler().postDelayed({
-                startActivity<LoginActivity>()
-                finish()
-            }, 2000)
-        } else {
-            Handler().postDelayed({
-                startActivity<MainActivity>()
-                finish()
-            }, 2000)
-        }
+        startActivity<MainActivity>()
+//        var name: String? = null
+//        var token: String? = null
+//        cookies.forEach {
+//            if (it.name() == "loginUserName") {
+//                name = it.value()
+//            } else if (it.name() == "token_pass") {
+//                token = it.value()
+//            }
+//        }
+//        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(token)) {
+//            Handler().postDelayed({
+//                startActivity<LoginActivity>()
+//                finish()
+//            }, 2000)
+//        } else {
+//            Handler().postDelayed({
+//                startActivity<MainActivity>()
+//                finish()
+//            }, 2000)
+//        }
     }
 
     override fun finish() {
