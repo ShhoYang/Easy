@@ -10,7 +10,7 @@ import dagger.Provides
  * @author Yang Shihao
  * @date 2018/10/23
  */
-@Module(includes = [ApiModule::class])
+@Module(includes = [NetworkModule::class])
 class AppModule(private val application: Application) {
 
     @Provides

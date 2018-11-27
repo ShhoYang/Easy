@@ -6,10 +6,12 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.widget.DrawerLayout
 import android.view.View
 import com.hao.easy.mvvm.R
+import com.hao.easy.mvvm.android.ui.fragment.AndroidFragment
 import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.flutter.ui.fragment.FlutterFragment
-import com.hao.easy.mvvm.kotlin.ui.ffragment.KotlinFragment
+import com.hao.easy.mvvm.kotlin.ui.fragment.KotlinFragment
+import com.hao.easy.mvvm.wechat.ui.fragment.WechatFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
 
@@ -64,8 +66,8 @@ class MainActivity : BaseActivity() {
                     when (item.itemId) {
                         R.id.tab_wechat -> 0
                         R.id.tab_new -> 1
-                        R.id.tab_android -> 0
-                        else -> 1
+                        R.id.tab_android -> 2
+                        else -> 3
                     }
             true
         }
@@ -82,11 +84,13 @@ class MainActivity : BaseActivity() {
     inner class MainViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(p0: Int): Fragment {
             return when (p0) {
-                0 -> FlutterFragment()
+                0 -> WechatFragment()
+                1 -> AndroidFragment()
+                2 -> FlutterFragment()
                 else -> KotlinFragment()
             }
         }
 
-        override fun getCount() = 2
+        override fun getCount() = 4
     }
 }

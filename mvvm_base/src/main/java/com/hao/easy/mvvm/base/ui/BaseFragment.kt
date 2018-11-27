@@ -6,10 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.hao.easy.mvvm.base.App
-import com.hao.easy.mvvm.inject.component.DaggerConfigPersistentComponent
-import com.hao.easy.mvvm.inject.component.FragmentComponent
-import com.hao.easy.mvvm.inject.module.FragmentModule
+import com.hao.easy.mvvm.inject.component.FragmentCommonComponent
 
 /**
  * @author Yang Shihao
@@ -18,7 +15,6 @@ import com.hao.easy.mvvm.inject.module.FragmentModule
 abstract class BaseFragment : Fragment() {
 
     private lateinit var fragmentRootView: View
-    private lateinit var fragmentComponent: FragmentComponent
     private var isCreated = false
     private var isVisibleToUser = false
 
@@ -44,9 +40,6 @@ abstract class BaseFragment : Fragment() {
     }
 
     open fun onInit() {
-        val configPersistentComponent = DaggerConfigPersistentComponent.builder()
-                .appComponent(App.instance.appComponent)
-        fragmentComponent = configPersistentComponent.build().fragmentComponent(FragmentModule(this))
 
     }
 
@@ -65,8 +58,6 @@ abstract class BaseFragment : Fragment() {
             isCreated = false
         }
     }
-
-    fun fragmentComponent() = fragmentComponent!!
 
     fun <T : View> f(id: Int): T? {
         return fragmentRootView?.findViewById(id)

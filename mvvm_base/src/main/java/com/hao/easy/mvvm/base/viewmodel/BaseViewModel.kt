@@ -4,7 +4,6 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.ViewModel
-import com.hao.easy.mvvm.base.http.Api
 import com.socks.library.KLog
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -14,8 +13,6 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     companion object {
         const val TAG = "BaseViewModel"
     }
-
-    lateinit var api: Api
 
     private val compositeDisposable by lazy { CompositeDisposable() }
 

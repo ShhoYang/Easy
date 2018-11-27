@@ -46,4 +46,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':mvvm_base')
+    kapt kaptLibs
+    annotationProcessor annotationProcessorLibs
 }

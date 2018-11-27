@@ -5,10 +5,6 @@ import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.hao.easy.mvvm.base.R
-import com.hao.easy.mvvm.base.App
-import com.hao.easy.mvvm.inject.component.ActivityComponent
-import com.hao.easy.mvvm.inject.component.DaggerConfigPersistentComponent
-import com.hao.easy.mvvm.inject.module.ActivityModule
 import com.hao.easy.mvvm.view.ToolbarLayout
 import kotlinx.android.synthetic.main.activity_base.*
 
@@ -17,8 +13,6 @@ import kotlinx.android.synthetic.main.activity_base.*
  * @date 2018/11/18
  */
 abstract class BaseActivity : AppCompatActivity() {
-
-    private lateinit var activityComponent: ActivityComponent
 
     private var toolbar: ToolbarLayout? = null
 
@@ -48,13 +42,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     open fun onInit() {
-        val configPersistentComponent = DaggerConfigPersistentComponent.builder()
-                .appComponent(App.instance.appComponent)
-        activityComponent = configPersistentComponent.build().activityComponent(ActivityModule(this))
     }
-
-
-    fun activityComponent() = activityComponent!!
 
     open fun showToolbar() = true
 

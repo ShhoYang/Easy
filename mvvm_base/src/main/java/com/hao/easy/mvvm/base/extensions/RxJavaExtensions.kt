@@ -6,7 +6,6 @@ import com.hao.easy.mvvm.base.http.HttpFailure
 import com.hao.easy.mvvm.base.http.HttpResponse
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 

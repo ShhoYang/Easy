@@ -12,7 +12,7 @@ import com.tencent.smtt.sdk.QbSdk
  * @author Yang Shihao
  * @date 2018/11/18
  */
-class App : Application() {
+open class App : Application() {
 
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
