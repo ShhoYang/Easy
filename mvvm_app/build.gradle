@@ -31,6 +31,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':mvvm_base')
     if(isModule){
+        implementation project(':mvvm_user')
         implementation project(':mvvm_wechat')
         implementation project(':mvvm_android')
         implementation project(':mvvm_flutter')
