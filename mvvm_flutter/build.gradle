@@ -15,6 +15,7 @@ android {
         if (!isModule) {
             applicationId "com.hao.easy.mvvm.flutter"
         }
+
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versions.versionCode
@@ -29,9 +30,15 @@ android {
                     exclude '*module'
                 }
             } else {
+                java.srcDirs 'src/main/java', 'src/main/module/java'
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
             }
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -40,12 +47,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':mvvm_base')
     kapt kaptLibs
-    annotationProcessor annotationProcessorLibs
 }

@@ -1,6 +1,7 @@
 package com.hao.easy.mvvm.base
 
 import android.app.Application
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hao.easy.mvvm.base.extensions.notNullSingleValue
 import com.hao.easy.mvvm.inject.component.AppComponent
 import com.hao.easy.mvvm.inject.component.DaggerAppComponent
@@ -29,5 +30,8 @@ open class App : Application() {
         instance = this
         KLog.init(true)
         QbSdk.initX5Environment(this, null)
+        ARouter.openLog()
+        ARouter.openDebug()
+        ARouter.init(this)
     }
 }

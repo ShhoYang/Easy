@@ -21,14 +21,14 @@ android {
                 arguments = [moduleName: "module2"]
             }
         }
+    }
 
-        sourceSets {
-            main {
-                if (isModule) {
-                    manifest.srcFile 'src/main/AndroidManifest.xml'
-                } else {
-                    manifest.srcFile 'src/main/module/AndroidManifest.xml'
-                }
+    sourceSets {
+        main {
+            if (isModule) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
             }
         }
     }

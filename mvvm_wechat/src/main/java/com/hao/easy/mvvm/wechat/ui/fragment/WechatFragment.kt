@@ -8,10 +8,10 @@ import android.widget.ImageView
 import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.extensions.load
 import com.hao.easy.mvvm.base.ui.BaseFragment
-import com.hao.easy.mvvm.inject.component.DaggerFragmentComponent
+import com.hao.easy.mvvm.inject.component.DaggerWechatComponent
 import com.hao.easy.mvvm.inject.module.FragmentCommonModule
-import com.hao.easy.mvvm.inject.module.FragmentModule
 import com.hao.easy.mvvm.wechat.R
+import com.hao.easy.mvvm.wechat.inject.module.WechatModule
 import com.hao.easy.mvvm.wechat.ui.adapter.FragmentWithTabAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.WechatViewModel
 import com.socks.library.KLog
@@ -55,10 +55,10 @@ class WechatFragment : BaseFragment() {
     override fun getLayoutId() = R.layout.fragment_wechat
 
     override fun initInject() {
-        DaggerFragmentComponent.builder()
+        DaggerWechatComponent.builder()
                 .appComponent(App.instance.appComponent)
                 .fragmentCommonModule(FragmentCommonModule(this))
-                .fragmentModule(FragmentModule())
+                .wechatModule(WechatModule())
                 .build()
                 .inject(this)
     }

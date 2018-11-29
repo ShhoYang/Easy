@@ -13,6 +13,11 @@ android {
         versionName versions.versionName
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -22,15 +27,20 @@ android {
 
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api supportLibs
+    kapt kaptLibs
     implementations.each { k, v ->
         api(v) {
             //去除第三方的重复support库
             exclude group: 'com.android.support'
         }
     }
-    kapt kaptLibs
-    annotationProcessor annotationProcessorLibs
 }

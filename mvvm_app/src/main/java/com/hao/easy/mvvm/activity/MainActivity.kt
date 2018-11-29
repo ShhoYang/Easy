@@ -5,19 +5,26 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.widget.DrawerLayout
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.android.ui.fragment.AndroidFragment
 import com.hao.easy.mvvm.base.extensions.snack
+import com.hao.easy.mvvm.base.provider.IMainService
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.flutter.ui.fragment.FlutterFragment
 import com.hao.easy.mvvm.kotlin.ui.fragment.KotlinFragment
 import com.hao.easy.mvvm.user.ui.fragment.UserFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.WechatFragment
+import com.socks.library.KLog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
 
+@Route(path = "/app/MainActivity")
+class MainActivity : BaseActivity(),IMainService {
 
-class MainActivity : BaseActivity() {
+    companion object {
+        private const val TAG = "MainActivity22"
+    }
 
     private var drawerOpened: Boolean = false
 
@@ -27,11 +34,6 @@ class MainActivity : BaseActivity() {
         } else {
             drawerLayout?.snack("再按返回鍵退出")
         }
-    }
-
-    override fun onStart() {
-        drawerLayout.closeDrawers()
-        super.onStart()
     }
 
     override fun showToolbar() = false
@@ -46,7 +48,6 @@ class MainActivity : BaseActivity() {
             offscreenPageLimit = 3
             adapter = MainViewPagerAdapter(supportFragmentManager)
         }
-
     }
 
     private fun initDrawerLayout() {
@@ -59,7 +60,6 @@ class MainActivity : BaseActivity() {
             override fun onDrawerOpened(p0: View) {
                 drawerOpened = true
             }
-
         })
     }
 
@@ -90,6 +90,11 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override fun closeDraw() {
+        KLog.d(TAG, "closeDraw")
+        drawerLayout.closeDrawers()
+    }
+
     inner class MainViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(p0: Int): Fragment {
             return when (p0) {
@@ -100,6 +105,6 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        override fun getCount() = 4
+        override fun getCount() = 1
     }
 }

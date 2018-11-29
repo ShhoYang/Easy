@@ -29,10 +29,15 @@ android {
                     exclude '*module'
                 }
             } else {
+                java.srcDirs 'src/main/java', 'src/main/module/java'
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
-                java.srcDirs[ 'src/main/module/java']
             }
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -41,13 +46,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':mvvm_base')
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     kapt kaptLibs
-    annotationProcessor annotationProcessorLibs
 }

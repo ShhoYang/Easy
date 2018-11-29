@@ -5,10 +5,10 @@ import android.view.View
 import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.base.ui.WebActivity
-import com.hao.easy.mvvm.inject.component.DaggerFragmentComponent
+import com.hao.easy.mvvm.inject.component.DaggerWechatComponent
 import com.hao.easy.mvvm.inject.module.FragmentCommonModule
-import com.hao.easy.mvvm.inject.module.FragmentModule
 import com.hao.easy.mvvm.wechat.R
+import com.hao.easy.mvvm.wechat.inject.module.WechatModule
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.adapter.ArticlesAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.ArticlesViewModel
@@ -42,12 +42,11 @@ class ArticlesFragment : BaseListFragment<Article>() {
     override fun getLayoutId() = R.layout.fragment_wechat_articles
 
     override fun initInject() {
-        DaggerFragmentComponent.builder()
+        DaggerWechatComponent.builder()
                 .appComponent(App.instance.appComponent)
                 .fragmentCommonModule(FragmentCommonModule(this))
-                .fragmentModule(FragmentModule())
-                .build()
-                .inject(this)
+                .wechatModule(WechatModule())
+                .build().inject(this)
     }
 
     override fun initData() {

@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.kotlin.ui.activity
+package com.hao.easy.mvvm.kotlin
 
 import com.hao.easy.mvvm.base.ui.ContainerActivity
 import com.hao.easy.mvvm.kotlin.ui.fragment.KotlinFragment

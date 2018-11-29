@@ -2,7 +2,7 @@
 //include ':app'
 //include ':jetpack'
 
-include ':mvvm'
+//include ':mvvm'
 include ':mvvm_base'
 include ':mvvm_app'
 include ':mvvm_wechat'

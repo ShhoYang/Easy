@@ -21,7 +21,6 @@ class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: I
         if (view == null) {
             view = itemView.findViewById(viewId)
             if (view != null) {
-
                 views.put(viewId, view)
             }
         }

@@ -38,5 +38,4 @@ dependencies {
         }
     }
     kapt kaptLibs
-    annotationProcessor annotationProcessorLibs
 }

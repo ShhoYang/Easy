@@ -21,6 +21,6 @@ class LoginViewModel : BaseViewModel() {
             loggedLiveData.value = null
         }, {
             loggedLiveData.value = it
-        })
+        }).add()
     }
 }

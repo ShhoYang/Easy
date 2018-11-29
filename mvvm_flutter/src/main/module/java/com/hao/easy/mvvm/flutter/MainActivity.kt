@@ -1,8 +1,7 @@
-package com.hao.easy.mvvm.android.ui.activity
+package com.hao.easy.mvvm.flutter
 
-import com.hao.easy.mvvm.android.ui.fragment.AndroidFragment
 import com.hao.easy.mvvm.base.ui.ContainerActivity
-
+import com.hao.easy.mvvm.flutter.ui.fragment.FlutterFragment
 
 /**
  * @author Yang Shihao
@@ -12,5 +11,5 @@ class MainActivity : ContainerActivity() {
 
     override fun showToolbar() = false
 
-    override fun getFragment() = AndroidFragment()
+    override fun getFragment()= FlutterFragment()
 }

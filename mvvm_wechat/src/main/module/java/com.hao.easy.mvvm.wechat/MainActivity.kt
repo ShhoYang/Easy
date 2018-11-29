@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.wechat.ui.activity
+package com.hao.easy.mvvm.wechat
 
 import com.hao.easy.mvvm.base.ui.ContainerActivity
 import com.hao.easy.mvvm.wechat.ui.fragment.WechatFragment
