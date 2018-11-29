@@ -1,9 +1,11 @@
 package com.hao.easy.mvvm.user.ui.activity
 
+import android.os.Handler
 import android.view.WindowManager
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.user.R
 import okhttp3.Cookie
+import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
 class WelcomeActivity : BaseActivity() {
@@ -22,6 +24,11 @@ class WelcomeActivity : BaseActivity() {
     }
 
     override fun initData() {
+
+        Handler().postDelayed({
+            startActivity<LoginActivity>()
+            finish()
+        }, 2000)
 
 //        var name: String? = null
 //        var token: String? = null

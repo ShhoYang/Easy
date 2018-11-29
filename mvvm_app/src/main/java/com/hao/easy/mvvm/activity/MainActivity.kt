@@ -9,18 +9,16 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.android.ui.fragment.AndroidFragment
 import com.hao.easy.mvvm.base.extensions.snack
-import com.hao.easy.mvvm.base.provider.IMainService
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.flutter.ui.fragment.FlutterFragment
 import com.hao.easy.mvvm.kotlin.ui.fragment.KotlinFragment
 import com.hao.easy.mvvm.user.ui.fragment.UserFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.WechatFragment
-import com.socks.library.KLog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
 
 @Route(path = "/app/MainActivity")
-class MainActivity : BaseActivity(),IMainService {
+class MainActivity : BaseActivity() {
 
     companion object {
         private const val TAG = "MainActivity22"
@@ -88,11 +86,6 @@ class MainActivity : BaseActivity(),IMainService {
         } else {
             backPressedTime = System.currentTimeMillis()
         }
-    }
-
-    override fun closeDraw() {
-        KLog.d(TAG, "closeDraw")
-        drawerLayout.closeDrawers()
     }
 
     inner class MainViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {

@@ -7,7 +7,6 @@ import com.hao.easy.mvvm.user.http.Api
 import com.hao.easy.mvvm.user.viewmodel.LoginViewModel
 import dagger.Module
 import dagger.Provides
-import retrofit2.Retrofit
 
 /**
  * @author Yang Shihao
@@ -16,10 +15,10 @@ import retrofit2.Retrofit
 @Module(includes = [FragmentCommonModule::class])
 class FragmentModule {
 
-    @Provides
-    internal fun provideApi(retrofit: Retrofit): Api {
-        return retrofit.create(Api::class.java)
-    }
+//    @Provides
+//    internal fun provideApi(retrofit: Retrofit): Api {
+//        return retrofit.create(Api::class.java)
+//    }
 
     @Provides
     internal fun provideLoginViewModel(fragment: Fragment, api: Api): LoginViewModel {

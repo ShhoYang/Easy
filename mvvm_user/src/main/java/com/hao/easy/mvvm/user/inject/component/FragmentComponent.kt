@@ -11,7 +11,7 @@ import dagger.Component
  * @date 2018/10/23
  */
 @PreFragment
-@Component(modules = [FragmentModule::class], dependencies = [AppComponent::class])
+@Component(modules = [FragmentModule::class], dependencies = [ApiComponent::class])
 interface FragmentComponent {
 
     fun inject(loginFragment: LoginFragment)

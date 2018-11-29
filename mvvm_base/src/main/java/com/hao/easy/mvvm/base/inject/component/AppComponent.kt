@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import com.hao.easy.mvvm.inject.ApplicationContext
 import com.hao.easy.mvvm.inject.module.AppModule
-import com.hao.easy.mvvm.inject.module.NetworkModule
 import dagger.Component
 import okhttp3.Cookie
 import retrofit2.Retrofit
@@ -15,7 +14,7 @@ import javax.inject.Singleton
  * @date 2018/10/23
  */
 @Singleton
-@Component(modules = [AppModule::class,NetworkModule::class])
+@Component(modules = [AppModule::class])
 interface AppComponent {
 
     @ApplicationContext
