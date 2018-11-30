@@ -22,11 +22,11 @@ abstract class BasePagedAdapter<T : BaseItem>(private val layoutId: Int) : Paged
         bindViewHolder(holder, getItem(position)!!, position)
     }
 
+    abstract fun bindViewHolder(holder: ViewHolder, item: T, position: Int)
+
     class Diff<T : BaseItem> : DiffUtil.ItemCallback<T>() {
         override fun areItemsTheSame(item: T, item1: T) = item.id == item1.id
 
         override fun areContentsTheSame(item: T, item1: T) = item == item1
     }
-
-    abstract fun bindViewHolder(holder: ViewHolder, item: T, position: Int)
 }

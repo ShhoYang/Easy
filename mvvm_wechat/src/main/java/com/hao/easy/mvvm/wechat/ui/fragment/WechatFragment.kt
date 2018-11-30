@@ -1,17 +1,14 @@
 package com.hao.easy.mvvm.wechat.ui.fragment
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.design.widget.AppBarLayout
 import android.view.MotionEvent
 import android.widget.ImageView
-import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.extensions.load
 import com.hao.easy.mvvm.base.ui.BaseFragment
-import com.hao.easy.mvvm.inject.component.DaggerWechatComponent
-import com.hao.easy.mvvm.inject.module.FragmentCommonModule
 import com.hao.easy.mvvm.wechat.R
-import com.hao.easy.mvvm.wechat.inject.module.WechatModule
 import com.hao.easy.mvvm.wechat.ui.adapter.FragmentWithTabAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.WechatViewModel
 import com.socks.library.KLog
@@ -19,7 +16,6 @@ import com.youth.banner.BannerConfig
 import com.youth.banner.loader.ImageLoader
 import kotlinx.android.synthetic.main.fragment_wechat.*
 import org.jetbrains.anko.support.v4.dimen
-import javax.inject.Inject
 
 /**
  * @author Yang Shihao
@@ -31,8 +27,10 @@ class WechatFragment : BaseFragment() {
         private const val TAG = "WechatFragment"
     }
 
-    @Inject
-    lateinit var viewModel: WechatViewModel
+    private val viewModel: WechatViewModel by lazy {
+        ViewModelProviders.of(this@WechatFragment).get(WechatViewModel::class.java)
+    }
+
     private var adapter: FragmentWithTabAdapter? = null
 
     private var startX = .0F
@@ -54,17 +52,7 @@ class WechatFragment : BaseFragment() {
 
     override fun getLayoutId() = R.layout.fragment_wechat
 
-    override fun initInject() {
-        DaggerWechatComponent.builder()
-                .appComponent(App.instance.appComponent)
-                .fragmentCommonModule(FragmentCommonModule(this))
-                .wechatModule(WechatModule())
-                .build()
-                .inject(this)
-    }
-
     override fun initView() {
-
         viewPager.setOnTouchListener { _, ev ->
             when (ev.action) {
                 MotionEvent.ACTION_DOWN -> {

@@ -1,6 +1,7 @@
 package com.hao.easy.mvvm.base.adapter
 
 import android.content.Context
+import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
@@ -9,6 +10,7 @@ import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 
 class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: Int) :
@@ -40,18 +42,16 @@ class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: I
         return this
     }
 
-    fun setOnClickListener(viewId: Int, f: () -> Unit): ViewHolder {
-        getView<View>(viewId)?.setOnClickListener { f() }
+    fun setImageResource(@IdRes viewId: Int, @DrawableRes resId: Int): ViewHolder {
+        var imageView: ImageView = getView(viewId)
+        imageView?.setImageResource(resId)
         return this
     }
 
-    fun setItemClickListener(f: () -> Unit): ViewHolder {
-        itemView.setOnClickListener { f() }
-        return this
-    }
-
-    fun setItemLongClickListener(f: () -> Boolean): ViewHolder {
-        itemView.setOnLongClickListener { f() }
+    fun setOnClickListener(viewId: Int, f: (View) -> Unit): ViewHolder {
+        getView<View>(viewId)?.apply {
+            setOnClickListener { f(this) }
+        }
         return this
     }
 }

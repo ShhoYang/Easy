@@ -13,4 +13,5 @@ data class Author(var courseId: Int,
 data class Article(var title: String,
                    var author: String,
                    var niceDate: String,
-                   var link: String) : BaseItem()
+                   var link: String,
+                   var collect: Boolean) : BaseItem()

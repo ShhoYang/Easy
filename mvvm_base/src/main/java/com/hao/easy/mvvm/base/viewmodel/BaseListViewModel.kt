@@ -1,6 +1,7 @@
 package com.hao.easy.mvvm.base.viewmodel
 
 import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.paging.LivePagedListBuilder
@@ -19,7 +20,7 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
     }
 
     companion object {
-        const val TAG = "BaseViewModel"
+        private const val TAG = "BaseViewModel"
     }
 
     private val dataSourceFactory: DataSourceFactory<T> by lazy {
@@ -30,13 +31,20 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
 
     private val refreshLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
-    private val loadMoreLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val loadMoreLiveData: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+
+    private val notifyItemLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+
+    private val removeItemLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
 
     fun invalidate() {
         dataSourceFactory.sourceLiveData.value?.invalidate()
     }
 
-    fun observe(@NonNull owner: LifecycleOwner, data: (PagedList<T>) -> Unit, refreshResult: (Boolean?) -> Unit, loadMoreResult: (Boolean?) -> Unit) {
+    fun observeDataObserver(@NonNull owner: LifecycleOwner,
+                            data: (PagedList<T>) -> Unit,
+                            refreshResult: (Boolean?) -> Unit,
+                            loadMoreResult: (Boolean?) -> Unit) {
         loadLiveData.observe(owner, Observer {
             it?.apply(data)
         })
@@ -47,6 +55,18 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
 
         loadMoreLiveData.observe(owner, Observer {
             loadMoreResult(it)
+        })
+    }
+
+    fun observeAdapterObserver(@NonNull owner: LifecycleOwner,
+                               notifyItem: (Int) -> Unit,
+                               removeItem: (Int) -> Unit) {
+        notifyItemLiveData.observe(owner, Observer {
+            notifyItem(it!!)
+        })
+
+        removeItemLiveData.observe(owner, Observer {
+            removeItem(it!!)
         })
     }
 
@@ -84,6 +104,11 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
                 }
             }
         }
+    }
+
+    fun notifyItem(position: Int) {
+        notifyItemLiveData.value = position
+        notifyItemLiveData.value = -1
     }
 
     override fun refresh() {

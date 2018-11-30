@@ -47,10 +47,14 @@ abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
     }
 
     override fun initData() {
-        dataViewModel().observe(this,
+        dataViewModel().observeDataObserver(this,
                 { adapter().submitList(it) },
                 { refreshFinished(it) },
                 { loadMoreFinished(it) })
+
+        dataViewModel().observeAdapterObserver(this,
+                { adapter().notifyItemChanged(it) },
+                { adapter().notifyItemRemoved(it) })
     }
 
     open fun itemClicked(view: View, item: T, position: Int) {

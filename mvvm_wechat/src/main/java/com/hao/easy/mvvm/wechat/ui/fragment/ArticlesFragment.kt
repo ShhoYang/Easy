@@ -1,18 +1,17 @@
 package com.hao.easy.mvvm.wechat.ui.fragment
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.base.ui.WebActivity
-import com.hao.easy.mvvm.inject.component.DaggerWechatComponent
-import com.hao.easy.mvvm.inject.module.FragmentCommonModule
+import com.hao.easy.mvvm.inject.component.DaggerFragmentComponent
 import com.hao.easy.mvvm.wechat.R
-import com.hao.easy.mvvm.wechat.inject.module.WechatModule
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.adapter.ArticlesAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.ArticlesViewModel
-import com.socks.library.KLog
 import javax.inject.Inject
 
 /**
@@ -36,21 +35,20 @@ class ArticlesFragment : BaseListFragment<Article>() {
     @Inject
     lateinit var adapter: ArticlesAdapter
 
-    @Inject
-    lateinit var viewModel: ArticlesViewModel
+    private val viewModel: ArticlesViewModel by lazy {
+        ViewModelProviders.of(this@ArticlesFragment).get(ArticlesViewModel::class.java)
+    }
 
     override fun getLayoutId() = R.layout.fragment_wechat_articles
 
     override fun initInject() {
-        DaggerWechatComponent.builder()
+        DaggerFragmentComponent.builder()
                 .appComponent(App.instance.appComponent)
-                .fragmentCommonModule(FragmentCommonModule(this))
-                .wechatModule(WechatModule())
-                .build().inject(this)
+                .build()
+                .inject(this)
     }
 
     override fun initData() {
-        KLog.d(TAG, "initData")
         arguments?.apply {
             viewModel.authorId = getInt(AUTHOR_ID, 409)
         }
@@ -62,7 +60,11 @@ class ArticlesFragment : BaseListFragment<Article>() {
     override fun adapter() = adapter
 
     override fun itemClicked(view: View, item: Article, position: Int) {
-       context?.apply { WebActivity.start(this, item.title, item.link) }
+        if (view.id == R.id.ivFav) {
+            viewModel.collect(item, position)
+        } else {
+            context?.apply { WebActivity.start(this, item.title, item.link) }
+        }
     }
 
     override fun refreshFinished(success: Boolean?) {
