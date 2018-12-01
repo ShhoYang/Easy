@@ -15,7 +15,6 @@ import com.tencent.smtt.sdk.QbSdk
  */
 open class App : Application() {
 
-
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
                 .appModule(AppModule(this))

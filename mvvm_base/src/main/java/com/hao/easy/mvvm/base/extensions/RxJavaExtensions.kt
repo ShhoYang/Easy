@@ -6,49 +6,30 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-fun <D, T : HttpResult<D>> Observable<T>.subscribeBy(onResponse: (D?) -> Unit) =
+fun <D, T : HttpResult<D>> Observable<T>.main() =
+        observeOn(AndroidSchedulers.mainThread())
+
+fun <D, T : HttpResult<D>> Observable<T>.io_main() =
         subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.errorCode == 0) {
-                        onResponse(it.data)
-                    }
-                }, {
-                    KLog.d("onFailure", it)
-                })
+
+fun <D, T : HttpResult<D>> Observable<T>.subscribeBy(onResponse: (D?) -> Unit) =
+        subscribe({
+            if (it.errorCode == 0) {
+                onResponse(it.data)
+            }
+        }, {
+            KLog.d("onFailure", it)
+        })
 
 fun <D, T : HttpResult<D>> Observable<T>.subscribeBy(onResponse: (D?) -> Unit, onFailure: (String) -> Unit) =
-        subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.errorCode == 0) {
-                        onResponse(it.data)
-                    } else {
-                        onFailure(it.errorMsg)
-                    }
-                }, {
-                    onFailure(it.message!!)
-                })
-
-fun <D, T : HttpResult<D>> Observable<T>._subscribeBy(onResponse: (D?) -> Unit) =
-        observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.errorCode == 0) {
-                        onResponse(it.data)
-                    }
-                }, {
-                    KLog.d("onFailure", it)
-                })
-
-fun <D, T : HttpResult<D>> Observable<T>._subscribeBy(onResponse: (D?) -> Unit, onFailure: (String) -> Unit) =
-        observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.errorCode == 0) {
-                        onResponse(it.data)
-                    } else {
-                        onFailure(it.errorMsg)
-                    }
-                }, {
-                    onFailure(it.message!!)
-                })
+        subscribe({
+            if (it.errorCode == 0) {
+                onResponse(it.data)
+            } else {
+                onFailure(it.errorMsg)
+            }
+        }, {
+            onFailure(it.message!!)
+        })
 

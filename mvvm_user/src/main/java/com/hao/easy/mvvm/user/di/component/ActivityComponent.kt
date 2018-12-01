@@ -1,8 +1,7 @@
-package com.hao.easy.mvvm.user.inject.component
+package com.hao.easy.mvvm.user.di.component
 
 import com.hao.easy.mvvm.inject.PreActivity
 import com.hao.easy.mvvm.inject.component.AppComponent
-import com.hao.easy.mvvm.user.ui.activity.WelcomeActivity
 import dagger.Component
 
 /**
@@ -12,7 +11,5 @@ import dagger.Component
 @PreActivity
 @Component(dependencies = [AppComponent::class])
 interface ActivityComponent {
-
-    fun inject(welcomeActivity: WelcomeActivity)
 
 }

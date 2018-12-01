@@ -1,9 +1,7 @@
 package com.hao.easy.mvvm.wechat.ui.fragment
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.base.ui.WebActivity
@@ -18,7 +16,7 @@ import javax.inject.Inject
  * @author Yang Shihao
  * @date 2018/11/18
  */
-class ArticlesFragment : BaseListFragment<Article>() {
+class ArticlesFragment : BaseListFragment<Article,ArticlesViewModel>() {
 
     companion object {
         private const val TAG = "ArticlesFragment"
@@ -35,11 +33,7 @@ class ArticlesFragment : BaseListFragment<Article>() {
     @Inject
     lateinit var adapter: ArticlesAdapter
 
-    private val viewModel: ArticlesViewModel by lazy {
-        ViewModelProviders.of(this@ArticlesFragment).get(ArticlesViewModel::class.java)
-    }
-
-    override fun getLayoutId() = R.layout.fragment_wechat_articles
+    override fun getLayoutId() = R.layout.wechat_fragment_articles
 
     override fun initInject() {
         DaggerFragmentComponent.builder()
@@ -50,18 +44,16 @@ class ArticlesFragment : BaseListFragment<Article>() {
 
     override fun initData() {
         arguments?.apply {
-            viewModel.authorId = getInt(AUTHOR_ID, 409)
+            dataViewModel.authorId = getInt(AUTHOR_ID, 409)
         }
         super.initData()
     }
-
-    override fun dataViewModel() = viewModel
 
     override fun adapter() = adapter
 
     override fun itemClicked(view: View, item: Article, position: Int) {
         if (view.id == R.id.ivFav) {
-            viewModel.collect(item, position)
+            dataViewModel.collect(item, position)
         } else {
             context?.apply { WebActivity.start(this, item.title, item.link) }
         }
@@ -74,6 +66,6 @@ class ArticlesFragment : BaseListFragment<Article>() {
     }
 
     fun refresh() {
-        viewModel.invalidate()
+        dataViewModel.invalidate()
     }
 }

@@ -1,5 +1,6 @@
 package com.hao.easy.mvvm.base.ui
 
+import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -10,15 +11,22 @@ import com.hao.easy.mvvm.base.extensions.init
 import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.viewmodel.BaseListViewModel
 import com.hao.easy.mvvm.view.EmptyView
+import java.lang.reflect.ParameterizedType
 
 /**
  * @author Yang Shihao
  * @date 2018/11/18
  */
-abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
+abstract class BaseListFragment<T : BaseItem, VM : BaseListViewModel<T>> : BaseFragment() {
 
     companion object {
         private const val TAG = "BaseListFragment"
+    }
+
+    val dataViewModel: VM by lazy {
+        var parameterizedType = javaClass.genericSuperclass as ParameterizedType
+        val cla = parameterizedType.actualTypeArguments[1] as Class<VM>
+        ViewModelProviders.of(this).get(cla)
     }
 
     private var refreshLayout: SwipeRefreshLayout? = null
@@ -42,17 +50,17 @@ abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
         }
         recyclerView.init(adapter)
         refreshLayout?.setOnRefreshListener {
-            dataViewModel().invalidate()
+            dataViewModel.invalidate()
         }
     }
 
     override fun initData() {
-        dataViewModel().observeDataObserver(this,
+        dataViewModel.observeDataObserver(this,
                 { adapter().submitList(it) },
                 { refreshFinished(it) },
                 { loadMoreFinished(it) })
 
-        dataViewModel().observeAdapterObserver(this,
+        dataViewModel.observeAdapterObserver(this,
                 { adapter().notifyItemChanged(it) },
                 { adapter().notifyItemRemoved(it) })
     }
@@ -87,6 +95,4 @@ abstract class BaseListFragment<T : BaseItem> : BaseFragment() {
     }
 
     abstract fun adapter(): BasePagedAdapter<T>
-
-    abstract fun dataViewModel(): BaseListViewModel<T>
 }

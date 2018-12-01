@@ -10,19 +10,19 @@ import com.hao.easy.mvvm.user.repository.Api
  * @author Yang Shihao
  * @date 2018/11/25
  */
-class LoginViewModel : BaseViewModel() {
+class UserViewModel : BaseViewModel() {
 
     companion object {
-        private const val TAG = "LoginViewModel"
+        private const val TAG = "UserViewModel"
     }
 
-    var loginLiveData = MutableLiveData<String>()
+    var logoutLiveData = MutableLiveData<String>()
 
-    fun login(username: String, password: String) {
-        Api.login(username, password).io_main().subscribeBy({
-            loginLiveData.value = null
+    fun logout() {
+        Api.logout().io_main().subscribeBy({
+            logoutLiveData.value = null
         }, {
-            loginLiveData.value = it
+            logoutLiveData.value = null
         }).add()
     }
 }

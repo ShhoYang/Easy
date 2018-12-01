@@ -1,10 +1,11 @@
 package com.hao.easy.mvvm.wechat.viewmodel
 
-import com.hao.easy.mvvm.base.extensions._subscribeBy
+import com.hao.easy.mvvm.base.extensions.io_main
+import com.hao.easy.mvvm.base.extensions.main
 import com.hao.easy.mvvm.base.extensions.subscribeBy
 import com.hao.easy.mvvm.base.viewmodel.BaseListViewModel
-import com.hao.easy.mvvm.wechat.http.Api
 import com.hao.easy.mvvm.wechat.model.Article
+import com.hao.easy.mvvm.wechat.repository.Api
 
 class ArticlesViewModel : BaseListViewModel<Article>() {
 
@@ -15,7 +16,7 @@ class ArticlesViewModel : BaseListViewModel<Article>() {
     var authorId: Int = 409
 
     override fun loadData(page: Int, onResponse: (ArrayList<Article>?) -> Unit) {
-        Api.getArticles(authorId, page)._subscribeBy({
+        Api.getArticles(authorId, page).main().subscribeBy({
             onResponse(it?.datas)
         }, {
             onResponse(null)
@@ -24,14 +25,14 @@ class ArticlesViewModel : BaseListViewModel<Article>() {
 
     fun collect(item: Article, position: Int) {
         if(item.collect){
-            Api.cancelCollect(item.id).subscribeBy({
+            Api.cancelCollect(item.id).io_main().subscribeBy({
                 item.collect = false
                 notifyItem(position)
             }, {
 
             })
         }else {
-            Api.collect(item.id).subscribeBy({
+            Api.collect(item.id).io_main().subscribeBy({
                 item.collect = true
                 notifyItem(position)
             }, {

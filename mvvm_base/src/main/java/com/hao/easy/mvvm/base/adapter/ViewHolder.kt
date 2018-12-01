@@ -16,15 +16,16 @@ import android.widget.TextView
 class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: Int) :
         RecyclerView.ViewHolder(LayoutInflater.from(context).inflate(layoutId, parent, false)) {
 
-    val views = SparseArray<View>()
+    private val views = SparseArray<View>()
 
     fun <T : View> getView(viewId: Int): T {
         var view = views.get(viewId)
         if (view == null) {
             view = itemView.findViewById(viewId)
-            if (view != null) {
-                views.put(viewId, view)
+            if (view == null) {
+                throw IllegalArgumentException("not found id")
             }
+            views.put(viewId, view)
         }
 
         return view as T
@@ -32,24 +33,24 @@ class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: I
 
     fun setText(@IdRes viewId: Int, text: String): ViewHolder {
         var textView: TextView = getView(viewId)
-        textView?.text = text
+        textView.text = text
         return this
     }
 
     fun setText(@IdRes viewId: Int, @StringRes resId: Int): ViewHolder {
         var textView: TextView = getView(viewId)
-        textView?.text = context.getString(resId)
+        textView.text = context.getString(resId)
         return this
     }
 
     fun setImageResource(@IdRes viewId: Int, @DrawableRes resId: Int): ViewHolder {
         var imageView: ImageView = getView(viewId)
-        imageView?.setImageResource(resId)
+        imageView.setImageResource(resId)
         return this
     }
 
     fun setOnClickListener(viewId: Int, f: (View) -> Unit): ViewHolder {
-        getView<View>(viewId)?.apply {
+        getView<View>(viewId).apply {
             setOnClickListener { f(this) }
         }
         return this

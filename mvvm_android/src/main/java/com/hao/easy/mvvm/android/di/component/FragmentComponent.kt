@@ -1,6 +1,6 @@
-package com.hao.easy.mvvm.android.inject.component
+package com.hao.easy.mvvm.android.di.component
 
-import com.hao.easy.mvvm.android.inject.module.FragmentModule
+import com.hao.easy.mvvm.android.di.module.FragmentModule
 import com.hao.easy.mvvm.android.ui.fragment.AndroidFragment
 import com.hao.easy.mvvm.inject.PreFragment
 import com.hao.easy.mvvm.inject.component.AppComponent

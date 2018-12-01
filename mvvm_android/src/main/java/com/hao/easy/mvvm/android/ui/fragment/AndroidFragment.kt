@@ -2,8 +2,8 @@ package com.hao.easy.mvvm.android.ui.fragment
 
 import android.view.View
 import com.hao.easy.mvvm.android.R
-import com.hao.easy.mvvm.android.inject.component.DaggerFragmentComponent
-import com.hao.easy.mvvm.android.inject.module.FragmentModule
+import com.hao.easy.mvvm.android.di.component.DaggerFragmentComponent
+import com.hao.easy.mvvm.android.di.module.FragmentModule
 import com.hao.easy.mvvm.android.model.Article
 import com.hao.easy.mvvm.android.ui.adapter.ArticleAdapter
 import com.hao.easy.mvvm.android.viewmodel.ArticleViewModel

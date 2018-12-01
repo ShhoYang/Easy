@@ -1,12 +1,15 @@
-package com.hao.easy.mvvm.wechat.http
+package com.hao.easy.mvvm.wechat.repository
 
 import com.hao.easy.mvvm.base.App
-import com.hao.easy.mvvm.base.model.*
+import com.hao.easy.mvvm.base.model.HttpResult
+import com.hao.easy.mvvm.base.model.ListPaged
 import com.hao.easy.mvvm.wechat.model.Ad
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.model.Author
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 /**
  * @author Yang Shihao

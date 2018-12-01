@@ -24,7 +24,7 @@ class LoginFragment : BaseFragment() {
         private const val TAG = "LoginFragment"
     }
 
-    lateinit var viewMode: LoginViewModel
+    lateinit var viewModel: LoginViewModel
 
     override fun getLayoutId() = R.layout.fragment_login
 
@@ -42,7 +42,7 @@ class LoginFragment : BaseFragment() {
                 textInputPassword.showError("密码不能为空")
                 return@setOnClickListener
             }
-            viewMode.login(username, password)
+            viewModel.login(username, password)
             hideSoftInput()
         }
         textRegister.setOnClickListener {
@@ -54,10 +54,11 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun initData() {
-        viewMode = ViewModelProviders.of(this).get(LoginViewModel::class.java)
-        viewMode.loggedLiveData.observe(this, Observer {
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        viewModel.loginLiveData.observe(this, Observer {
             if (it == null) {
                 ARouter.getInstance().build("/app/MainActivity").navigation()
+                activity?.finish()
             } else {
                 editTextUsername.snack(it)
             }

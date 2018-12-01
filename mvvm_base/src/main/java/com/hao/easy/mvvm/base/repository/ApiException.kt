@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.base.http
+package com.hao.easy.mvvm.base.repository
 
 /**
  * @author Yang Shihao

@@ -4,10 +4,16 @@ import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.user.R
 import com.hao.easy.mvvm.user.ui.fragment.LoginFragment
 import com.hao.easy.mvvm.user.ui.fragment.RegisterFragment
+import com.socks.library.KLog
 
 class LoginActivity : BaseActivity() {
 
+    companion object {
+        private const val TAG = "LoginActivity"
+    }
+
     private val loginFragment: LoginFragment by lazy { LoginFragment() }
+    
     private val registerFragment: RegisterFragment by lazy { RegisterFragment() }
 
     override fun showToolbar() = false
@@ -36,5 +42,10 @@ class LoginActivity : BaseActivity() {
             addToBackStack(null)
             commit()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        KLog.d(TAG, "onBackPressed")
     }
 }

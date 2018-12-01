@@ -1,8 +1,8 @@
-package com.hao.easy.mvvm.android.inject.module
+package com.hao.easy.mvvm.android.di.module
 
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.Fragment
-import com.hao.easy.mvvm.android.http.Api
+import com.hao.easy.mvvm.android.repository.Api
 import com.hao.easy.mvvm.android.viewmodel.ArticleViewModel
 import com.hao.easy.mvvm.inject.module.FragmentCommonModule
 import dagger.Module

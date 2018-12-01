@@ -1,9 +1,11 @@
-package com.hao.easy.mvvm.android.http
+package com.hao.easy.mvvm.android.repository
 
 import com.hao.easy.mvvm.android.model.Article
-import com.hao.easy.mvvm.base.model.*
+import com.hao.easy.mvvm.base.model.HttpResult
+import com.hao.easy.mvvm.base.model.ListPaged
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * @author Yang Shihao
