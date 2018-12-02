@@ -2,11 +2,11 @@ package com.hao.easy.mvvm.user.ui.fragment
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.text.TextUtils
 import android.widget.TextView
 import com.hao.easy.mvvm.base.Config
 import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.ui.BaseFragment
+import com.hao.easy.mvvm.base.user.User
 import com.hao.easy.mvvm.user.R
 import com.hao.easy.mvvm.user.ui.activity.LoginActivity
 import com.hao.easy.mvvm.user.viewmodel.UserViewModel
@@ -29,25 +29,6 @@ class UserFragment : BaseFragment() {
 
     private lateinit var tvUsername: TextView
 
-    private var username: String = "未登录"
-
-
-    override fun onStart() {
-        super.onStart()
-        username = Config.username
-        if (TextUtils.isEmpty(username)) {
-            tvUsername.text = "未登录"
-            tvUsername.setOnClickListener {
-                goLogin()
-            }
-            leftNavigationView.menu.findItem(R.id.menu_logout).isVisible = false
-        } else {
-            tvUsername.text = Config.username
-            tvUsername.setOnClickListener(null)
-            leftNavigationView.menu.findItem(R.id.menu_logout).isVisible = true
-        }
-    }
-
     override fun getLayoutId() = R.layout.fragment_user
 
     override fun initView() {
@@ -63,7 +44,7 @@ class UserFragment : BaseFragment() {
                 R.id.menu_about -> {
                 }
                 R.id.menu_logout -> {
-                    Config.logout()
+                    Config.instance().logout()
                     viewModel.logout()
                 }
             }
@@ -73,11 +54,30 @@ class UserFragment : BaseFragment() {
 
     override fun initData() {
         viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        lifecycle.addObserver(viewModel)
+        viewModel.loginLiveData.observe(this, Observer {
+            serLogin(it)
+        })
         viewModel.logoutLiveData.observe(this, Observer {
             if (it == null) {
                 goLogin()
             }
         })
+    }
+
+    private fun serLogin(user: User?) {
+        if (user == null) {
+            tvUsername.text = "未登录"
+            tvUsername.setOnClickListener {
+                goLogin()
+            }
+            leftNavigationView.menu.findItem(R.id.menu_logout).isVisible = false
+
+        } else {
+            tvUsername.text = user.username
+            tvUsername.setOnClickListener(null)
+            leftNavigationView.menu.findItem(R.id.menu_logout).isVisible = true
+        }
     }
 
     private fun goLogin() {

@@ -1,15 +1,18 @@
 package com.hao.easy.mvvm.user.ui.activity
 
 import android.os.Handler
+import android.os.Looper
 import android.view.WindowManager
 import com.alibaba.android.arouter.launcher.ARouter
+import com.hao.easy.mvvm.base.Config
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.user.R
+import kotlin.concurrent.thread
 
 class WelcomeActivity : BaseActivity() {
 
     companion object {
-        private val DURATION = 1500L
+        private const val DURATION = 1500L
     }
 
     override fun showToolbar() = false
@@ -19,32 +22,27 @@ class WelcomeActivity : BaseActivity() {
     }
 
     override fun initData() {
+        thread {
+            var l = System.currentTimeMillis()
+            Config.instance().init()
+            var delayTime = DURATION + l - System.currentTimeMillis()
+            if (delayTime <= 0) {
+                start()
+            } else {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    start()
+                }, delayTime)
+            }
+        }
+    }
 
-        Handler().postDelayed({
-            ARouter.getInstance().build("/app/MainActivity").navigation()
-            finish()
-        }, DURATION)
-
-//        var name: String? = null
-//        var token: String? = null
-//        cookies.forEach {
-//            if (it.name() == "loginUserName") {
-//                name = it.value()
-//            } else if (it.name() == "token_pass") {
-//                token = it.value()
-//            }
-//        }
-//        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(token)) {
-//            Handler().postDelayed({
-//                startActivity<LoginActivity>()
-//                finish()
-//            }, DURATION)
-//        } else {
-//
-//        }
+    private fun start() {
+        ARouter.getInstance().build("/app/MainActivity").navigation()
+        finish()
     }
 
     override fun finish() {
+
         window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
         super.finish()
     }

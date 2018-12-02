@@ -2,7 +2,7 @@ package com.hao.easy.mvvm.user.repository
 
 import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.model.HttpResult
-import com.hao.easy.mvvm.base.model.User
+import com.hao.easy.mvvm.base.user.User
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

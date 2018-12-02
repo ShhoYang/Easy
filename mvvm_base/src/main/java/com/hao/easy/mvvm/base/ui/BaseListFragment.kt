@@ -38,6 +38,7 @@ abstract class BaseListFragment<T : BaseItem, VM : BaseListViewModel<T>> : BaseF
 
     final override fun onInit() {
         super.onInit()
+        lifecycle.addObserver(dataViewModel)
     }
 
     override fun initView() {

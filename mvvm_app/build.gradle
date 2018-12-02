@@ -54,6 +54,7 @@ kapt {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':mvvm_base')
+    debugImplementation debugImplementationLibs
     kapt kaptLibs
     if (isModule) {
         implementation project(':mvvm_user')

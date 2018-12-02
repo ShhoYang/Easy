@@ -1,43 +1,81 @@
 package com.hao.easy.mvvm.base
 
-import android.text.TextUtils
-import android.util.Log
+import com.hao.easy.mvvm.base.user.User
+import com.hao.easy.paging.db.UserDb
+import kotlin.concurrent.thread
 
-object Config {
+class Config private constructor() {
 
-    var username: String = ""
-        get() {
-            Log.e("111111111111111",field)
-            if (!TextUtils.isEmpty(field)) {
-                return field
-            }
-            var cookies = App.instance.appComponent.cookies()
-            cookies.forEach {
-                Log.e("111111111111111","name = ${it.name()} -- ${it.value()}")
-                if (it.name() == "loginUserName") {
-                    field = it.value()
-                    return field
+    companion object {
+        private const val TAG = "Config"
+
+        private const val KEY_USERNAME = "loginUserName"
+        private const val KEY_TOKEN = "token_pass"
+
+        private var instance: Config? = null
+
+        fun instance(): Config {
+            if (instance == null) {
+                synchronized(Config::class.java) {
+                    if (instance == null) {
+                        instance = Config()
+                    }
                 }
             }
-            return ""
+            return instance!!
+        }
+    }
+
+    var user: User? = null
+    var username: String? = null
+        get() {
+            return user?.username
+        }
+    var isLogin: Boolean = false
+        get() {
+            return field and (null != user)
         }
 
-    fun isLogin(): Boolean {
-        var name: String? = null
+    fun init() {
+        var username: String? = null
         var token: String? = null
         var cookies = App.instance.appComponent.cookies()
         cookies.forEach {
-            if (it.name() == "loginUserName") {
-                name = it.value()
-            } else if (it.name() == "token_pass") {
-                token = it.value()
+            if (it.name() == KEY_USERNAME) {
+                var value = it.value()
+                if ("\"\"" != value) {
+                    username = value
+                }
+
+            } else if (it.name() == KEY_TOKEN) {
+                var value = it.value()
+                if ("\"\"" != value) {
+                    token = value
+                }
             }
         }
-        return !TextUtils.isEmpty(name) && !TextUtils.isEmpty(token)
+
+        if ((null != username) and (null != token)) {
+            var user = UserDb.instance().userDao().queryUser(username!!)
+            if (null != user) {
+                this.user = user
+                isLogin = true
+            }
+        }
+    }
+
+    fun logged(user: User) {
+        this.user = user
+        isLogin = true
+        thread { UserDb.instance().userDao().insert(user) }
     }
 
     fun logout() {
-        username = ""
+        user?.apply {
+            thread { UserDb.instance().userDao().delete(this) }
+        }
+        user = null
+        isLogin = false
         App.instance.appComponent.apply {
             okHttpClient().dispatcher().cancelAll()
             persistentCookieJar().clear()

@@ -1,11 +1,13 @@
 package com.hao.easy.mvvm.user.ui.activity
 
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.user.R
 import com.hao.easy.mvvm.user.ui.fragment.LoginFragment
 import com.hao.easy.mvvm.user.ui.fragment.RegisterFragment
 import com.socks.library.KLog
 
+@Route(path = "/user/LoginActivity")
 class LoginActivity : BaseActivity() {
 
     companion object {
@@ -26,7 +28,6 @@ class LoginActivity : BaseActivity() {
                     add(R.id.frame, loginFragment, "Login")
                     commit()
                 }
-
     }
 
     fun goRegister() {

@@ -3,6 +3,7 @@ package com.hao.easy.mvvm.user.ui.fragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.text.TextUtils
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hao.easy.mvvm.base.extensions.addTextChangedListener
 import com.hao.easy.mvvm.base.extensions.hideSoftInput
