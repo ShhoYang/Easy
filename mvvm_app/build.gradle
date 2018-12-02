@@ -59,8 +59,8 @@ dependencies {
     if (isModule) {
         implementation project(':mvvm_user')
         implementation project(':mvvm_wechat')
-//        implementation project(':mvvm_android')
-//        implementation project(':mvvm_flutter')
-//        implementation project(':mvvm_kotlin')
+        implementation project(':mvvm_android')
+        implementation project(':mvvm_flutter')
+        implementation project(':mvvm_kotlin')
     }
 }

@@ -2,7 +2,6 @@ package com.hao.easy.mvvm.kotlin.ui.fragment
 
 import com.hao.easy.mvvm.base.ui.BaseFragment
 import com.hao.easy.mvvm.kotlin.R
-import com.socks.library.KLog
 
 /**
  * @author Yang Shihao
@@ -16,13 +15,5 @@ class KotlinFragment : BaseFragment() {
 
     override fun getLayoutId() = R.layout.fragment_kotlin
 
-    override fun initView() {
-    }
-
     override fun isLazy() = true
-
-    override fun initData() {
-        super.initData()
-        KLog.d(TAG, "initData")
-    }
 }

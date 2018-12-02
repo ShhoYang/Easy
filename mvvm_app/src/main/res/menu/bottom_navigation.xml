@@ -5,11 +5,11 @@
         android:icon="@drawable/ic_wechat"
         android:title="公眾號" />
     <item
-        android:id="@+id/tab_new"
+        android:id="@+id/tab_android"
         android:icon="@drawable/ic_android"
         android:title="項目" />
     <item
-        android:id="@+id/tab_android"
+        android:id="@+id/tab_flutter"
         android:icon="@drawable/ic_flutter"
         android:title="Flutter" />
     <item

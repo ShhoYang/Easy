@@ -10,7 +10,7 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/tv_text"
+        android:id="@+id/tvText"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

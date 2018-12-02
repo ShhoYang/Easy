@@ -12,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.hao.easy.mvvm.base.extensions.gone
+import com.hao.easy.mvvm.base.extensions.visible
 
 class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: Int) :
         RecyclerView.ViewHolder(LayoutInflater.from(context).inflate(layoutId, parent, false)) {
@@ -46,6 +48,18 @@ class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: I
     fun setImageResource(@IdRes viewId: Int, @DrawableRes resId: Int): ViewHolder {
         var imageView: ImageView = getView(viewId)
         imageView.setImageResource(resId)
+        return this
+    }
+
+    fun gone(@IdRes viewId: Int): ViewHolder {
+        var view: View = getView(viewId)
+        view.gone()
+        return this
+    }
+
+    fun visible(@IdRes viewId: Int): ViewHolder {
+        var view: View = getView(viewId)
+        view.visible()
         return this
     }
 

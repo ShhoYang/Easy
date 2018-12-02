@@ -23,7 +23,7 @@ abstract class BaseListFragment<T : BaseItem, VM : BaseListViewModel<T>> : BaseF
         private const val TAG = "BaseListFragment"
     }
 
-    val dataViewModel: VM by lazy {
+    val viewModel: VM by lazy {
         var parameterizedType = javaClass.genericSuperclass as ParameterizedType
         val cla = parameterizedType.actualTypeArguments[1] as Class<VM>
         ViewModelProviders.of(this).get(cla)
@@ -38,7 +38,7 @@ abstract class BaseListFragment<T : BaseItem, VM : BaseListViewModel<T>> : BaseF
 
     final override fun onInit() {
         super.onInit()
-        lifecycle.addObserver(dataViewModel)
+        lifecycle.addObserver(viewModel)
     }
 
     override fun initView() {
@@ -51,17 +51,17 @@ abstract class BaseListFragment<T : BaseItem, VM : BaseListViewModel<T>> : BaseF
         }
         recyclerView.init(adapter)
         refreshLayout?.setOnRefreshListener {
-            dataViewModel.invalidate()
+            viewModel.invalidate()
         }
     }
 
     override fun initData() {
-        dataViewModel.observeDataObserver(this,
+        viewModel.observeDataObserver(this,
                 { adapter().submitList(it) },
                 { refreshFinished(it) },
                 { loadMoreFinished(it) })
 
-        dataViewModel.observeAdapterObserver(this,
+        viewModel.observeAdapterObserver(this,
                 { adapter().notifyItemChanged(it) },
                 { adapter().notifyItemRemoved(it) })
     }

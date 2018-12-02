@@ -13,6 +13,46 @@
         app:showBack="false"
         app:title="項目" />
 
-    <include layout="@layout/activity_base_list" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@id/baseRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:elevation="0dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    app:layout_scrollFlags="scroll" />
+
+            </android.support.design.widget.AppBarLayout>
+
+            <com.hao.easy.mvvm.view.EmptyView
+                android:id="@id/baseEmptyView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@id/baseRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
+            </com.hao.easy.mvvm.view.EmptyView>
+
+
+        </android.support.design.widget.CoordinatorLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

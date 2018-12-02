@@ -44,7 +44,7 @@ class ArticlesFragment : BaseListFragment<Article,ArticlesViewModel>() {
 
     override fun initData() {
         arguments?.apply {
-            dataViewModel.authorId = getInt(AUTHOR_ID, 409)
+            viewModel.authorId = getInt(AUTHOR_ID, 409)
         }
         super.initData()
     }
@@ -53,7 +53,7 @@ class ArticlesFragment : BaseListFragment<Article,ArticlesViewModel>() {
 
     override fun itemClicked(view: View, item: Article, position: Int) {
         if (view.id == R.id.ivFav) {
-            dataViewModel.collect(item, position)
+            viewModel.collect(item, position)
         } else {
             context?.apply { WebActivity.start(this, item.title, item.link) }
         }
@@ -66,6 +66,6 @@ class ArticlesFragment : BaseListFragment<Article,ArticlesViewModel>() {
     }
 
     fun refresh() {
-        dataViewModel.invalidate()
+        viewModel.invalidate()
     }
 }
