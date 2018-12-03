@@ -2,6 +2,7 @@ package com.hao.easy.mvvm.base.extensions
 
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputLayout
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
@@ -18,6 +19,11 @@ import android.widget.EditText
 
 fun <VH : RecyclerView.ViewHolder, A : Adapter<VH>> RecyclerView.init(adapter: A, layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)) {
     this.layoutManager = layoutManager
+    this.adapter = adapter
+}
+
+fun <VH : RecyclerView.ViewHolder, A : Adapter<VH>> RecyclerView.init(adapter: A, column: Int) {
+    this.layoutManager = GridLayoutManager(context, column)
     this.adapter = adapter
 }
 

@@ -12,4 +12,5 @@ data class Article(var title: String,
                    var link: String,
                    var projectLink: String,
                    var desc: String,
-                   var envelopePic: String) : BaseItem()
+                   var envelopePic: String,
+                   var collect: Boolean) : BaseItem()

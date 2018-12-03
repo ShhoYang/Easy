@@ -36,6 +36,14 @@
                     android:overScrollMode="never"
                     app:layout_scrollFlags="scroll" />
 
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/line"
+                    android:visibility="gone"
+                    app:layout_scrollFlags="scroll" />
+
             </android.support.design.widget.AppBarLayout>
 
             <com.hao.easy.mvvm.view.EmptyView

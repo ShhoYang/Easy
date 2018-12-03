@@ -14,15 +14,10 @@ import javax.inject.Inject
 class TypeAdapter @Inject constructor() : BaseNormalAdapter<Type>(R.layout.android_item_type) {
 
     override fun bindViewHolder(holder: ViewHolder, item: Type, position: Int) {
+        holder.visible(R.id.tvText)
+                .setText(R.id.tvText, item.name)
+                .setImageResource(R.id.ivIcon, Icon.icons[position % 18])
 
-        if (position == 7 && list.size > 8) {
-            holder.gone(R.id.tvText)
-                    .setImageResource(R.id.ivIcon, R.drawable.ic_more)
-        } else {
-            holder.visible(R.id.tvText)
-                    .setText(R.id.tvText, item.name)
-                    .setImageResource(R.id.ivIcon, Icon.icons[position % 18])
-        }
     }
 
     override fun getItemCount(): Int {

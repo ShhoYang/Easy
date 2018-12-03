@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.hao.easy.mvvm.base.extensions.gone
+import com.hao.easy.mvvm.base.extensions.load
 import com.hao.easy.mvvm.base.extensions.visible
 
 class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: Int) :
@@ -51,6 +52,12 @@ class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: I
         return this
     }
 
+    fun setImage(@IdRes viewId: Int, url: String): ViewHolder {
+        var imageView: ImageView = getView(viewId)
+        imageView.load(url)
+        return this
+    }
+
     fun gone(@IdRes viewId: Int): ViewHolder {
         var view: View = getView(viewId)
         view.gone()
@@ -63,9 +70,18 @@ class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: I
         return this
     }
 
-    fun setOnClickListener(viewId: Int, f: (View) -> Unit): ViewHolder {
+    fun setClickListener(@IdRes viewId: Int, f: (View) -> Unit): ViewHolder {
         getView<View>(viewId).apply {
             setOnClickListener { f(this) }
+        }
+        return this
+    }
+
+    fun setClickListener(viewIds: Array<Int>, f: (View) -> Unit): ViewHolder {
+        viewIds.forEach {
+            getView<View>(it).apply {
+                setOnClickListener { f(this) }
+            }
         }
         return this
     }

@@ -64,4 +64,8 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun setTitle(title: CharSequence?) {
         toolbar?.title = title
     }
+
+    fun <T : View> f(id: Int): T? {
+        return findViewById(id)
+    }
 }
