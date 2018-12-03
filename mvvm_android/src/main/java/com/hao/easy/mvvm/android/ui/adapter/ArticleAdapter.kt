@@ -18,7 +18,8 @@ class ArticleAdapter @Inject constructor() : BasePagedAdapter<Article>(R.layout.
         }
         holder.setText(R.id.tvTitle, item.title)
                 .setText(R.id.tvDesc, item.desc)
-                .setText(R.id.tvTime, item.niceDate)
+                .setText(R.id.tvAuthor, "作者: ${item.author}")
+                .setText(R.id.tvTime, "時間: ${item.niceDate}")
                 .setImageResource(R.id.ivFav, if (item.collect) R.drawable.ic_fav_1 else R.drawable.ic_fav_0)
                 .setImage(R.id.ivThumbnail, item.envelopePic)
                 .setClickListener(arrayOf(R.id.ivLink, R.id.tvLink, R.id.ivFav), click)

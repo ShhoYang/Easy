@@ -48,10 +48,11 @@
         android:layout_marginLeft="2dp"
         android:gravity="center_vertical"
         android:text="@string/link_github"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="@color/blue"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@id/ivThumbnail"
-        app:layout_constraintStart_toEndOf="@id/ivLink" />
+        app:layout_constraintBottom_toBottomOf="@id/ivLink"
+        app:layout_constraintStart_toEndOf="@id/ivLink"
+        app:layout_constraintTop_toTopOf="@id/ivLink" />
 
     <TextView
         android:id="@+id/tvDesc"
@@ -59,6 +60,7 @@
         android:layout_height="0dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="4dp"
+        android:lineSpacingMultiplier="1.2"
         android:maxLines="4"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/tvLink"
@@ -68,13 +70,24 @@
         tools:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题" />
 
     <TextView
-        android:visibility="gone"
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingRight="32dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@id/tvTime"
+        app:layout_constraintTop_toBottomOf="@id/ivThumbnail"
+        tools:text="作者: author" />
+
+    <TextView
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/ivThumbnail"
+        app:layout_constraintBottom_toBottomOf="@id/tvAuthor"
+        app:layout_constraintStart_toEndOf="@id/tvAuthor"
         tools:text="2018-11-24" />
 
     <ImageView
@@ -82,7 +95,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/ic_fav_0"
-        app:layout_constraintBottom_toBottomOf="@id/ivLink"
+        app:layout_constraintBottom_toBottomOf="@id/tvTime"
         app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

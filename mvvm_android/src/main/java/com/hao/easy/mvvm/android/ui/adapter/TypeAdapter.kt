@@ -15,16 +15,8 @@ class TypeAdapter @Inject constructor() : BaseNormalAdapter<Type>(R.layout.andro
 
     override fun bindViewHolder(holder: ViewHolder, item: Type, position: Int) {
         holder.visible(R.id.tvText)
-                .setText(R.id.tvText, item.name)
+                .setText(R.id.tvText, item.name?.replace("amp;", ""))
                 .setImageResource(R.id.ivIcon, Icon.icons[position % 18])
 
-    }
-
-    override fun getItemCount(): Int {
-        return if (list.size > 8) {
-            8
-        } else {
-            list.size
-        }
     }
 }

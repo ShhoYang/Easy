@@ -10,7 +10,7 @@ class ArticlesAdapter @Inject constructor() : BasePagedAdapter<Article>(R.layout
 
     override fun bindViewHolder(holder: ViewHolder, item: Article, position: Int) {
         holder.setText(R.id.tvTitle, item.title)
-                .setText(R.id.tvTime, item.niceDate)
+                .setText(R.id.tvTime, "時間: ${item.niceDate}")
                 .setImageResource(R.id.ivFav, if (item.collect) R.drawable.ic_fav_1 else R.drawable.ic_fav_0)
                 .setClickListener(R.id.ivFav) {
                     itemClickListener?.apply {

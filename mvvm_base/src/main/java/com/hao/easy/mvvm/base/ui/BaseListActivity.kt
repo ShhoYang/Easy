@@ -62,8 +62,16 @@ abstract class BaseListActivity<T : BaseItem, VM : BaseListViewModel<T>> : BaseA
                 { loadMoreFinished(it) })
 
         viewModel.observeAdapterObserver(this,
-                { adapter().notifyItemChanged(it) },
-                { adapter().notifyItemRemoved(it) })
+                {
+                    if (it >= 0 && it < adapter().itemCount) {
+                        adapter().notifyItemChanged(it)
+                    }
+                },
+                {
+                    if (it >= 0 && it < adapter().itemCount) {
+                        adapter().notifyItemRemoved(it)
+                    }
+                })
     }
 
     open fun itemClicked(view: View, item: T, position: Int) {

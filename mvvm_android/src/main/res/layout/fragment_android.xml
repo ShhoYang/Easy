@@ -32,15 +32,25 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvType"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:overScrollMode="never"
                     app:layout_scrollFlags="scroll" />
+
+                <LinearLayout
+                    android:id="@+id/llPoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal" />
 
                 <View
                     android:id="@+id/line"
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
-                    android:background="@color/line"
+                    android:background="#F2F2F2"
                     android:visibility="gone"
                     app:layout_scrollFlags="scroll" />
 

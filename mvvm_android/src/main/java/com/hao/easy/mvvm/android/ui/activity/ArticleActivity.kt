@@ -32,7 +32,7 @@ class ArticleActivity : BaseListActivity<Article, ArticleViewModel>() {
     override fun initData() {
         var type = intent.getParcelableExtra<Type>(TYPE)
         type?.apply {
-            title = name
+            title = name?.replace("amp;", "")
             viewModel.typeId = id
         }
 

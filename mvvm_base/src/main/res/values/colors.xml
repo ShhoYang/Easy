@@ -10,6 +10,8 @@
     <color name="window_bg">#FAFAFA</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="blue">#0099cc</color>
+    <color name="red">#FF4444</color>
 
     <color name="text_black">#333333</color>
     <color name="tran">#00000000</color>

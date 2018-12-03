@@ -111,6 +111,11 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
         notifyItemLiveData.value = -1
     }
 
+    fun removeItem(position: Int) {
+        removeItemLiveData.value = position
+        removeItemLiveData.value = -1
+    }
+
     override fun refresh() {
     }
 
