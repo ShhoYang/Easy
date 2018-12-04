@@ -7,14 +7,14 @@ import android.support.v4.widget.DrawerLayout
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hao.easy.mvvm.R
-import com.hao.easy.mvvm.android.ui.fragment.AndroidFragment
 import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.flutter.ui.fragment.FlutterFragment
 import com.hao.easy.mvvm.kotlin.ui.fragment.KotlinFragment
 import com.hao.easy.mvvm.user.ui.fragment.UserFragment
+import com.hao.easy.mvvm.wechat.ui.fragment.ProjectFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.WechatFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_activity_main.*
 import kotlin.properties.Delegates
 
 @Route(path = "/app/MainActivity")
@@ -36,7 +36,7 @@ class MainActivity : BaseActivity() {
 
     override fun showToolbar() = false
 
-    override fun getLayoutId() = R.layout.activity_main
+    override fun getLayoutId() = R.layout.app_activity_main
 
     override fun initView() {
         initDrawerLayout()
@@ -92,7 +92,7 @@ class MainActivity : BaseActivity() {
         override fun getItem(p0: Int): Fragment {
             return when (p0) {
                 0 -> WechatFragment()
-                1 -> AndroidFragment()
+                1 -> ProjectFragment()
                 2 -> FlutterFragment()
                 else -> KotlinFragment()
             }

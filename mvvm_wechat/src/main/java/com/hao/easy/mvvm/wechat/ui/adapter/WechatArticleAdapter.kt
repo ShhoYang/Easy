@@ -6,7 +6,7 @@ import com.hao.easy.mvvm.wechat.R
 import com.hao.easy.mvvm.wechat.model.Article
 import javax.inject.Inject
 
-class ArticlesAdapter @Inject constructor() : BasePagedAdapter<Article>(R.layout.wechat_item_articels) {
+class WechatArticleAdapter @Inject constructor() : BasePagedAdapter<Article>(R.layout.wechat_item_wechat_article) {
 
     override fun bindViewHolder(holder: ViewHolder, item: Article, position: Int) {
         holder.setText(R.id.tvTitle, item.title)

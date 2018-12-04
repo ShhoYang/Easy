@@ -20,7 +20,7 @@ class LoginActivity : BaseActivity() {
 
     override fun showToolbar() = false
 
-    override fun getLayoutId() = R.layout.activity_login
+    override fun getLayoutId() = R.layout.user_activity_login
 
     override fun initView() {
         supportFragmentManager
@@ -33,10 +33,10 @@ class LoginActivity : BaseActivity() {
     fun goRegister() {
         supportFragmentManager.beginTransaction().apply {
             setCustomAnimations(
-                    R.anim.fragment_right_in,
-                    R.anim.fragment_left_out,
-                    R.anim.fragment_left_in,
-                    R.anim.fragment_right_out
+                    R.anim.user_fragment_right_in,
+                    R.anim.user_fragment_left_out,
+                    R.anim.user_fragment_left_in,
+                    R.anim.user_fragment_right_out
             )
             hide(loginFragment)
             add(R.id.frame, registerFragment, "Register")

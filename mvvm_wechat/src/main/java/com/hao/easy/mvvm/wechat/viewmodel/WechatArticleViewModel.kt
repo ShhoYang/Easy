@@ -1,20 +1,16 @@
 package com.hao.easy.mvvm.wechat.viewmodel
 
-import com.alibaba.android.arouter.launcher.ARouter
 import com.hao.easy.mvvm.base.Config
 import com.hao.easy.mvvm.base.extensions.io_main
 import com.hao.easy.mvvm.base.extensions.main
 import com.hao.easy.mvvm.base.extensions.subscribeBy
 import com.hao.easy.mvvm.base.viewmodel.BaseListViewModel
+import com.hao.easy.mvvm.wechat.Router
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.repository.Api
 import kotlin.properties.Delegates
 
-class ArticlesViewModel : BaseListViewModel<Article>() {
-
-    companion object {
-        private const val TAG = "ArticlesViewModel"
-    }
+class WechatArticleViewModel : BaseListViewModel<Article>() {
 
     var isLogin by Delegates.observable(Config.instance().isLogin) { _, old, new ->
         if (old != new) {
@@ -30,7 +26,7 @@ class ArticlesViewModel : BaseListViewModel<Article>() {
     }
 
     override fun loadData(page: Int, onResponse: (ArrayList<Article>?) -> Unit) {
-        Api.getArticles(authorId, page).main().subscribeBy({
+        Api.getWechatArticles(authorId, page).main().subscribeBy({
             onResponse(it?.datas)
         }, {
             onResponse(null)
@@ -39,7 +35,7 @@ class ArticlesViewModel : BaseListViewModel<Article>() {
 
     fun collect(item: Article, position: Int) {
         if (!Config.instance().isLogin) {
-            ARouter.getInstance().build("/user/LoginActivity").navigation()
+            Router.startLogin()
             return
         }
         if (item.collect) {
@@ -48,14 +44,14 @@ class ArticlesViewModel : BaseListViewModel<Article>() {
                 notifyItem(position)
             }, {
 
-            })
+            }).add()
         } else {
             Api.collect(item.id).io_main().subscribeBy({
                 item.collect = true
                 notifyItem(position)
             }, {
 
-            })
+            }).add()
         }
     }
 }

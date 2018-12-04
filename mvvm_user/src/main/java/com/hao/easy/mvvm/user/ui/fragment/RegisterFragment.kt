@@ -10,7 +10,7 @@ import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.ui.BaseFragment
 import com.hao.easy.mvvm.user.R
 import com.hao.easy.mvvm.user.viewmodel.RegisterViewModel
-import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.user_fragment_register.*
 
 /**
  * @author Yang Shihao
@@ -20,7 +20,7 @@ class RegisterFragment : BaseFragment() {
 
     lateinit var viewModel: RegisterViewModel
 
-    override fun getLayoutId() = R.layout.fragment_register
+    override fun getLayoutId() = R.layout.user_fragment_register
 
     override fun initView() {
         activity?.title = "注册"

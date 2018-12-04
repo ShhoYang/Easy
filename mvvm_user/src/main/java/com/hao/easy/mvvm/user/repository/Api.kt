@@ -2,11 +2,12 @@ package com.hao.easy.mvvm.user.repository
 
 import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.model.HttpResult
-import com.hao.easy.mvvm.base.model.ListPaged
 import com.hao.easy.mvvm.base.user.User
-import com.hao.easy.mvvm.user.model.Fav
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * @author Yang Shihao
@@ -30,11 +31,4 @@ interface Service {
 
     @GET("user/logout/json")
     fun logout(): Observable<HttpResult<User>>
-
-
-    @GET("lg/collect/list/{page}/json")
-    fun getMyFav(@Path("page") page:Int): Observable<HttpResult<ListPaged<Fav>>>
-
-    @POST("lg/uncollect_originId/{id}/json")
-    fun cancelCollect(@Path("id") id: Int): Observable<HttpResult<Void>>
 }

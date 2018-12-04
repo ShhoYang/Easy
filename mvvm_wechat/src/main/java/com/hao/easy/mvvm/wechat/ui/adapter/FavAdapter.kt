@@ -1,9 +1,9 @@
-package com.hao.easy.mvvm.user.ui.adapter
+package com.hao.easy.mvvm.wechat.ui.adapter
 
 import com.hao.easy.mvvm.base.adapter.BasePagedAdapter
 import com.hao.easy.mvvm.base.adapter.ViewHolder
-import com.hao.easy.mvvm.user.R
-import com.hao.easy.mvvm.user.model.Fav
+import com.hao.easy.mvvm.wechat.R
+import com.hao.easy.mvvm.wechat.model.Article
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout
 import javax.inject.Inject
 
@@ -11,10 +11,10 @@ import javax.inject.Inject
  * @author Yang Shihao
  * @date 2018/12/3
  */
-class MyFavAdapter @Inject constructor() : BasePagedAdapter<Fav>(R.layout.user_item_fav) {
+class FavAdapter @Inject constructor() : BasePagedAdapter<Article>(R.layout.wechat_item_fav) {
 
-    override fun bindViewHolder(holder: ViewHolder, item: Fav, position: Int) {
-        (holder.itemView as SwipeMenuLayout).isIos = false//这句话关掉IOS阻塞式交互效果
+    override fun bindViewHolder(holder: ViewHolder, item: Article, position: Int) {
+        (holder.itemView as SwipeMenuLayout).isIos = false
         holder.setText(R.id.tvTitle, item.title)
                 .setClickListener(R.id.buttonDelete) {
                     itemClickListener?.apply {

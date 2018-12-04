@@ -12,10 +12,6 @@ import com.hao.easy.mvvm.user.repository.Api
  */
 class RegisterViewModel : BaseViewModel() {
 
-    companion object {
-        private const val TAG = "RegisterViewModel"
-    }
-
     var registerLiveData = MutableLiveData<String>()
 
     fun register(username: String, password: String) {

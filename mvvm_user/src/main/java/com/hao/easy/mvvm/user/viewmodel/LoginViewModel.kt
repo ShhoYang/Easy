@@ -1,7 +1,6 @@
 package com.hao.easy.mvvm.user.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
-import android.graphics.Bitmap
 import com.hao.easy.mvvm.base.Config
 import com.hao.easy.mvvm.base.extensions.io_main
 import com.hao.easy.mvvm.base.extensions.subscribeBy
@@ -13,10 +12,6 @@ import com.hao.easy.mvvm.user.repository.Api
  * @date 2018/11/25
  */
 class LoginViewModel : BaseViewModel() {
-
-    companion object {
-        private const val TAG = "LoginViewModel"
-    }
 
     var loginLiveData = MutableLiveData<String>()
 

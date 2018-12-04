@@ -13,7 +13,7 @@ class KotlinFragment : BaseFragment() {
         private const val TAG = "KotlinFragment"
     }
 
-    override fun getLayoutId() = R.layout.fragment_kotlin
+    override fun getLayoutId() = R.layout.kotlin_fragment_kotlin
 
     override fun isLazy() = true
 }

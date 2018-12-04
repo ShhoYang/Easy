@@ -1,24 +1,27 @@
-package com.hao.easy.mvvm.user.ui.activity
+package com.hao.easy.mvvm.wechat.ui.activity
 
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.ui.BaseListActivity
 import com.hao.easy.mvvm.base.ui.WebActivity
-import com.hao.easy.mvvm.user.R
-import com.hao.easy.mvvm.user.di.component.DaggerActivityComponent
-import com.hao.easy.mvvm.user.model.Fav
-import com.hao.easy.mvvm.user.ui.adapter.MyFavAdapter
-import com.hao.easy.mvvm.user.viewmodel.MyFavViewModel
+import com.hao.easy.mvvm.wechat.R
+import com.hao.easy.mvvm.wechat.di.component.DaggerActivityComponent
+import com.hao.easy.mvvm.wechat.model.Article
+import com.hao.easy.mvvm.wechat.ui.adapter.FavAdapter
+import com.hao.easy.mvvm.wechat.viewmodel.FavViewModel
 import javax.inject.Inject
 
 /**
  * @author Yang Shihao
  * @date 2018/12/3
  */
-class MyFavActivity : BaseListActivity<Fav, MyFavViewModel>() {
+
+@Route(path = "/wechat/FavActivity")
+class FavActivity : BaseListActivity<Article, FavViewModel>() {
 
     @Inject
-    lateinit var adapter: MyFavAdapter
+    lateinit var adapter: FavAdapter
 
     override fun initInject() {
         DaggerActivityComponent.builder()
@@ -33,7 +36,7 @@ class MyFavActivity : BaseListActivity<Fav, MyFavViewModel>() {
 
     override fun adapter() = adapter
 
-    override fun itemClicked(view: View, item: Fav, position: Int) {
+    override fun itemClicked(view: View, item: Article, position: Int) {
         if (view.id == R.id.buttonDelete) {
             viewModel.cancelCollect(item, position)
         } else {

@@ -1,11 +1,7 @@
-package com.hao.easy.mvvm.android.model
+package com.hao.easy.mvvm.wechat.model
 
 import com.hao.easy.mvvm.base.adapter.BaseItem
 
-/**
- * @author Yang Shihao
- * @date 2018/11/21
- */
 data class Article(var title: String,
                    var author: String,
                    var niceDate: String,
@@ -13,4 +9,5 @@ data class Article(var title: String,
                    var projectLink: String,
                    var desc: String,
                    var envelopePic: String,
-                   var collect: Boolean) : BaseItem()
+                   var collect: Boolean,
+                   var originId: Int) : BaseItem()

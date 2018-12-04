@@ -1,0 +1,43 @@
+package com.hao.easy.mvvm.wechat.ui.activity
+
+import android.content.Context
+import com.hao.easy.mvvm.base.App
+import com.hao.easy.mvvm.base.ui.BaseListActivity
+import com.hao.easy.mvvm.wechat.di.component.DaggerActivityComponent
+import com.hao.easy.mvvm.wechat.model.Article
+import com.hao.easy.mvvm.wechat.model.ProjectType
+import com.hao.easy.mvvm.wechat.ui.adapter.ProjectArticleAdapter
+import com.hao.easy.mvvm.wechat.viewmodel.ProjectArticleViewModel
+import org.jetbrains.anko.startActivity
+import javax.inject.Inject
+
+class ProjectArticleActivity : BaseListActivity<Article, ProjectArticleViewModel>() {
+
+    @Inject
+    lateinit var adapter: ProjectArticleAdapter
+
+    companion object {
+        private const val TYPE = "TYPE"
+        fun start(context: Context, projectType: ProjectType) {
+            context.startActivity<ProjectArticleActivity>(Pair(TYPE, projectType))
+        }
+    }
+
+    override fun initInject() {
+        DaggerActivityComponent.builder()
+                .appComponent(App.instance.appComponent)
+                .build().inject(this)
+    }
+
+    override fun initData() {
+        var type = intent.getParcelableExtra<ProjectType>(TYPE)
+        type?.apply {
+            title = name?.replace("amp;", "")
+            viewModel.typeId = id
+        }
+
+        super.initData()
+    }
+
+    override fun adapter() = adapter
+}

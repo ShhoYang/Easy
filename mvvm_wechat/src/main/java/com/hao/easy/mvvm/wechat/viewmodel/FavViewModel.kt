@@ -1,19 +1,19 @@
-package com.hao.easy.mvvm.user.viewmodel
+package com.hao.easy.mvvm.wechat.viewmodel
 
 import com.hao.easy.mvvm.base.extensions.io_main
 import com.hao.easy.mvvm.base.extensions.main
 import com.hao.easy.mvvm.base.extensions.subscribeBy
 import com.hao.easy.mvvm.base.viewmodel.BaseListViewModel
-import com.hao.easy.mvvm.user.model.Fav
-import com.hao.easy.mvvm.user.repository.Api
+import com.hao.easy.mvvm.wechat.model.Article
+import com.hao.easy.mvvm.wechat.repository.Api
 
 /**
  * @author Yang Shihao
  * @date 2018/12/3
  */
-class MyFavViewModel : BaseListViewModel<Fav>() {
+class FavViewModel : BaseListViewModel<Article>() {
 
-    override fun loadData(page: Int, onResponse: (ArrayList<Fav>?) -> Unit) {
+    override fun loadData(page: Int, onResponse: (ArrayList<Article>?) -> Unit) {
         Api.getMyFav(page - 1).main().subscribeBy({
             onResponse(it?.datas)
         }, {
@@ -21,12 +21,12 @@ class MyFavViewModel : BaseListViewModel<Fav>() {
         }).add()
     }
 
-    fun cancelCollect(item: Fav, position: Int) {
+    fun cancelCollect(item: Article, position: Int) {
         Api.cancelCollect(item.originId).io_main().subscribeBy({
-           invalidate()
-           //removeItem(position)
+           //invalidate()
+           removeItem(position)
         }, {
 
-        })
+        }).add()
     }
 }

@@ -1,4 +1,4 @@
-package com.hao.easy.mvvm.android.model
+package com.hao.easy.mvvm.wechat.model
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -7,8 +7,8 @@ import android.os.Parcelable
  * @author Yang Shihao
  * @date 2018/12/2
  */
-data class Type(var id: Int,
-                var name: String) : Parcelable {
+data class ProjectType(var id: Int,
+                       var name: String) : Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
@@ -23,12 +23,12 @@ data class Type(var id: Int,
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Type> {
-        override fun createFromParcel(parcel: Parcel): Type {
-            return Type(parcel)
+    companion object CREATOR : Parcelable.Creator<ProjectType> {
+        override fun createFromParcel(parcel: Parcel): ProjectType {
+            return ProjectType(parcel)
         }
 
-        override fun newArray(size: Int): Array<Type?> {
+        override fun newArray(size: Int): Array<ProjectType?> {
             return arrayOfNulls(size)
         }
     }

@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/tab_wechat"
-        android:icon="@drawable/ic_wechat"
+        android:icon="@drawable/app_ic_wechat"
         android:title="公眾號" />
     <item
         android:id="@+id/tab_android"
-        android:icon="@drawable/ic_android"
+        android:icon="@drawable/app_ic_android"
         android:title="項目" />
     <item
         android:id="@+id/tab_flutter"
-        android:icon="@drawable/ic_flutter"
+        android:icon="@drawable/app_ic_flutter"
         android:title="Flutter" />
     <item
         android:id="@+id/tab_kotlin"
-        android:icon="@drawable/ic_kotlin"
+        android:icon="@drawable/app_ic_kotlin"
         android:title="Kotlin" />
 </menu>

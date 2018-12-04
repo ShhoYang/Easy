@@ -3,10 +3,10 @@ package com.hao.easy.mvvm.user.ui.activity
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
-import com.alibaba.android.arouter.launcher.ARouter
 import com.hao.easy.mvvm.base.Config
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.user.R
+import com.hao.easy.mvvm.user.Router
 import kotlin.concurrent.thread
 
 class WelcomeActivity : BaseActivity() {
@@ -18,7 +18,7 @@ class WelcomeActivity : BaseActivity() {
     override fun showToolbar() = false
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_welcome
+        return R.layout.user_activity_welcome
     }
 
     override fun initData() {
@@ -37,12 +37,11 @@ class WelcomeActivity : BaseActivity() {
     }
 
     private fun start() {
-        ARouter.getInstance().build("/app/MainActivity").navigation()
+        Router.startMainActivity()
         finish()
     }
 
     override fun finish() {
-
         window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
         super.finish()
     }

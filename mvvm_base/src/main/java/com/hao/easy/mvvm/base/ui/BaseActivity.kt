@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.hao.easy.mvvm.base.R
+import com.hao.easy.mvvm.base.common.AppManager
 import com.hao.easy.mvvm.view.ToolbarLayout
 import kotlinx.android.synthetic.main.activity_base.*
 
@@ -19,6 +20,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         //BackgroundLibrary.inject(this)
         super.onCreate(savedInstanceState)
+        AppManager.instance().pushActivity(this)
         when {
             getLayoutId() == 0 -> setContentView()
 
@@ -39,6 +41,11 @@ abstract class BaseActivity : AppCompatActivity() {
         initInject()
         initView()
         initData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        AppManager.instance().popActivity(this)
     }
 
     open fun onInit() {

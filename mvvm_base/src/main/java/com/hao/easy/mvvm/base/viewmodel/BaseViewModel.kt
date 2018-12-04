@@ -10,11 +10,9 @@ import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel : ViewModel(), LifecycleObserver {
 
-    companion object {
-        const val TAG = "BaseViewModel"
-    }
+    private var TAG = "BaseViewModel--${javaClass.simpleName}"
 
-    private val compositeDisposable by lazy { CompositeDisposable() }
+    private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
 
     open fun Disposable.add() {
         compositeDisposable.add(this)
@@ -43,13 +41,13 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     protected open fun onStop() {
         KLog.d(TAG, "onStop")
-        if (!compositeDisposable.isDisposed) {
-            compositeDisposable.dispose()
-        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     protected open fun onDestroy() {
         KLog.d(TAG, "onDestroy")
+        if (compositeDisposable != null && !compositeDisposable.isDisposed) {
+            compositeDisposable.dispose()
+        }
     }
 }

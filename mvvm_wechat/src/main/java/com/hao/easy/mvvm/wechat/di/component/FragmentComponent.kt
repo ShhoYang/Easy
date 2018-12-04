@@ -1,7 +1,8 @@
 package com.hao.easy.mvvm.inject.component
 
 import com.hao.easy.mvvm.inject.PreFragment
-import com.hao.easy.mvvm.wechat.ui.fragment.ArticlesFragment
+import com.hao.easy.mvvm.wechat.ui.fragment.ProjectFragment
+import com.hao.easy.mvvm.wechat.ui.fragment.WechatArticleFragment
 import dagger.Component
 
 /**
@@ -12,5 +13,7 @@ import dagger.Component
 @Component(dependencies = [AppComponent::class])
 interface FragmentComponent {
 
-    fun inject(articlesFragment: ArticlesFragment)
+    fun inject(wechatArticleFragment: WechatArticleFragment)
+
+    fun inject(projectFragment: ProjectFragment)
 }

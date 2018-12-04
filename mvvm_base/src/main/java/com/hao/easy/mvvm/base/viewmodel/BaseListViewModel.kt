@@ -1,7 +1,6 @@
 package com.hao.easy.mvvm.base.viewmodel
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.paging.LivePagedListBuilder
@@ -9,6 +8,7 @@ import android.arch.paging.PageKeyedDataSource
 import android.arch.paging.PagedList
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.support.annotation.NonNull
+import com.hao.easy.mvvm.base.common.RefreshResult
 import com.hao.easy.mvvm.base.datasource.DataSourceFactory
 import com.hao.easy.mvvm.base.datasource.PagedDataLoader
 import com.socks.library.KLog
@@ -20,7 +20,11 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
     }
 
     companion object {
-        private const val TAG = "BaseViewModel"
+        private const val TAG = "BaseListViewModel"
+    }
+
+    enum class Result {
+        SUCCEED, FAILED, NO_DATA, NO_MORE
     }
 
     private val dataSourceFactory: DataSourceFactory<T> by lazy {
@@ -29,9 +33,9 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
 
     private val loadLiveData = LivePagedListBuilder(dataSourceFactory, pageSize()).build()
 
-    private val refreshLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val refreshLiveData: MutableLiveData<RefreshResult> = MutableLiveData()
 
-    private val loadMoreLiveData: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    private val loadMoreLiveData: MutableLiveData<RefreshResult> by lazy { MutableLiveData<RefreshResult>() }
 
     private val notifyItemLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
 
@@ -43,18 +47,18 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
 
     fun observeDataObserver(@NonNull owner: LifecycleOwner,
                             data: (PagedList<T>) -> Unit,
-                            refreshResult: (Boolean?) -> Unit,
-                            loadMoreResult: (Boolean?) -> Unit) {
+                            refreshResult: (RefreshResult) -> Unit,
+                            loadMoreResult: (RefreshResult) -> Unit) {
         loadLiveData.observe(owner, Observer {
             it?.apply(data)
         })
 
         refreshLiveData.observe(owner, Observer {
-            refreshResult(it)
+            refreshResult(it!!)
         })
 
         loadMoreLiveData.observe(owner, Observer {
-            loadMoreResult(it)
+            loadMoreResult(it!!)
         })
     }
 
@@ -75,14 +79,15 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
         KLog.d(TAG, "loadInitial")
         loadData(1) {
             when {
-                it == null -> refreshLiveData.value = false
+                it == null -> refreshLiveData.value = RefreshResult.FAILED
+                it.isEmpty() -> refreshLiveData.value = RefreshResult.NO_DATA
                 it.size < PAGE_SIZE -> {
                     callback.onResult(it, null, null)
-                    refreshLiveData.value = null
+                    refreshLiveData.value = RefreshResult.NO_MORE
                 }
                 else -> {
                     callback.onResult(it, null, 2)
-                    refreshLiveData.value = true
+                    refreshLiveData.value = RefreshResult.SUCCEED
                 }
             }
         }
@@ -93,14 +98,14 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
         KLog.d(TAG, "loadAfter--${params.key}")
         loadData(params.key) {
             when {
-                it == null -> loadMoreLiveData.value = false
+                it == null -> loadMoreLiveData.value = RefreshResult.FAILED
                 it.size < pageSize() -> {
                     callback.onResult(it, null)
-                    loadMoreLiveData.value = null
+                    loadMoreLiveData.value = RefreshResult.NO_MORE
                 }
                 else -> {
                     callback.onResult(it, params.key + 1)
-                    loadMoreLiveData.value = true
+                    loadMoreLiveData.value = RefreshResult.SUCCEED
                 }
             }
         }

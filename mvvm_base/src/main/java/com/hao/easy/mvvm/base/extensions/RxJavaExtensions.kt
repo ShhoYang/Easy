@@ -14,13 +14,13 @@ fun <D, T : HttpResult<D>> Observable<T>.io_main() =
                 .observeOn(AndroidSchedulers.mainThread())
 
 fun <D, T : HttpResult<D>> Observable<T>.subscribeBy(onResponse: (D?) -> Unit) =
-        subscribe({
+        this!!.subscribe({
             if (it.errorCode == 0) {
                 onResponse(it.data)
             }
         }, {
             KLog.d("onFailure", it)
-        })
+        })!!
 
 fun <D, T : HttpResult<D>> Observable<T>.subscribeBy(onResponse: (D?) -> Unit, onFailure: (String) -> Unit) =
         subscribe({

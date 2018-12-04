@@ -1,6 +1,5 @@
 package com.hao.easy.mvvm.android.di.component
 
-import com.hao.easy.mvvm.android.ui.fragment.AndroidFragment
 import com.hao.easy.mvvm.inject.PreFragment
 import com.hao.easy.mvvm.inject.component.AppComponent
 import dagger.Component
@@ -12,6 +11,4 @@ import dagger.Component
 @PreFragment
 @Component(dependencies = [AppComponent::class])
 interface FragmentComponent {
-
-    fun inject(articleFragment: AndroidFragment)
 }

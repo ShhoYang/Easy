@@ -15,11 +15,12 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
         const val TAG = "BaseViewModel"
     }
 
-    lateinit var api: Api
-
-    private val compositeDisposable by lazy { CompositeDisposable() }
+    private lateinit var compositeDisposable: CompositeDisposable()
 
     open fun Disposable.add() {
+        if (compositeDisposable == null) {
+            compositeDisposable = CompositeDisposable()
+        }
         compositeDisposable.add(this)
     }
 
@@ -46,13 +47,13 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     protected open fun onStop() {
         KLog.d(TAG, "onStop")
-        if (!compositeDisposable.isDisposed) {
-            compositeDisposable.dispose()
-        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     protected open fun onDestroy() {
         KLog.d(TAG, "onDestroy")
+        if (!compositeDisposable.isDisposed) {
+            compositeDisposable.dispose()
+        }
     }
 }

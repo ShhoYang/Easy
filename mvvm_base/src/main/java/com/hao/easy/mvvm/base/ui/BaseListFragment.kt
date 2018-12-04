@@ -7,6 +7,7 @@ import android.view.View
 import com.hao.easy.mvvm.base.R
 import com.hao.easy.mvvm.base.adapter.BaseItem
 import com.hao.easy.mvvm.base.adapter.BasePagedAdapter
+import com.hao.easy.mvvm.base.common.RefreshResult
 import com.hao.easy.mvvm.base.extensions.init
 import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.viewmodel.BaseListViewModel
@@ -70,28 +71,28 @@ abstract class BaseListFragment<T : BaseItem, VM : BaseListViewModel<T>> : BaseF
 
     }
 
-    /**
-     * @param success true:刷新完成  false:刷新失败  null:加载完成,沒有更多
-     */
-    open fun refreshFinished(success: Boolean?) {
+    open fun refreshFinished(result: RefreshResult) {
         refreshLayout?.isRefreshing = false
         emptyView?.apply {
-            if (success == null) {
-                state = EmptyView.Status.NO_DATA
-            } else if (success) {
-                state = EmptyView.Status.DISMISS
-            } else {
-                state = EmptyView.Status.LOAD_FAILED
+            when (result) {
+                RefreshResult.SUCCEED -> state = EmptyView.Status.DISMISS
+                RefreshResult.FAILED -> state = EmptyView.Status.LOAD_FAILED
+                RefreshResult.NO_DATA -> state = EmptyView.Status.NO_DATA
+                RefreshResult.NO_MORE -> {
+                    state = EmptyView.Status.DISMISS
+                    refreshLayout?.snack("全部加载完成")
+                }
             }
         }
     }
 
-    /**
-     * @param success true:加载完成  false:加载失败  null:加载完成,沒有更多
-     */
-    fun loadMoreFinished(success: Boolean?) {
-        if (success == null) {
-            recyclerView?.snack("全部加载完成")
+    fun loadMoreFinished(result: RefreshResult) {
+        when (result) {
+            RefreshResult.SUCCEED -> {
+            }
+            RefreshResult.FAILED -> {
+            }
+            RefreshResult.NO_MORE -> refreshLayout?.snack("全部加载完成")
         }
     }
 

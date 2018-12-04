@@ -3,17 +3,16 @@ package com.hao.easy.mvvm.user.ui.fragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.text.TextUtils
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.hao.easy.mvvm.base.extensions.addTextChangedListener
 import com.hao.easy.mvvm.base.extensions.hideSoftInput
 import com.hao.easy.mvvm.base.extensions.showError
 import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.ui.BaseFragment
 import com.hao.easy.mvvm.user.R
+import com.hao.easy.mvvm.user.Router
 import com.hao.easy.mvvm.user.ui.activity.LoginActivity
 import com.hao.easy.mvvm.user.viewmodel.LoginViewModel
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.user_fragment_login.*
 
 /**
  * @author Yang Shihao
@@ -27,7 +26,7 @@ class LoginFragment : BaseFragment() {
 
     lateinit var viewModel: LoginViewModel
 
-    override fun getLayoutId() = R.layout.fragment_login
+    override fun getLayoutId() = R.layout.user_fragment_login
 
     override fun initView() {
         editTextUsername.addTextChangedListener(textInputUsername)
@@ -58,7 +57,7 @@ class LoginFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         viewModel.loginLiveData.observe(this, Observer {
             if (it == null) {
-                ARouter.getInstance().build("/app/MainActivity").navigation()
+                Router.startMainActivity()
                 activity?.finish()
             } else {
                 editTextUsername.snack(it)

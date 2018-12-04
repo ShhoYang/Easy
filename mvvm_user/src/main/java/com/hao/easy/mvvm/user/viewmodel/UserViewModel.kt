@@ -14,10 +14,6 @@ import com.hao.easy.mvvm.user.repository.Api
  */
 class UserViewModel : BaseViewModel() {
 
-    companion object {
-        private const val TAG = "UserViewModel"
-    }
-
     var loginLiveData = MutableLiveData<User>()
 
     var logoutLiveData = MutableLiveData<String>()

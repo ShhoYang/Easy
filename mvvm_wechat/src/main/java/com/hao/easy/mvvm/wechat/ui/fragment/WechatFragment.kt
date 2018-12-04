@@ -11,10 +11,9 @@ import com.hao.easy.mvvm.base.ui.BaseFragment
 import com.hao.easy.mvvm.wechat.R
 import com.hao.easy.mvvm.wechat.ui.adapter.FragmentWithTabAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.WechatViewModel
-import com.socks.library.KLog
 import com.youth.banner.BannerConfig
 import com.youth.banner.loader.ImageLoader
-import kotlinx.android.synthetic.main.fragment_wechat.*
+import kotlinx.android.synthetic.main.wechat_fragment_wechat.*
 import org.jetbrains.anko.support.v4.dimen
 
 /**
@@ -22,10 +21,6 @@ import org.jetbrains.anko.support.v4.dimen
  * @date 2018/11/18
  */
 class WechatFragment : BaseFragment() {
-
-    companion object {
-        private const val TAG = "WechatFragment"
-    }
 
     private val viewModel: WechatViewModel by lazy {
         ViewModelProviders.of(this@WechatFragment).get(WechatViewModel::class.java)
@@ -50,7 +45,7 @@ class WechatFragment : BaseFragment() {
         }
     }
 
-    override fun getLayoutId() = R.layout.fragment_wechat
+    override fun getLayoutId() = R.layout.wechat_fragment_wechat
 
     override fun initView() {
         viewPager.setOnTouchListener { _, ev ->
@@ -80,7 +75,7 @@ class WechatFragment : BaseFragment() {
             if (currentFragment == null) {
                 baseRefreshLayout.isRefreshing = false
 
-            } else if (currentFragment is ArticlesFragment) {
+            } else if (currentFragment is WechatArticleFragment) {
                 currentFragment.refresh()
             }
         }
@@ -109,7 +104,6 @@ class WechatFragment : BaseFragment() {
     }
 
     override fun initData() {
-        KLog.d(TAG, "initData")
         viewModel.authorsLiveData.observe(this, Observer {
             adapter = FragmentWithTabAdapter(childFragmentManager, it!!)
             viewPager.adapter = adapter

@@ -11,7 +11,7 @@ class FlutterFragment : BaseFragment() {
     companion object {
         private const val TAG = "FlutterFragment"
     }
-    override fun getLayoutId() = R.layout.fragment_flutter
+    override fun getLayoutId() = R.layout.flutter_fragment_flutter
 
     override fun isLazy() = true
 }

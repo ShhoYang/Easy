@@ -1,23 +1,35 @@
-package com.hao.easy.mvvm.android.viewmodel
+package com.hao.easy.mvvm.wechat.viewmodel
 
-import com.alibaba.android.arouter.launcher.ARouter
-import com.hao.easy.mvvm.android.model.Article
-import com.hao.easy.mvvm.android.repository.Api
+import android.arch.lifecycle.MutableLiveData
 import com.hao.easy.mvvm.base.Config
 import com.hao.easy.mvvm.base.extensions.io_main
 import com.hao.easy.mvvm.base.extensions.main
 import com.hao.easy.mvvm.base.extensions.subscribeBy
 import com.hao.easy.mvvm.base.viewmodel.BaseListViewModel
+import com.hao.easy.mvvm.wechat.Router
+import com.hao.easy.mvvm.wechat.model.Article
+import com.hao.easy.mvvm.wechat.model.ProjectType
+import com.hao.easy.mvvm.wechat.repository.Api
 
-class ArticleViewModel : BaseListViewModel<Article>() {
+class ProjectViewModel : BaseListViewModel<Article>() {
 
     override fun pageSize() = 6
 
-    var typeId: Int = 0
+    val typeLiveData = MutableLiveData<ArrayList<ProjectType>>()
 
     override fun loadData(page: Int, onResponse: (ArrayList<Article>?) -> Unit) {
 
-        Api.getArticles(page - 1,typeId).main().subscribeBy({
+        if (page == 1) {
+            Api.getProjectType().io_main().subscribeBy({
+                if (it != null && !it.isEmpty()) {
+                    typeLiveData.value = it
+                }
+            }, {
+
+            }).add()
+        }
+
+        Api.getNewProjectArticles(page - 1).main().subscribeBy({
             onResponse(it?.datas)
         }, {
             onResponse(null)
@@ -26,7 +38,7 @@ class ArticleViewModel : BaseListViewModel<Article>() {
 
     fun collect(item: Article, position: Int) {
         if (!Config.instance().isLogin) {
-            ARouter.getInstance().build("/user/LoginActivity").navigation()
+            Router.startLogin()
             return
         }
         if (item.collect) {
@@ -35,14 +47,14 @@ class ArticleViewModel : BaseListViewModel<Article>() {
                 notifyItem(position)
             }, {
 
-            })
+            }).add()
         } else {
             Api.collect(item.id).io_main().subscribeBy({
                 item.collect = true
                 notifyItem(position)
             }, {
 
-            })
+            }).add()
         }
     }
 }
