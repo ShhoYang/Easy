@@ -19,6 +19,8 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
         return 20
     }
 
+    private val data = ArrayList<T>()
+
     companion object {
         private const val TAG = "BaseListViewModel"
     }
@@ -37,7 +39,7 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
 
     private val loadMoreLiveData: MutableLiveData<RefreshResult> by lazy { MutableLiveData<RefreshResult>() }
 
-    private val notifyItemLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+    private val notifyItemLiveData: MutableLiveData<Pair<Int, Any?>> by lazy { MutableLiveData<Pair<Int, Any?>>() }
 
     private val removeItemLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
 
@@ -63,10 +65,10 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
     }
 
     fun observeAdapterObserver(@NonNull owner: LifecycleOwner,
-                               notifyItem: (Int) -> Unit,
+                               notifyItem: (Int, Any?) -> Unit,
                                removeItem: (Int) -> Unit) {
         notifyItemLiveData.observe(owner, Observer {
-            notifyItem(it!!)
+            it?.apply { notifyItem(first, second) }
         })
 
         removeItemLiveData.observe(owner, Observer {
@@ -77,11 +79,13 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
     final override fun loadInitial(params: PageKeyedDataSource.LoadInitialParams<Int>, callback: PageKeyedDataSource.LoadInitialCallback<Int, T>) {
         refresh()
         KLog.d(TAG, "loadInitial")
+        data.clear()
         loadData(1) {
             when {
                 it == null -> refreshLiveData.value = RefreshResult.FAILED
                 it.isEmpty() -> refreshLiveData.value = RefreshResult.NO_DATA
                 it.size < PAGE_SIZE -> {
+                    data.addAll(it)
                     callback.onResult(it, null, null)
                     refreshLiveData.value = RefreshResult.NO_MORE
                 }
@@ -100,10 +104,12 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
             when {
                 it == null -> loadMoreLiveData.value = RefreshResult.FAILED
                 it.size < pageSize() -> {
+                    data.addAll(it)
                     callback.onResult(it, null)
                     loadMoreLiveData.value = RefreshResult.NO_MORE
                 }
                 else -> {
+                    data.addAll(it)
                     callback.onResult(it, params.key + 1)
                     loadMoreLiveData.value = RefreshResult.SUCCEED
                 }
@@ -112,13 +118,16 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
     }
 
     fun notifyItem(position: Int) {
-        notifyItemLiveData.value = position
-        notifyItemLiveData.value = -1
+        notifyItemLiveData.value = Pair(position, null)
+    }
+
+    fun notifyItem(position: Int, payload: Any?) {
+        notifyItemLiveData.value = Pair(position, payload)
     }
 
     fun removeItem(position: Int) {
+        data.removeAt(position)
         removeItemLiveData.value = position
-        removeItemLiveData.value = -1
     }
 
     override fun refresh() {

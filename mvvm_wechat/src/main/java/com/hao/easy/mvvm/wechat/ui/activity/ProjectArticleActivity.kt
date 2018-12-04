@@ -1,8 +1,12 @@
 package com.hao.easy.mvvm.wechat.ui.activity
 
 import android.content.Context
+import android.view.View
 import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.ui.BaseListActivity
+import com.hao.easy.mvvm.base.ui.WebActivity
+import com.hao.easy.mvvm.base.ui.WebWithImageActivity
+import com.hao.easy.mvvm.wechat.R
 import com.hao.easy.mvvm.wechat.di.component.DaggerActivityComponent
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.model.ProjectType
@@ -40,4 +44,16 @@ class ProjectArticleActivity : BaseListActivity<Article, ProjectArticleViewModel
     }
 
     override fun adapter() = adapter
+
+    override fun itemClicked(view: View, item: Article, position: Int) {
+        when (view.id) {
+            R.id.ivLink, R.id.tvLink -> {
+                WebActivity.start(this, item.title, item.projectLink)
+            }
+            R.id.ivFav -> {
+                viewModel.collect(item, position)
+            }
+            else -> WebWithImageActivity.start(this, item.title, item.link)
+        }
+    }
 }

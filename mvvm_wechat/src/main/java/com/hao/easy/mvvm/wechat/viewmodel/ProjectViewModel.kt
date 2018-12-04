@@ -44,14 +44,14 @@ class ProjectViewModel : BaseListViewModel<Article>() {
         if (item.collect) {
             Api.cancelCollect(item.id).io_main().subscribeBy({
                 item.collect = false
-                notifyItem(position)
+                notifyItem(position,"fav")
             }, {
 
             }).add()
         } else {
             Api.collect(item.id).io_main().subscribeBy({
                 item.collect = true
-                notifyItem(position)
+                notifyItem(position,"fav")
             }, {
 
             }).add()

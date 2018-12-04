@@ -63,16 +63,11 @@ abstract class BaseListActivity<T : BaseItem, VM : BaseListViewModel<T>> : BaseA
                 { loadMoreFinished(it) })
 
         viewModel.observeAdapterObserver(this,
-                {
-                    if (it >= 0 && it < adapter().itemCount) {
-                        adapter().notifyItemChanged(it)
-                    }
+                { position, payload ->
+                    adapter().notifyItemChanged(position, payload)
                 },
                 {
-                    if (it >= 0 && it < adapter().itemCount) {
-                        adapter().currentList?.removeAt(it)
-                        adapter().notifyItemRemoved(it)
-                    }
+                    adapter().removeItem(it)
                 })
     }
 

@@ -63,8 +63,12 @@ abstract class BaseListFragment<T : BaseItem, VM : BaseListViewModel<T>> : BaseF
                 { loadMoreFinished(it) })
 
         viewModel.observeAdapterObserver(this,
-                { adapter().notifyItemChanged(it) },
-                { adapter().notifyItemRemoved(it) })
+                { position, payload ->
+                    adapter().notifyItemChanged(position, payload)
+                },
+                {
+                    adapter().removeItem(it)
+                })
     }
 
     open fun itemClicked(view: View, item: T, position: Int) {

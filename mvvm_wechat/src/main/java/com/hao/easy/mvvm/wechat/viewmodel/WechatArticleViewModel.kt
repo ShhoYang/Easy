@@ -41,7 +41,7 @@ class WechatArticleViewModel : BaseListViewModel<Article>() {
         if (item.collect) {
             Api.cancelCollect(item.id).io_main().subscribeBy({
                 item.collect = false
-                notifyItem(position)
+                notifyItem(position, "fav")
             }, {
 
             }).add()
