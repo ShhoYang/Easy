@@ -18,8 +18,16 @@ abstract class BasePagedAdapter<T : BaseItem>(private val layoutId: Int) : Paged
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        itemClickListener?.let { holder.itemView.setOnClickListener { it(holder.itemView, getItem(position)!!, position) } }
         bindViewHolder(holder, getItem(position)!!, position)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+        itemClickListener?.apply { holder.itemView.setOnClickListener { this(holder.itemView, getItem(position)!!, position) } }
+        bindViewHolder(holder, getItem(position)!!, position, payloads)
+    }
+
+    open fun bindViewHolder(holder: ViewHolder, item: T, position: Int, payloads: MutableList<Any>) {
+        bindViewHolder(holder, item, position)
     }
 
     abstract fun bindViewHolder(holder: ViewHolder, item: T, position: Int)
@@ -33,13 +41,6 @@ abstract class BasePagedAdapter<T : BaseItem>(private val layoutId: Int) : Paged
     fun changeItem(position: Int, payload: Any?) {
         if (position in 0..(itemCount - 1)) {
             notifyItemChanged(position, payload)
-        }
-    }
-
-    fun removeItem(position: Int) {
-        if (position in 0..(itemCount - 1)) {
-            //currentList?.remove(position,1)
-            notifyItemRemoved(position)
         }
     }
 

@@ -67,7 +67,6 @@ abstract class BaseListFragment<T : BaseItem, VM : BaseListViewModel<T>> : BaseF
                     adapter().notifyItemChanged(position, payload)
                 },
                 {
-                    adapter().removeItem(it)
                 })
     }
 

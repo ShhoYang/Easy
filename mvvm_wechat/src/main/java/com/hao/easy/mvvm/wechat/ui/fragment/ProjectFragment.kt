@@ -126,7 +126,11 @@ class ProjectFragment : BaseListFragment<Article, ProjectViewModel>() {
                 }
             }
             R.id.ivFav -> {
-                viewModel.collect(item, position)
+                if (item.collect) {
+                    viewModel.cancelCollect(item, position)
+                } else {
+                    viewModel.collect(item, position)
+                }
             }
             else -> context?.apply {
                 WebWithImageActivity.start(this, item.title, item.link)

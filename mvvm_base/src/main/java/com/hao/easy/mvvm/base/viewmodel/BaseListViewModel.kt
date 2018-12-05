@@ -90,6 +90,7 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
                     refreshLiveData.value = RefreshResult.NO_MORE
                 }
                 else -> {
+                    data.addAll(it)
                     callback.onResult(it, null, 2)
                     refreshLiveData.value = RefreshResult.SUCCEED
                 }
@@ -125,9 +126,8 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
         notifyItemLiveData.value = Pair(position, payload)
     }
 
-    fun removeItem(position: Int) {
-        data.removeAt(position)
-        removeItemLiveData.value = position
+    private fun removeItem(position: Int) {
+
     }
 
     override fun refresh() {

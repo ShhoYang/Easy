@@ -19,13 +19,13 @@ class WechatArticleAdapter @Inject constructor() : BasePagedAdapter<Article>(R.l
                 }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+    override fun bindViewHolder(holder: ViewHolder, item: Article, position: Int, payloads: MutableList<Any>) {
         if (payloads == null || payloads.isEmpty()) {
-            super.onBindViewHolder(holder, position, payloads)
+            super.bindViewHolder(holder, item, position, payloads)
         } else if ("fav" != payloads[0]) {
-            super.onBindViewHolder(holder, position, payloads)
+            super.bindViewHolder(holder, item, position, payloads)
         } else {
-            holder.setImageResource(R.id.ivFav, if (getItem(position)!!.collect) R.drawable.ic_fav_1 else R.drawable.ic_fav_0)
+            holder.setImageResource(R.id.ivFav, if (item.collect) R.drawable.ic_fav_1 else R.drawable.ic_fav_0)
         }
     }
 }

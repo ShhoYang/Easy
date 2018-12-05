@@ -3,6 +3,7 @@ package com.hao.easy.mvvm.inject.module
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.google.gson.GsonBuilder
 import com.hao.easy.mvvm.base.App
 import com.socks.library.KLog
 import dagger.Module
@@ -29,7 +30,7 @@ class NetworkModule {
             Retrofit.Builder()
                     .baseUrl(getBaseUrl())
                     .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
 

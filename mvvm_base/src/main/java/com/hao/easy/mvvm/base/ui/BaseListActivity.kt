@@ -67,7 +67,6 @@ abstract class BaseListActivity<T : BaseItem, VM : BaseListViewModel<T>> : BaseA
                     adapter().notifyItemChanged(position, payload)
                 },
                 {
-                    adapter().removeItem(it)
                 })
     }
 

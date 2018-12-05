@@ -10,7 +10,6 @@ class DataSourceFactory<T>(var dataLoader: PagedDataLoader<T>) : DataSource.Fact
     override fun create(): PagedDataSource<T>? {
         val dataSource = PagedDataSource(dataLoader)
         sourceLiveData.postValue(dataSource)
-        sourceLiveData.value?.invalidate()
         return dataSource
     }
 }

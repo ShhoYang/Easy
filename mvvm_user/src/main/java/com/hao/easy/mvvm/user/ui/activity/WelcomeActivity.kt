@@ -1,9 +1,12 @@
 package com.hao.easy.mvvm.user.ui.activity
 
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.view.WindowManager
 import com.hao.easy.mvvm.base.Config
+import com.hao.easy.mvvm.base.extensions.gone
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.user.R
 import com.hao.easy.mvvm.user.Router
@@ -21,6 +24,11 @@ class WelcomeActivity : BaseActivity() {
         return R.layout.user_activity_welcome
     }
 
+    override fun initView() {
+        super.initView()
+        hideSystemNavigationBar()
+    }
+
     override fun initData() {
         thread {
             var l = System.currentTimeMillis()
@@ -33,6 +41,17 @@ class WelcomeActivity : BaseActivity() {
                     start()
                 }, delayTime)
             }
+        }
+    }
+
+    private fun hideSystemNavigationBar() {
+        if (Build.VERSION.SDK_INT in 12..18) {
+            window.decorView.gone()
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            var uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+                    View.SYSTEM_UI_FLAG_FULLSCREEN
+            window.decorView.systemUiVisibility = uiOptions
         }
     }
 

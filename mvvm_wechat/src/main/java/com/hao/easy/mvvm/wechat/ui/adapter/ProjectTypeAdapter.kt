@@ -15,7 +15,7 @@ class ProjectTypeAdapter @Inject constructor() : BaseNormalAdapter<ProjectType>(
 
     override fun bindViewHolder(holder: ViewHolder, item: ProjectType, position: Int) {
         holder.visible(R.id.tvText)
-                .setText(R.id.tvText, item.name?.replace("amp;", ""))
+                .setText(R.id.tvText, item.name)
                 .setImageResource(R.id.ivIcon, Icon.icons[position % 18])
 
     }

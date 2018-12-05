@@ -55,7 +55,11 @@ class WechatArticleFragment : BaseListFragment<Article, WechatArticleViewModel>(
 
     override fun itemClicked(view: View, item: Article, position: Int) {
         if (view.id == R.id.ivFav) {
-            viewModel.collect(item, position)
+            if (item.collect) {
+                viewModel.cancelCollect(item, position)
+            } else {
+                viewModel.collect(item, position)
+            }
         } else {
             context?.apply { WebActivity.start(this, item.title, item.link) }
         }

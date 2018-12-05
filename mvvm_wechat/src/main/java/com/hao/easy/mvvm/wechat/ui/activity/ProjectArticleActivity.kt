@@ -51,7 +51,11 @@ class ProjectArticleActivity : BaseListActivity<Article, ProjectArticleViewModel
                 WebActivity.start(this, item.title, item.projectLink)
             }
             R.id.ivFav -> {
-                viewModel.collect(item, position)
+                if (item.collect) {
+                    viewModel.cancelCollect(item, position)
+                } else {
+                    viewModel.collect(item, position)
+                }
             }
             else -> WebWithImageActivity.start(this, item.title, item.link)
         }
