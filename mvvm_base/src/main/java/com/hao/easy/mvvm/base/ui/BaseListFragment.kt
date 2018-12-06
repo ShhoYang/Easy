@@ -37,11 +37,6 @@ abstract class BaseListFragment<T : BaseItem, VM : BaseListViewModel<T>> : BaseF
 
     override fun getLayoutId() = R.layout.activity_base_list
 
-    final override fun onInit() {
-        super.onInit()
-        lifecycle.addObserver(viewModel)
-    }
-
     override fun initView() {
         refreshLayout = f(R.id.baseRefreshLayout)
         recyclerView = f(R.id.baseRecyclerView)!!
