@@ -19,6 +19,12 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode versions.versionCode
         versionName versions.versionName
+
+        multiDexEnabled true
+    }
+
+    dexOptions {
+        incremental true
     }
 
     sourceSets {

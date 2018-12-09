@@ -2,12 +2,10 @@ package com.hao.easy.mvvm.wechat.ui.activity
 
 import android.content.Context
 import android.view.View
-import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.ui.BaseListActivity
 import com.hao.easy.mvvm.base.ui.WebActivity
 import com.hao.easy.mvvm.base.ui.WebWithImageActivity
 import com.hao.easy.mvvm.wechat.R
-import com.hao.easy.mvvm.wechat.di.component.DaggerActivityComponent
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.model.ProjectType
 import com.hao.easy.mvvm.wechat.ui.adapter.ProjectArticleAdapter
@@ -28,9 +26,7 @@ class ProjectArticleActivity : BaseListActivity<Article, ProjectArticleViewModel
     }
 
     override fun initInject() {
-        DaggerActivityComponent.builder()
-                .appComponent(App.instance.appComponent)
-                .build().inject(this)
+        //inject()
     }
 
     override fun initData() {

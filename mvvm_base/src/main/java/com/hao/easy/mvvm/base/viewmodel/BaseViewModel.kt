@@ -51,7 +51,7 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     override fun onCleared() {
         super.onCleared()
         KLog.d(TAG, "onCleared")
-        if (compositeDisposable != null && !compositeDisposable.isDisposed) {
+        if (!compositeDisposable.isDisposed) {
             compositeDisposable.dispose()
         }
     }

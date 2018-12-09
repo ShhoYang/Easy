@@ -32,6 +32,19 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+import com.android.build.gradle.internal.pipeline.TransformTask
+
+def deleteDuplicateJniFiles() {
+    def files = fileTree("${buildDir}") {
+        include "**/BaseActivity_MembersInjector.*"
+    }
+    files.each { it.delete() }
+}
+
+tasks.withType(TransformTask) { pkgTask ->
+    pkgTask.doFirst { deleteDuplicateJniFiles() }
+}
+
 // buildSrc下的插件
 //此处插件id大小写，中下划线均可***
 //apply plugin: 'com.hao.plugin-buildSrc'

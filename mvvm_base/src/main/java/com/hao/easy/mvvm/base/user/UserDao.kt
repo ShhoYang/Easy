@@ -17,7 +17,7 @@ interface UserDao {
     fun insert(user: User)
 
     @Query("SELECT * FROM User WHERE username in (:username)")
-    fun queryUser(username: String): User
+    fun queryUser(username: String): User?
 
     @Delete()
     fun delete(user: User)

@@ -1,11 +1,11 @@
 package com.hao.easy.mvvm.inject
 
-import javax.inject.Qualifier
+import javax.inject.Scope
 
 /**
  * @author Yang Shihao
  * @date 2018/10/23
  */
-@Qualifier
+@Scope
 @Retention
-annotation class ApplicationContext
+annotation class ModuleScope

@@ -14,7 +14,6 @@ import com.hao.easy.mvvm.base.extensions.visible
 import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.base.ui.WebActivity
 import com.hao.easy.mvvm.base.ui.WebWithImageActivity
-import com.hao.easy.mvvm.inject.component.DaggerFragmentComponent
 import com.hao.easy.mvvm.wechat.R
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.activity.ProjectArticleActivity
@@ -45,9 +44,7 @@ class ProjectFragment : BaseListFragment<Article, ProjectViewModel>() {
     override fun getLayoutId() = R.layout.wechat_fragment_project
 
     override fun initInject() {
-        DaggerFragmentComponent.builder()
-                .appComponent(App.instance.appComponent)
-                .build().inject(this)
+       //inject()
     }
 
     override fun initView() {
@@ -112,7 +109,7 @@ class ProjectFragment : BaseListFragment<Article, ProjectViewModel>() {
         viewModel.typeLiveData.observe(this, Observer {
             typeAdapter.setData(it!!)
             line.visible()
-            createPoints(it!!.size)
+            createPoints(it?.size)
         })
     }
 
