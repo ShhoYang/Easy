@@ -6,7 +6,7 @@ import com.hao.easy.mvvm.base.common.RefreshResult
 import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.base.ui.WebActivity
 import com.hao.easy.mvvm.wechat.R
-import com.hao.easy.mvvm.wechat.di.inject
+import com.hao.easy.mvvm.wechat.di.component
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.adapter.WechatArticleAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.WechatArticleViewModel
@@ -35,7 +35,7 @@ class WechatArticleFragment : BaseListFragment<Article, WechatArticleViewModel>(
     override fun getLayoutId() = R.layout.wechat_fragment_wechat_article
 
     override fun initInject() {
-       inject()
+        component().inject(this)
     }
 
     override fun isLazy() = true

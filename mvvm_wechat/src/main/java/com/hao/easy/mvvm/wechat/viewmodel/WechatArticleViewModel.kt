@@ -9,7 +9,7 @@ import kotlin.properties.Delegates
 
 class WechatArticleViewModel : BaseArticleViewModel() {
 
-    var isLogin by Delegates.observable(Config.instance().isLogin) { _, old, new ->
+    var isLogin by Delegates.observable(Config.isLogin) { _, old, new ->
         if (old != new) {
             invalidate()
         }
@@ -19,7 +19,7 @@ class WechatArticleViewModel : BaseArticleViewModel() {
 
     override fun onResume() {
         super.onResume()
-        isLogin = Config.instance().isLogin
+        isLogin = Config.isLogin
     }
 
     override fun loadData(page: Int, onResponse: (ArrayList<Article>?) -> Unit) {

@@ -1,6 +1,7 @@
 package com.hao.easy.mvvm.wechat.viewmodel
 
 import com.hao.easy.mvvm.base.Config
+import com.hao.easy.mvvm.base.Config.isLogin
 import com.hao.easy.mvvm.base.extensions.io_main
 import com.hao.easy.mvvm.base.extensions.main
 import com.hao.easy.mvvm.base.extensions.subscribeBy
@@ -23,7 +24,7 @@ class FavViewModel : BaseArticleViewModel() {
     }
 
     override fun cancelCollect(item: Article, position: Int) {
-        if (!Config.instance().isLogin) {
+        if (!Config.isLogin) {
             Router.startLogin()
             return
         }

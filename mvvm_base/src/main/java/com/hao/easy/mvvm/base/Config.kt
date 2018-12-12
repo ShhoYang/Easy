@@ -4,36 +4,23 @@ import com.hao.easy.mvvm.base.user.User
 import com.hao.easy.paging.db.UserDb
 import kotlin.concurrent.thread
 
-class Config private constructor() {
+object Config {
 
-    companion object {
-        private const val TAG = "Config"
+    private const val TAG = "Config"
 
-        private const val KEY_USERNAME = "loginUserName"
-        private const val KEY_TOKEN = "token_pass"
+    private const val KEY_USERNAME = "loginUserName"
+    private const val KEY_TOKEN = "token_pass"
 
-        private var instance: Config? = null
-
-        fun instance(): Config {
-            if (instance == null) {
-                synchronized(Config::class.java) {
-                    if (instance == null) {
-                        instance = Config()
-                    }
-                }
-            }
-            return instance!!
-        }
-    }
 
     var user: User? = null
     var username: String? = null
         get() {
             return user?.username
         }
+
     var isLogin: Boolean = false
         get() {
-            return field and (null != user)
+            return field && null != user
         }
 
     fun init() {

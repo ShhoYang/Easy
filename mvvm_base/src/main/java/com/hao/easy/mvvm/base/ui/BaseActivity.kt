@@ -2,10 +2,10 @@ package com.hao.easy.mvvm.base.ui
 
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.hao.easy.mvvm.base.R
 import com.hao.easy.mvvm.base.common.AppManager
-import com.hao.easy.mvvm.base.di.android.DIActivity
 import com.hao.easy.mvvm.view.ToolbarLayout
 import kotlinx.android.synthetic.main.activity_base.*
 
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_base.*
  * @author Yang Shihao
  * @date 2018/11/18
  */
-abstract class BaseActivity : DIActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     private var toolbar: ToolbarLayout? = null
 

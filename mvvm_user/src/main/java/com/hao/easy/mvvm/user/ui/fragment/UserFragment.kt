@@ -34,7 +34,7 @@ class UserFragment : BaseFragment() {
         leftNavigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_fav -> {
-                    if (Config.instance().isLogin) {
+                    if (Config.isLogin) {
                         Router.startFavActivity()
                     } else {
                         startActivity<LoginActivity>()
@@ -47,7 +47,7 @@ class UserFragment : BaseFragment() {
                     WebActivity.start(context!!, "https://github.com/haoshiy", "https://github.com/haoshiy")
                 }
                 R.id.menu_logout -> {
-                    Config.instance().logout()
+                    Config.logout()
                     viewModel.logout()
                 }
             }
@@ -59,7 +59,7 @@ class UserFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
         lifecycle.addObserver(viewModel)
         viewModel.loginLiveData.observe(this, Observer {
-            serLogin(it)
+            setLogin(it)
         })
         viewModel.logoutLiveData.observe(this, Observer {
             if (it == null) {
@@ -68,7 +68,7 @@ class UserFragment : BaseFragment() {
         })
     }
 
-    private fun serLogin(user: User?) {
+    private fun setLogin(user: User?) {
         if (user == null) {
             tvUsername.text = "未登录"
             tvUsername.setOnClickListener {

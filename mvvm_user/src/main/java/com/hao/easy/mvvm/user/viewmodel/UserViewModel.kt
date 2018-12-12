@@ -19,7 +19,7 @@ class UserViewModel : BaseViewModel() {
     var logoutLiveData = MutableLiveData<String>()
 
     override fun onResume() {
-        loginLiveData.value = Config.instance().user
+        loginLiveData.value = Config.user
     }
 
     fun logout() {

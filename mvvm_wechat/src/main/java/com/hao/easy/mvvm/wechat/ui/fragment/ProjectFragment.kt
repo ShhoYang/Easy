@@ -14,8 +14,7 @@ import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.base.ui.WebActivity
 import com.hao.easy.mvvm.base.ui.WebWithImageActivity
 import com.hao.easy.mvvm.wechat.R
-import com.hao.easy.mvvm.wechat.WechatApp
-import com.hao.easy.mvvm.wechat.di.inject
+import com.hao.easy.mvvm.wechat.di.component
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.activity.ProjectArticleActivity
 import com.hao.easy.mvvm.wechat.ui.adapter.ProjectArticleAdapter
@@ -46,7 +45,7 @@ class ProjectFragment : BaseListFragment<Article, ProjectViewModel>() {
     override fun getLayoutId() = R.layout.wechat_fragment_project
 
     override fun initInject() {
-        inject()
+        component().inject(this)
     }
 
     override fun initView() {
@@ -133,7 +132,7 @@ class ProjectFragment : BaseListFragment<Article, ProjectViewModel>() {
             }
             else -> context?.apply {
                 //WebWithImageActivity.start(this, item.title, item.link)
-                WebWithImageActivity.start(activity!!, item.title, item.link,view.find(R.id.ivThumbnail),item.envelopePic)
+                WebWithImageActivity.start(activity!!, item.title, item.link, view.find(R.id.ivThumbnail), item.envelopePic)
             }
         }
     }

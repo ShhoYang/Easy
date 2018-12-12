@@ -32,7 +32,7 @@ class WelcomeActivity : BaseActivity() {
     override fun initData() {
         thread {
             var l = System.currentTimeMillis()
-            Config.instance().init()
+            Config.init()
             var delayTime = DURATION + l - System.currentTimeMillis()
             if (delayTime <= 0) {
                 start()

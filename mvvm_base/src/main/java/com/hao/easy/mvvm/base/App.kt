@@ -5,7 +5,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.hao.easy.mvvm.base.di.component.AppComponent
 import com.hao.easy.mvvm.base.di.component.DaggerAppComponent
 import com.hao.easy.mvvm.base.extensions.notNullSingleValue
-import com.hao.easy.mvvm.base.provider.ILikeApplication
+import com.hao.easy.mvvm.inject.module.AppModule
 import com.socks.library.KLog
 import com.tencent.smtt.sdk.QbSdk
 
@@ -16,7 +16,11 @@ import com.tencent.smtt.sdk.QbSdk
 
 open class App : Application() {
 
-    lateinit var appComponent: AppComponent
+     val appComponent: AppComponent by lazy {
+        DaggerAppComponent.builder()
+                .appModule(AppModule(this))
+                .build()
+    }
 
     companion object {
         var instance by notNullSingleValue<App>()
@@ -27,18 +31,8 @@ open class App : Application() {
         instance = this
         KLog.init(true)
         QbSdk.initX5Environment(this, null)
-        appComponent = DaggerAppComponent.create()
         ARouter.openLog()
         ARouter.openDebug()
         ARouter.init(this)
-        /* var userApp = ARouter.getInstance()
-                 .build("/user/UserApp")
-                 .navigation() as ILikeApplication
-         userApp.onCreate()*/
-
-        var wechatApp = ARouter.getInstance()
-                .build("/wechat/WechatApp")
-                .navigation() as ILikeApplication
-        wechatApp.onCreate()
     }
 }

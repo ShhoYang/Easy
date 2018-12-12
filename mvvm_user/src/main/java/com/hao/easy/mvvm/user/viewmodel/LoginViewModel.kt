@@ -17,7 +17,7 @@ class LoginViewModel : BaseViewModel() {
 
     fun login(username: String, password: String) {
         Api.login(username, password).io_main().subscribeBy({
-            Config.instance().logged(it!!)
+            Config.logged(it!!)
             loginLiveData.value = null
         }, {
             loginLiveData.value = it
