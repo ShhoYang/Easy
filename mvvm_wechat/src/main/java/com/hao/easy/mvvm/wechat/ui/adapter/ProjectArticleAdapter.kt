@@ -1,10 +1,13 @@
 package com.hao.easy.mvvm.wechat.ui.adapter
 
+import android.os.Build
 import android.view.View
+import android.widget.ImageView
 import com.hao.easy.mvvm.base.adapter.BasePagedAdapter
 import com.hao.easy.mvvm.base.adapter.ViewHolder
 import com.hao.easy.mvvm.wechat.R
 import com.hao.easy.mvvm.wechat.model.Article
+import org.jetbrains.anko.find
 import javax.inject.Inject
 
 class ProjectArticleAdapter @Inject constructor() : BasePagedAdapter<Article>(R.layout.wechat_item_project_article) {
@@ -15,6 +18,9 @@ class ProjectArticleAdapter @Inject constructor() : BasePagedAdapter<Article>(R.
             itemClickListener?.apply {
                 this(it, item, position)
             }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            holder.itemView.find<ImageView>(R.id.ivThumbnail).transitionName = item.envelopePic
         }
         holder.setText(R.id.tvTitle, item.title)
                 .setText(R.id.tvDesc, item.desc)

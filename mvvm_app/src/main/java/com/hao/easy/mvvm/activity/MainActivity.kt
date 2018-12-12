@@ -11,7 +11,6 @@ import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.ui.BaseActivity
 import com.hao.easy.mvvm.flutter.ui.fragment.FlutterFragment
 import com.hao.easy.mvvm.kotlin.ui.fragment.KotlinFragment
-import com.hao.easy.mvvm.user.ui.fragment.UserFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.ProjectFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.WechatFragment
 import kotlinx.android.synthetic.main.app_activity_main.*
@@ -62,9 +61,9 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initLeftNavigation() {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.leftNavigationView, UserFragment())
-                .commit()
+//        supportFragmentManager.beginTransaction()
+//                .add(R.id.leftNavigationView, UserFragment())
+//                .commit()
     }
 
     private fun initBottomNavigation() {

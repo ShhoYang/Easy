@@ -2,11 +2,11 @@ package com.hao.easy.mvvm.wechat.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.common.RefreshResult
 import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.base.ui.WebActivity
 import com.hao.easy.mvvm.wechat.R
+import com.hao.easy.mvvm.wechat.di.inject
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.adapter.WechatArticleAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.WechatArticleViewModel
@@ -35,7 +35,7 @@ class WechatArticleFragment : BaseListFragment<Article, WechatArticleViewModel>(
     override fun getLayoutId() = R.layout.wechat_fragment_wechat_article
 
     override fun initInject() {
-       //inject()
+       inject()
     }
 
     override fun isLazy() = true
@@ -57,7 +57,9 @@ class WechatArticleFragment : BaseListFragment<Article, WechatArticleViewModel>(
                 viewModel.collect(item, position)
             }
         } else {
-            context?.apply { WebActivity.start(this, item.title, item.link) }
+            context?.apply {
+                WebActivity.start(this, item.title, item.link)
+            }
         }
     }
 

@@ -16,8 +16,6 @@ import com.tencent.smtt.sdk.QbSdk
 
 open class App : Application() {
 
-    lateinit var userApp: ILikeApplication
-
     lateinit var appComponent: AppComponent
 
     companion object {
@@ -33,14 +31,14 @@ open class App : Application() {
         ARouter.openLog()
         ARouter.openDebug()
         ARouter.init(this)
-        userApp = ARouter.getInstance()
-                .build("/user/UserApp")
-                .navigation() as ILikeApplication
-        userApp.onCreate()
+        /* var userApp = ARouter.getInstance()
+                 .build("/user/UserApp")
+                 .navigation() as ILikeApplication
+         userApp.onCreate()*/
 
-//       var  userApp2 = ARouter.getInstance()
-//                .build("/wechat/WechatApp")
-//                .navigation() as ILikeApplication
-//        userApp2.onCreate()
+        var wechatApp = ARouter.getInstance()
+                .build("/wechat/WechatApp")
+                .navigation() as ILikeApplication
+        wechatApp.onCreate()
     }
 }

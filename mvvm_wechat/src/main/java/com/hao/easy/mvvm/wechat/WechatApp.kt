@@ -2,8 +2,10 @@ package com.hao.easy.mvvm.wechat
 
 import android.content.Context
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.extensions.notNullSingleValue
 import com.hao.easy.mvvm.base.provider.ILikeApplication
+import com.hao.easy.mvvm.wechat.di.component.DaggerWechatAppComponent
 import com.hao.easy.mvvm.wechat.di.component.WechatAppComponent
 import dagger.android.AndroidInjector
 
@@ -30,9 +32,9 @@ class WechatApp : ILikeApplication() {
     }
 
     override fun onCreate() {
-//        instance = this
-//        appComponent = DaggerWechatAppComponent.builder().appComponent(App.instance.appComponent).build()
-//        appComponent.inject(this)
+        instance = this
+        appComponent = DaggerWechatAppComponent.builder().appComponent(App.instance.appComponent).build()
+        appComponent.inject(this)
         super.onCreate()
     }
 }

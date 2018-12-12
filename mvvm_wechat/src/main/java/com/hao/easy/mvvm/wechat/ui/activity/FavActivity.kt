@@ -5,6 +5,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.hao.easy.mvvm.base.ui.BaseListActivity
 import com.hao.easy.mvvm.base.ui.WebActivity
 import com.hao.easy.mvvm.wechat.R
+import com.hao.easy.mvvm.wechat.di.inject
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.adapter.FavAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.FavViewModel
@@ -22,7 +23,7 @@ class FavActivity : BaseListActivity<Article, FavViewModel>() {
     lateinit var adapter: FavAdapter
 
     override fun initInject() {
-        //inject()
+        inject()
     }
 
     override fun initView() {

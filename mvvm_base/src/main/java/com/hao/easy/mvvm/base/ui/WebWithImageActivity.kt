@@ -2,13 +2,20 @@ package com.hao.easy.mvvm.base.ui
 
 import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v4.widget.NestedScrollView
 import android.text.TextUtils
+import android.widget.ImageView
 import com.hao.easy.mvvm.base.R
 import com.hao.easy.mvvm.base.extensions.gone
+import com.hao.easy.mvvm.base.extensions.load
 import com.hao.easy.mvvm.base.extensions.visible
 import kotlinx.android.synthetic.main.activity_web_with_image.*
 import kotlinx.android.synthetic.main.include_web_progress_bar.*
@@ -19,8 +26,18 @@ class WebWithImageActivity : WebActivity() {
     companion object {
         private const val TITLE = "TITLE"
         private const val URL = "URL"
+        private const val TRANSITION_NAME = "TRANSITION_NAME"
         fun start(context: Context, title: String, url: String) {
             context.startActivity<WebWithImageActivity>(Pair(TITLE, title), Pair(URL, url))
+        }
+
+        fun start(activity: Activity, title: String, url: String, imageView: ImageView, transitionName: String) {
+            val intent = Intent(activity, WebWithImageActivity::class.java)
+            intent.putExtra(TITLE, title)
+            intent.putExtra(URL, url)
+            intent.putExtra(TRANSITION_NAME, transitionName)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imageView, transitionName)
+            ActivityCompat.startActivity(activity, intent, options.toBundle())
         }
     }
 
@@ -29,10 +46,18 @@ class WebWithImageActivity : WebActivity() {
 
     override fun showToolbar() = false
 
-    override fun getLayoutId() = R.layout.activity_web_with_image
+    override fun getLayoutId(): Int {
+        //window.setBackgroundDrawableResource(R.color.tran)
+        return R.layout.activity_web_with_image
+    }
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun initView() {
+        var transitionName = intent.getStringExtra(TRANSITION_NAME)
+        if (!TextUtils.isEmpty(transitionName)) {
+            imageView.load(transitionName)
+            ViewCompat.setTransitionName(imageView, transitionName)
+        }
         val s = intent.getStringExtra(TITLE)
         title = if (TextUtils.isEmpty(s)) "详情" else s
         // baseToolbar.icTintColor = 0xFF0000
@@ -71,6 +96,15 @@ class WebWithImageActivity : WebActivity() {
         val evaluate = evaluator.evaluate(positionOffset, Color.WHITE, ContextCompat.getColor(this, R.color.text_black))
         baseToolbar.textColor = evaluate as Int
         baseToolbar.iconTintColor = evaluate
+    }
+
+    override fun onBackPressed() {
+        if (baseWebView != null && baseWebView.canGoBack()) {
+            baseWebView.goBack()
+        } else {
+            //supportFinishAfterTransition()
+            finish()
+        }
     }
 }
 

@@ -12,11 +12,11 @@ import dagger.android.ContributesAndroidInjector
  */
 
 @Module
-abstract class ActivityBuilder2 {
+abstract class ActivityBuilder {
 
-//    @ContributesAndroidInjector
-//    internal abstract fun bindProjectArticleActivity(): ProjectArticleActivity
-//
-//    @ContributesAndroidInjector
-//    internal abstract fun bindFavActivity(): FavActivity
+    @ContributesAndroidInjector
+    internal abstract fun bindProjectArticleActivity(): ProjectArticleActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun bindFavActivity(): FavActivity
 }

@@ -45,13 +45,11 @@ android {
     }
 
     packagingOptions {
-       // pickFirsts ['**/BaseActivity_MembersInjector.*']
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
-        exclude '**/BaseActivity_MembersInjector'
     }
 }
 
@@ -67,23 +65,10 @@ dependencies {
     debugImplementation debugImplementationLibs
     kapt kaptLibs
     if (isModule) {
-        implementation project(':mvvm_user')
+//        implementation project(':mvvm_user')
         implementation project(':mvvm_wechat')
         implementation project(':mvvm_android')
         implementation project(':mvvm_flutter')
         implementation project(':mvvm_kotlin')
     }
-}
-
-import com.android.build.gradle.internal.pipeline.TransformTask
-
-def deleteDuplicateJniFiles() {
-    def files = fileTree("${buildDir}") {
-        include "**/BaseActivity_MembersInjector.*"
-    }
-    files.each { it.delete() }
-}
-
-tasks.withType(TransformTask) { pkgTask ->
-    pkgTask.doFirst { deleteDuplicateJniFiles() }
 }

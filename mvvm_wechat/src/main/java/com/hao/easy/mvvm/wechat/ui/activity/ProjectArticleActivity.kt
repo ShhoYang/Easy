@@ -6,6 +6,7 @@ import com.hao.easy.mvvm.base.ui.BaseListActivity
 import com.hao.easy.mvvm.base.ui.WebActivity
 import com.hao.easy.mvvm.base.ui.WebWithImageActivity
 import com.hao.easy.mvvm.wechat.R
+import com.hao.easy.mvvm.wechat.di.inject
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.model.ProjectType
 import com.hao.easy.mvvm.wechat.ui.adapter.ProjectArticleAdapter
@@ -26,7 +27,7 @@ class ProjectArticleActivity : BaseListActivity<Article, ProjectArticleViewModel
     }
 
     override fun initInject() {
-        //inject()
+        inject()
     }
 
     override fun initData() {

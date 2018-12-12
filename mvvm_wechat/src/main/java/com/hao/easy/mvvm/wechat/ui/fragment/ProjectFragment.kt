@@ -8,19 +8,21 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import com.gcssloop.widget.PagerGridLayoutManager
 import com.gcssloop.widget.PagerGridSnapHelper
-import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.extensions.gone
 import com.hao.easy.mvvm.base.extensions.visible
 import com.hao.easy.mvvm.base.ui.BaseListFragment
 import com.hao.easy.mvvm.base.ui.WebActivity
 import com.hao.easy.mvvm.base.ui.WebWithImageActivity
 import com.hao.easy.mvvm.wechat.R
+import com.hao.easy.mvvm.wechat.WechatApp
+import com.hao.easy.mvvm.wechat.di.inject
 import com.hao.easy.mvvm.wechat.model.Article
 import com.hao.easy.mvvm.wechat.ui.activity.ProjectArticleActivity
 import com.hao.easy.mvvm.wechat.ui.adapter.ProjectArticleAdapter
 import com.hao.easy.mvvm.wechat.ui.adapter.ProjectTypeAdapter
 import com.hao.easy.mvvm.wechat.viewmodel.ProjectViewModel
 import kotlinx.android.synthetic.main.wechat_fragment_project.*
+import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.dip
 import javax.inject.Inject
 
@@ -44,7 +46,7 @@ class ProjectFragment : BaseListFragment<Article, ProjectViewModel>() {
     override fun getLayoutId() = R.layout.wechat_fragment_project
 
     override fun initInject() {
-       //inject()
+        inject()
     }
 
     override fun initView() {
@@ -130,7 +132,8 @@ class ProjectFragment : BaseListFragment<Article, ProjectViewModel>() {
                 }
             }
             else -> context?.apply {
-                WebWithImageActivity.start(this, item.title, item.link)
+                //WebWithImageActivity.start(this, item.title, item.link)
+                WebWithImageActivity.start(activity!!, item.title, item.link,view.find(R.id.ivThumbnail),item.envelopePic)
             }
         }
     }
