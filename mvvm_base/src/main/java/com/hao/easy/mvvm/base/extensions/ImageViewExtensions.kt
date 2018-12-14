@@ -2,6 +2,7 @@ package com.hao.easy.mvvm.base.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 /**
  * @author Yang Shihao
@@ -10,4 +11,8 @@ import com.bumptech.glide.Glide
 
 fun ImageView.load(url: Any) {
     Glide.with(this).load(url).into(this)
+}
+
+fun ImageView.loadCircle(url: Any) {
+    Glide.with(this).load(url).apply(RequestOptions.circleCropTransform()).into(this)
 }

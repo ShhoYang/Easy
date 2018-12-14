@@ -2,8 +2,10 @@ package com.hao.easy.mvvm.user.ui.fragment
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.widget.ImageView
 import android.widget.TextView
 import com.hao.easy.mvvm.base.Config
+import com.hao.easy.mvvm.base.extensions.loadCircle
 import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.ui.BaseFragment
 import com.hao.easy.mvvm.base.ui.WebActivity
@@ -30,9 +32,12 @@ class UserFragment : BaseFragment() {
     override fun getLayoutId() = R.layout.user_fragment_user
 
     override fun initView() {
+
         tvUsername = leftNavigationView.getHeaderView(0).find(R.id.tvUsername)
+        leftNavigationView.getHeaderView(0).find<ImageView>(R.id.ivAvatar).loadCircle(R.mipmap.ic_launcher_round)
         leftNavigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
+                R.id.menu_knowledge ->  Router.startKnowledgeActivity()
                 R.id.menu_fav -> {
                     if (Config.isLogin) {
                         Router.startFavActivity()
@@ -40,12 +45,8 @@ class UserFragment : BaseFragment() {
                         startActivity<LoginActivity>()
                     }
                 }
-                R.id.menu_clear -> {
-                    leftNavigationView.snack("清理完成")
-                }
-                R.id.menu_about -> {
-                    WebActivity.start(context!!, "https://github.com/haoshiy", "https://github.com/haoshiy")
-                }
+                R.id.menu_clear ->  leftNavigationView.snack("清理完成")
+                R.id.menu_about -> WebActivity.start(context!!, "https://github.com/haoshiy", "https://github.com/haoshiy")
                 R.id.menu_logout -> {
                     Config.logout()
                     viewModel.logout()

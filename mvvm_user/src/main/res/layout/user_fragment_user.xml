@@ -5,4 +5,5 @@
     app:headerLayout="@layout/user_navigation_header"
     app:menu="@menu/user_navigation"
     android:layout_width="match_parent"
+    app:insetForeground="@color/tran"
     android:layout_height="match_parent" />

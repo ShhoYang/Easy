@@ -3,15 +3,9 @@ package com.hao.easy.mvvm.wechat.repository
 import com.hao.easy.mvvm.base.App
 import com.hao.easy.mvvm.base.model.HttpResult
 import com.hao.easy.mvvm.base.model.ListPaged
-import com.hao.easy.mvvm.wechat.model.Ad
-import com.hao.easy.mvvm.wechat.model.Article
-import com.hao.easy.mvvm.wechat.model.Author
-import com.hao.easy.mvvm.wechat.model.ProjectType
+import com.hao.easy.mvvm.wechat.model.*
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * @author Yang Shihao
@@ -41,11 +35,21 @@ interface Service {
     fun getProjectArticles(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HttpResult<ListPaged<Article>>>
 
     @GET("lg/collect/list/{page}/json")
-    fun getMyFav(@Path("page") page:Int): Observable<HttpResult<ListPaged<Article>>>
+    fun getMyFav(@Path("page") page: Int): Observable<HttpResult<ListPaged<Article>>>
 
     @POST("lg/collect/{id}/json")
     fun collect(@Path("id") id: Int): Observable<HttpResult<Void>>
 
     @POST("lg/uncollect_originId/{id}/json")
     fun cancelCollect(@Path("id") id: Int): Observable<HttpResult<Void>>
+
+    @FormUrlEncoded
+    @POST("article/query/{page}/json")
+    fun search(@Path("page") page: Int, @Field("k") k: String): Observable<HttpResult<ListPaged<Article>>>
+
+    @GET("tree/json")
+    fun getKnowledge(): Observable<HttpResult<ArrayList<Knowledge>>>
+
+    @GET("article/list/{page}/json")
+    fun getKnowledgeArticle(@Path("page") page: Int, @Query("cid") id: Int): Observable<HttpResult<ListPaged<Article>>>
 }

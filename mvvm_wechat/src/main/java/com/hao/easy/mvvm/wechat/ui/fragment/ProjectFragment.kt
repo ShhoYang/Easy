@@ -131,8 +131,7 @@ class ProjectFragment : BaseListFragment<Article, ProjectViewModel>() {
                 }
             }
             else -> context?.apply {
-                //WebWithImageActivity.start(this, item.title, item.link)
-                WebWithImageActivity.start(activity!!, item.title, item.link, view.find(R.id.ivThumbnail), item.envelopePic)
+                WebWithImageActivity.start(this, item.title, item.link, item.envelopePic)
             }
         }
     }

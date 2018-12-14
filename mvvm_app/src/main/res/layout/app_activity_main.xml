@@ -9,15 +9,15 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             style="@style/FillWidth"
             app:itemBackground="@null"
             app:itemHorizontalTranslationEnabled="false"
-            app:labelVisibilityMode="labeled"
+            app:itemTextColor="@color/app_nav_text"
+            app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/app_navigation" />
 
@@ -39,8 +39,7 @@
         android:id="@+id/leftNavigationView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true" />
+        android:layout_gravity="start" />
 
 </android.support.v4.widget.DrawerLayout>
 

@@ -16,7 +16,7 @@ import com.socks.library.KLog
 abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
 
     open fun pageSize(): Int {
-        return 20
+        return 10
     }
 
     private val data = ArrayList<T>()
@@ -90,6 +90,7 @@ abstract class BaseListViewModel<T> : BaseViewModel(), PagedDataLoader<T> {
                     refreshLiveData.value = RefreshResult.NO_MORE
                 }
                 else -> {
+                    KLog.d(TAG, "loadInitial size = ${it.size}")
                     data.addAll(it)
                     callback.onResult(it, null, 2)
                     refreshLiveData.value = RefreshResult.SUCCEED

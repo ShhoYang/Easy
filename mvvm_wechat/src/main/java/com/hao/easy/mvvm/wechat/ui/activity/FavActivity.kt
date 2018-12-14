@@ -27,8 +27,8 @@ class FavActivity : BaseListActivity<Article, FavViewModel>() {
     }
 
     override fun initView() {
-        super.initView()
         title = "我的收藏"
+        super.initView()
     }
 
     override fun adapter() = adapter

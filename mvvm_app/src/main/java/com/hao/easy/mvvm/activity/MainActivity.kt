@@ -9,9 +9,9 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.hao.easy.mvvm.R
 import com.hao.easy.mvvm.base.extensions.snack
 import com.hao.easy.mvvm.base.ui.BaseActivity
-import com.hao.easy.mvvm.flutter.ui.fragment.FlutterFragment
-import com.hao.easy.mvvm.kotlin.ui.fragment.KotlinFragment
 import com.hao.easy.mvvm.user.ui.fragment.UserFragment
+import com.hao.easy.mvvm.wechat.ui.fragment.FlutterFragment
+import com.hao.easy.mvvm.wechat.ui.fragment.KotlinFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.ProjectFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.WechatFragment
 import kotlinx.android.synthetic.main.app_activity_main.*
@@ -68,12 +68,13 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initBottomNavigation() {
+        bottomNavigationView.itemIconTintList = null
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             viewPager.currentItem =
                     when (item.itemId) {
                         R.id.tab_wechat -> 0
                         R.id.tab_android -> 1
-                        R.id.tab_flutter -> 2
+                        R.id.tab_kotlin -> 2
                         else -> 3
                     }
             true
@@ -93,8 +94,8 @@ class MainActivity : BaseActivity() {
             return when (p0) {
                 0 -> WechatFragment()
                 1 -> ProjectFragment()
-                2 -> FlutterFragment()
-                else -> KotlinFragment()
+                2 -> KotlinFragment()
+                else -> FlutterFragment()
             }
         }
 

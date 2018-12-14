@@ -54,7 +54,7 @@ class ProjectArticleActivity : BaseListActivity<Article, ProjectArticleViewModel
                     viewModel.collect(item, position)
                 }
             }
-            else -> WebWithImageActivity.start(this, item.title, item.link)
+            else -> WebWithImageActivity.start(this, item.title, item.link, item.envelopePic)
         }
     }
 }

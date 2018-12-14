@@ -34,7 +34,7 @@ class ViewHolder(val context: Context, parent: ViewGroup, @LayoutRes layoutId: I
         return view as T
     }
 
-    fun setText(@IdRes viewId: Int, text: String): ViewHolder {
+    fun setText(@IdRes viewId: Int, text: CharSequence): ViewHolder {
         var textView: TextView = getView(viewId)
         textView.text = text
         return this

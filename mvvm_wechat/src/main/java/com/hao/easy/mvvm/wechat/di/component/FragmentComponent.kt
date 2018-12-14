@@ -2,6 +2,8 @@ package com.hao.easy.mvvm.wechat.di.component
 
 import com.hao.easy.mvvm.base.di.component.AppComponent
 import com.hao.easy.mvvm.inject.FragmentScope
+import com.hao.easy.mvvm.wechat.ui.fragment.FlutterFragment
+import com.hao.easy.mvvm.wechat.ui.fragment.KotlinFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.ProjectFragment
 import com.hao.easy.mvvm.wechat.ui.fragment.WechatArticleFragment
 import dagger.Component
@@ -15,7 +17,12 @@ import dagger.Component
 @FragmentScope
 @Component(dependencies = [AppComponent::class])
 interface FragmentComponent {
+
     fun inject(wechatArticleFragment: WechatArticleFragment)
 
     fun inject(projectFragment: ProjectFragment)
+
+    fun inject(kotlinFragment: KotlinFragment)
+
+    fun inject(flutterFragment: FlutterFragment)
 }

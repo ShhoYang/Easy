@@ -2,6 +2,7 @@ package com.hao.easy.mvvm.base.ui
 
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.transition.Fade
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.hao.easy.mvvm.base.R
@@ -19,6 +20,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //BackgroundLibrary.inject(this)
+//        MIUISetStatusBarLightMode(window, true)
+//        FlymeSetStatusBarLightMode(window, true)
         super.onCreate(savedInstanceState)
         AppManager.instance().pushActivity(this)
         when {
