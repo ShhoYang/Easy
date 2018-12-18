@@ -17,7 +17,7 @@
             app:itemBackground="@null"
             app:itemHorizontalTranslationEnabled="false"
             app:itemTextColor="@color/app_nav_text"
-            app:labelVisibilityMode="unlabeled"
+            app:labelVisibilityMode="selected"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/app_navigation" />
 

@@ -18,6 +18,36 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            keyAlias 'haoshi'
+            keyPassword '123456'
+            storeFile file('../haoshi.jks')
+            storePassword '123456'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "MVVM-${defaultConfig.versionName}.apk"
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
     sourceSets {
         main {
             if (isModule) {
